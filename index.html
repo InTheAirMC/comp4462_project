@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Oscar Bait Movies · Scroll-Driven Narrative</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Scrollama from local node_modules -->
+    <script src="node_modules/scrollama/build/scrollama.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0c12;
+            color: #f0f2f5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* ----- SECTION 1 : HERO with GIF background ----- */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('images/eeaao_gif.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            z-index: 1;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 40%, #000000aa);
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 1.5rem;
+            backdrop-filter: blur(2px);
+        }
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #FFD966, #FFB347, #E25822);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+        }
+        .hero-sub {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #e5e9f0;
+            border-top: 1px solid rgba(255,215,0,0.4);
+            display: inline-block;
+            padding-top: 0.75rem;
+        }
+        @media (max-width: 700px) {
+            .hero-title { font-size: 2.8rem; }
+            .hero-sub { font-size: 1.1rem; }
+        }
+
+        /* ----- SCROLL CONTAINER (two-column layout) ----- */
+        .scroll-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            background: #0f1219;
+            min-height: 200vh;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* LEFT text column - now has much more height to allow scrolling */
+        .text-side {
+            flex: 1;
+            background: #0f1219;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            min-height: 200vh;
+            padding: 4rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Fixed position container for text so it stays visible while scrolling */
+        .text-stage {
+            position: sticky;
+            top: 30%;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto 0 0;
+            min-height: 350px;
+        }
+        
+        /* Text part containers - positioned absolutely for crossfade */
+        .text-part {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: opacity;
+            background: transparent;
+            padding: 1rem;
+            border-radius: 20px;
+        }
+        
+        .text-part p {
+            font-size: 1.3rem;
+            line-height: 1.55;
+            font-weight: 400;
+            color: #eef2ff;
+            letter-spacing: -0.2px;
+        }
+        
+        .text-part strong {
+            color: #ffb347;
+            font-weight: 600;
+        }
+        
+        .text-part .highlight {
+            color: #f5b042;
+            border-left: 3px solid #f5b042;
+            padding-left: 1rem;
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+        
+        .part-1 {
+            opacity: 1;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .part-2 {
+            opacity: 0;
+            z-index: 1;
+            position: absolute;
+        }
+        
+        /* When part-2 is active */
+        .text-stage.show-part-2 .part-1 {
+            opacity: 0;
+            z-index: 1;
+            position: absolute;
+        }
+        
+        .text-stage.show-part-2 .part-2 {
+            opacity: 1;
+            z-index: 2;
+            position: relative;
+        }
+        
+        /* RIGHT visual column (sticky) */
+        .visual-side {
+            flex: 1;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            background: #0a0d14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .visual-frame {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dynamic-media {
+            max-width: 90%;
+            max-height: 85%;
+            object-fit: contain;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -10px black;
+            background: #1f222b;
+            transition: transform 0.3s ease-out;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #ffbc6e;
+            letter-spacing: 0.5px;
+            z-index: 100;
+            pointer-events: none;
+            white-space: nowrap;
+            font-family: monospace;
+            border: 1px solid rgba(255,188,110,0.4);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .progress-indicator::after {
+            content: attr(data-progress);
+            margin-left: 12px;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+        
+        .credit-note {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            font-size: 0.7rem;
+            background: rgba(0,0,0,0.5);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            color: #aaaaaa;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        /* Scroll instruction */
+        .scroll-hint {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 0.7rem;
+            color: #666;
+            background: rgba(0,0,0,0.4);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 99;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .scroll-container {
+                flex-direction: column;
+                min-height: 150vh;
+            }
+            .visual-side {
+                position: relative;
+                height: 50vh;
+                top: 0;
+                order: -1;
+            }
+            .text-side {
+                min-height: 150vh;
+                padding: 3rem 1.5rem;
+            }
+            .text-stage {
+                top: 20%;
+                margin: 0 auto;
+                min-height: 450px;
+            }
+            .text-part p {
+                font-size: 1.1rem;
+            }
+            .progress-indicator {
+                bottom: 15px;
+                font-size: 0.7rem;
+                white-space: nowrap;
+                padding: 0.4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: Hero with GIF background -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Oscar Bait Movies</h1>
+            <div class="hero-sub">Why are all the bad movies getting Oscar awards?</div>
+        </div>
+    </section>
+
+    <!-- SCROLLAMA TWO-COLUMN SECTION with delayed text replacement -->
+    <div class="scroll-container" id="mainScrollContainer">
+        
+        <!-- LEFT COLUMN: dynamic text that replaces itself after scrolling through part 1 -->
+        <div class="text-side">
+            <div class="text-stage" id="textStage">
+                <!-- Part 1: "Movies are becoming worse" -->
+                <div class="text-part part-1" id="part1">
+                    <p><strong>📉 The thesis.</strong> Movies are becoming worse — at least if we follow modern audience reception and critical discourse. Prestige productions once promised artistry, but lately formulaic "Oscar bait" melodramas dominate the nomination lists. Hollow scripts, excessive runtime, and predictable arcs somehow earn golden statues.</p>
+                    <div class="highlight">⬇️ Scroll down through this text — the evidence will appear after you've read it all.</div>
+                </div>
+                
+                <!-- Part 2: Appears only after user has scrolled through part 1 -->
+                <div class="text-part part-2" id="part2">
+                    <p><strong>📊 The evidence speaks.</strong> From the graph you can see it is rising: the disconnect between audience scores and Oscar nominations has widened dramatically since 2010. Each dot on the scatter chart represents a Best Picture nominee — note how audience ratings keep falling while Academy recognition remains stubborn. <strong>Something is clearly broken.</strong></p>
+                    <div class="highlight">✨ The trend confirms: audience approval keeps falling while Oscar nominations stay steady.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RIGHT COLUMN: sticky visual (always shows placeholder image) -->
+        <div class="visual-side">
+            <div class="visual-frame" id="visualFrame">
+                <img class="dynamic-media" src="images/placeholder.png" alt="cinema visual placeholder">
+            </div>
+            <div class="credit-note">✦ keep scrolling — narrative transforms ✦</div>
+        </div>
+    </div>
+
+    <div class="scroll-hint">↓ scroll down</div>
+
+    <script>
+        (function() {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+            
+            function init() {
+                console.log('Initializing delayed text transition...');
+                
+                const textStage = document.getElementById('textStage');
+                const part1 = document.getElementById('part1');
+                const part2 = document.getElementById('part2');
+                const visualFrame = document.getElementById('visualFrame');
+                
+                if (!textStage || !part1 || !part2) {
+                    console.error('Required DOM elements missing');
+                    return;
+                }
+                
+                let transitionStarted = false;
+                
+                // Get the scroll container and text column
+                const scrollContainer = document.querySelector('.scroll-container');
+                const textSide = document.querySelector('.text-side');
+                
+                if (!scrollContainer || !textSide) {
+                    console.error('Container elements missing');
+                    return;
+                }
+                
+                // Calculate progress based on how far through the text column you've scrolled
+                // But with delay: part 2 only starts appearing after you've scrolled past 60% of part 1
+                function calculateDelayedProgress() {
+                    const rect = textSide.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    const textTop = rect.top;
+                    const textHeight = rect.height;
+                    const viewportCenter = windowHeight;
+                    
+                    // Calculate how far the user has scrolled through the text column
+                    // 0 = top of text column just entered viewport
+                    // 1 = bottom of text column has reached top of viewport
+                    let rawProgress = 0;
+                    
+                    if (textTop < viewportCenter && textTop + textHeight > 0) {
+                        // User has scrolled into the text column
+                        const scrolledAmount = viewportCenter - textTop;
+                        const totalScrollable = textHeight;
+                        rawProgress = Math.min(1, Math.max(0, scrolledAmount / totalScrollable));
+                    } else if (textTop + textHeight < viewportCenter) {
+                        // Fully scrolled past the text column
+                        rawProgress = 1;
+                    }
+                    
+                    // DELAY: Part 2 only starts appearing after 55% of part 1 has been scrolled through
+                    // And it only fully appears at 90%
+                    let delayedProgress = 0;
+                    const startThreshold = 0.55;  // Start transition after scrolling 55% through part 1
+                    const endThreshold = 0.90;    // Complete transition at 90% through part 1
+                    
+                    if (rawProgress <= startThreshold) {
+                        delayedProgress = 0;
+                    } else if (rawProgress >= endThreshold) {
+                        delayedProgress = 1;
+                    } else {
+                        // Linear interpolation between start and end thresholds
+                        const range = endThreshold - startThreshold;
+                        delayedProgress = (rawProgress - startThreshold) / range;
+                    }
+                    
+                    return { rawProgress, delayedProgress };
+                }
+                
+                // Update text opacity based on delayed progress
+                function updateTextTransition() {
+                    const { rawProgress, delayedProgress } = calculateDelayedProgress();
+                    
+                    if (delayedProgress >= 0.98) {
+                        // Fully transitioned to part 2
+                        textStage.classList.add('show-part-2');
+                        part1.style.opacity = '';
+                        part2.style.opacity = '';
+                        console.log('Text transition complete: Part 2 fully visible');
+                        updateIndicator(1, true);
+                    } 
+                    else if (delayedProgress > 0 && delayedProgress < 0.98) {
+                        // Smooth crossfade based on delayed progress
+                        const part1Opacity = Math.max(0, Math.min(1, 1 - (delayedProgress * 1.1)));
+                        const part2Opacity = Math.max(0, Math.min(1, delayedProgress * 1.1));
+                        part1.style.opacity = part1Opacity;
+                        part2.style.opacity = part2Opacity;
+                        
+                        if (delayedProgress > 0.5) {
+                            textStage.classList.add('show-part-2');
+                        } else {
+                            textStage.classList.remove('show-part-2');
+                        }
+                        
+                        if (!transitionStarted && delayedProgress > 0.05) {
+                            transitionStarted = true;
+                            console.log('Transition started');
+                        }
+                        
+                        updateIndicator(delayedProgress, false);
+                    } else if (delayedProgress === 0) {
+                        // Ensure part 1 is fully visible
+                        part1.style.opacity = '1';
+                        part2.style.opacity = '0';
+                        textStage.classList.remove('show-part-2');
+                        updateIndicator(0, false);
+                    }
+                    
+                    // Update scroll hint based on raw progress
+                    updateScrollHint(rawProgress);
+                }
+                
+                // Progress indicator
+                const indicator = document.createElement('div');
+                indicator.className = 'progress-indicator';
+                document.body.appendChild(indicator);
+                
+                function updateIndicator(progress, isComplete) {
+                    if (isComplete) {
+                        indicator.innerHTML = '📈 Part 2: "From the graph you can see it is rising"';
+                        indicator.style.color = '#ffbc6e';
+                        indicator.setAttribute('data-progress', '100%');
+                    } else if (progress === 0) {
+                        indicator.innerHTML = '🎬 Part 1: "Movies are becoming worse"';
+                        indicator.style.color = '#ffbc6e';
+                        indicator.setAttribute('data-progress', '0%');
+                    } else {
+                        const percent = Math.floor(progress * 100);
+                        indicator.innerHTML = '✨ Transitioning to Part 2 ✨';
+                        indicator.style.color = '#f5b042';
+                        indicator.setAttribute('data-progress', `${percent}%`);
+                    }
+                }
+                
+                function updateScrollHint(rawProgress) {
+                    const hint = document.querySelector('.scroll-hint');
+                    if (hint) {
+                        if (rawProgress < 0.3) {
+                            hint.innerHTML = '↓ keep scrolling to read Part 1';
+                            hint.style.color = '#888';
+                        } else if (rawProgress < 0.55) {
+                            hint.innerHTML = '↓ almost there — keep going';
+                            hint.style.color = '#f5b042';
+                        } else if (rawProgress < 0.9) {
+                            hint.innerHTML = '✨ transitioning to Part 2 ✨';
+                            hint.style.color = '#ffbc6e';
+                        } else {
+                            hint.innerHTML = '✓ Part 2 revealed';
+                            hint.style.color = '#4caf50';
+                        }
+                    }
+                }
+                
+                // Throttled scroll handler
+                let ticking = false;
+                let lastRawProgress = 0;
+                
+                function onScrollHandler() {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            updateTextTransition();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }
+                
+                window.addEventListener('scroll', onScrollHandler);
+                window.addEventListener('resize', () => {
+                    updateTextTransition();
+                });
+                
+                // Initial setup
+                textStage.classList.remove('show-part-2');
+                part1.style.opacity = '1';
+                part2.style.opacity = '0';
+                transitionStarted = false;
+                
+                // Ensure placeholder image
+                const visualImg = visualFrame.querySelector('img');
+                if (!visualImg || visualImg.src.indexOf('placeholder.png') === -1) {
+                    visualFrame.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = 'images/placeholder.png';
+                    img.alt = 'cinema visual placeholder';
+                    img.className = 'dynamic-media';
+                    visualFrame.appendChild(img);
+                }
+                
+                // Subtle image scale effect on scroll
+                const imgElement = visualFrame.querySelector('img');
+                if (imgElement) {
+                    window.addEventListener('scroll', () => {
+                        const { delayedProgress } = calculateDelayedProgress();
+                        const scale = 1 + (delayedProgress * 0.05);
+                        imgElement.style.transform = `scale(${scale})`;
+                    });
+                }
+                
+                // Hero background
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('images/eeaao_gif.gif')`;
+                }
+                
+                // Initial call
+                setTimeout(() => {
+                    updateTextTransition();
+                    console.log('Delayed transition ready. Part 2 will appear after scrolling through 55% of Part 1');
+                }, 100);
+            }
+        })();
+    </script>
+</body>
+</html>

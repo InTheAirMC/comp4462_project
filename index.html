@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <!-- Scrollama CDN -->
     <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+    <!-- D3.js CDN (for slide 4 bubble chart) -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link href="main.css" rel="stylesheet">
 </head>
 <body>
@@ -67,10 +69,84 @@
                     <img src="images/placeholder.png">
                 </div>
             </div>
+            
+            <!-- SLIDE 4: TEXT LEFT + BUBBLE CHART RIGHT -->
+            <div class="narrative-slide slide-split slide-bubble" data-slide="3">
+                <div class="split-text slide4-copy">
+                    <div class="split-text-inner">
+                        <div class="badge">📊 THE DATA</div>
+                        <div class="slide4-step" data-step="t1"><h3>Nominations</h3></div>
+                        <div class="slide4-step" data-step="t2"><h3>Oscar-Baitness</h3></div>
+                        <div class="slide4-step" data-step="1">
+                            <p><strong>Every genre has its audiences.</strong> Perhaps the specific genre the movie is, can act as an effect on its Oscar-baityness.</p>
+                            <p>If every genre is shown as a bubble, we get a bubble view of the Oscars.</p>
+                            <div class="highlight">☁️ Hover on the bubbles to inspect them.</div>
+                        </div>
+                        <div class="slide4-step" data-step="2">
+                            <p></p>
+                            <p><strong>But not every movie satisfies the genre audiences.</strong> We keep movies that are Rotten, with the rotten rating lower than 60, but get an Oscar nomination.</p>
+                            <p></p>
+                        </div>
+                        <div class="slide4-step" data-step="b1">
+                            <div class="highlight">❓ See how many bait are inserted in Oscars through ghost bubbles by the below toggle button.</div>
+                            <p></p>
+                            <button class="slide4-filter-toggle" id="slide4FilterToggle" type="button" aria-pressed="false" aria-label="Toggle between nominations only and rotten nominations">
+                                    <span class="slide4-filter-track" aria-hidden="true">
+                                        <span class="slide4-filter-thumb"></span>
+                                    </span>
+                                    <span class="slide4-filter-text slide4-filter-text-off">Nominations Only</span>
+                                    <span class="slide4-filter-text slide4-filter-text-on">Rotten Nominations</span>
+                            </button>
+                        </div>
+                        <div class="slide4-step" data-step="b2">
+                            <div class="highlight">❓ See how the ranking differs from counts and ratios by the toggle buttons.</div>
+                            <p></p>
+                             <button class="slide4-filter-toggle" id="slide4RankToggle" type="button" aria-pressed="false" aria-label="Toggle between count ranking and rotten ratio ranking">
+                                    <span class="slide4-filter-track" aria-hidden="true">
+                                        <span class="slide4-filter-thumb"></span>
+                                    </span>
+                                    <span class="slide4-filter-text slide4-filter-text-off">Rank by Count</span>
+                                    <span class="slide4-filter-text slide4-filter-text-on">Rank by Rotten Ratio</span>
+                                </button>
+                                <p></p>
+                        </div>
+                        <div class="slide4-step" data-step="3">
+                            <p>The more movies in a genre, the bigger the bubble. Watch the bubbles fly in and settle, with Drama, Comedy, and Romance getting the most weight.</p>
+                            <p>Perhaps the public just favours movies of these genres more than others.</p>
+                        </div>
+                        <div class="slide4-step" data-step="4">
+                            <p></p>
+                            <div class="highlight">💥 Increasing bubble size indicates higher Oscar-bait potential due to ratio of nominations to total movies in that genre.</div>
+                            <p></p>
+                            <p>Notice how the genre mix shrinks once the filter is applied. Those are the genres that do not bait the Oscar conversation.</p>
+                            <p>Then, there are those expanding bubble indicates potential outrage genres.</p>
+                            <p></p>
+                        </div>
+                        <div class="slide4-step" data-step="5">
+                            <div class="highlight">⭐ <strong>Taking both ranking into consideration, Adventure and Action movies bait their loyal audiences the most.</strong></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="split-image slide4-visual">
+                    <div class="bubble-chart-host" id="genreBubbleChart">
+                        <div class="bubble-tooltip" id="bubbleTooltip"></div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="narrative-slide" data-slide="3">
-                <div>
-                    GGGG
+            <!-- SLIDE 5: TEXT (LHS) + IMAGE (RHS) -->
+            <div class="narrative-slide slide-split" data-slide="4">
+                <div class="split-text">
+                    <div class="split-text-inner">
+                        <div class="badge">📊 THE DATA</div>
+                        <h3>The Widening Gap</h3>
+                        <p><strong>Audience scores are plummeting.</strong> Since 2010, Rotten Tomatoes audience ratings for Best Picture nominees have dropped by nearly 28%, while the number of nominations for "prestige" films has barely changed.</p>
+                        <p>This scatter plot tells the story: each dot represents a nominee. Notice how the cluster moves leftward (lower audience scores) while staying high on the nomination axis.</p>
+                        <div class="highlight">⭐ The conclusion? The Academy is out of touch with what people actually enjoy watching.</div>
+                    </div>
+                </div>
+                <div class="split-image">
+                    <img src="images/placeholder.png">
                 </div>
             </div>
 
@@ -91,7 +167,8 @@
             <div class="trigger-step" data-trigger="0" style="height: 20vh;"></div>
             <div class="trigger-step" data-trigger="1" style="height: 150vh;"></div>
             <div class="trigger-step" data-trigger="2" style="height: 150vh;"></div>
-            <div class="trigger-step" data-trigger="3" style="height: 150vh;"></div>
+            <div class="trigger-step" data-trigger="3" style="height: 600vh;"></div>
+            <div class="trigger-step" data-trigger="4" style="height: 150vh;"></div>
         </div>
         
         <div class="scroll-spacer"></div>
@@ -107,6 +184,14 @@
         // You can design each slide ANY WAY YOU WANT
         // ============================================================
         (function() {
+            // Bubble chart state shared across slide transitions
+            let bubbleChartState = null;
+            let currentActiveIndex = 0;
+            let bubbleEnterTimer = null;
+            let bubbleEnterPending = false;
+            let slide4Mode = 'nominated';
+            let slide4RankMode = 'count';
+
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initFlexibleNarrative);
             } else {
@@ -121,20 +206,67 @@
                 const scrollContainer = document.getElementById('scrollContainer');
                 const slides = document.querySelectorAll('.narrative-slide');
                 const triggerSteps = document.querySelectorAll('.trigger-step');
+                const slide4FilterToggle = document.getElementById('slide4FilterToggle');
+                const slide4RankToggle = document.getElementById('slide4RankToggle');
                 // const progressPill = document.getElementById('progressPill');
                 // const scrollHint = document.getElementById('scrollHint');
                 
                 const totalSlides = slides.length; // Should be 3
                 console.log(`Total slides: ${totalSlides}`);
                 
-                const slideNames = ["Image Only", "Text Only", "Split Layout"];
+                // Slide Type
+                const slideNames = ["Image Only", "Text Only", "Split Layout", "Genre Bubbles", "Placeholder"];
                 
-                let currentActiveIndex = 0;
+                currentActiveIndex = 0;
+
+                function updateSlide4FilterButton(mode) {
+                    if (!slide4FilterToggle) return;
+                    slide4FilterToggle.setAttribute('aria-pressed', mode === 'nominated-rotten' ? 'true' : 'false');
+                    slide4FilterToggle.classList.toggle('is-active', mode === 'nominated-rotten');
+                }
+
+                function updateSlide4RankButton(mode) {
+                    if (!slide4RankToggle) return;
+                    slide4RankToggle.setAttribute('aria-pressed', mode === 'ratio' ? 'true' : 'false');
+                    slide4RankToggle.classList.toggle('is-active', mode === 'ratio');
+                }
+
+                function setSlide4FilterMode(mode) {
+                    if (mode !== 'nominated' && mode !== 'nominated-rotten') return;
+                    setSlide4Mode(mode);
+                    updateSlide4FilterButton(mode);
+                }
+
+                function setSlide4RankMode(mode) {
+                    if (mode !== 'count' && mode !== 'ratio') return;
+                    const previousMode = slide4RankMode;
+                    slide4RankMode = mode;
+                    updateSlide4RankButton(mode);
+                    if (bubbleChartState) {
+                        animateRankModeTransition(previousMode, mode, bubbleChartState.lastProgress || 0);
+                    }
+                }
+
+                if (slide4FilterToggle) {
+                    slide4FilterToggle.addEventListener('click', () => {
+                        const nextMode = slide4Mode === 'nominated' ? 'nominated-rotten' : 'nominated';
+                        setSlide4FilterMode(nextMode);
+                    });
+                }
+
+                if (slide4RankToggle) {
+                    slide4RankToggle.addEventListener('click', () => {
+                        const nextMode = slide4RankMode === 'count' ? 'ratio' : 'count';
+                        setSlide4RankMode(nextMode);
+                    });
+                }
                 
                 // Function to activate a slide (crossfade)
                 function activateSlide(index) {
                     if (index < 0 || index >= totalSlides) return;
                     if (index === currentActiveIndex && document.querySelector('.narrative-slide.active')?.getAttribute('data-slide') == index) return;
+
+                    const previousIndex = currentActiveIndex;
                     
                     // Crossfade slides
                     slides.forEach((slide, i) => {
@@ -159,6 +291,21 @@
                     
                     currentActiveIndex = index;
                     console.log(`Activated slide ${index+1}: ${slideNames[index]}`);
+
+                    // Trigger the bubble chart when slide 4 becomes active
+                    if (index === 3) {
+                        buildGenreBubbleChart();
+                        setSlide4FilterMode('nominated');
+                        setSlide4RankMode('count');
+                        scheduleBubbleEnter();
+                    }
+
+                    // Play exit animation when leaving slide 4
+                    if (previousIndex === 3 && index !== 3) {
+                        resetBubbleHoverState();
+                        startBubbleExitAnimation();
+                        clearBubbleEnterTimer();
+                    }
                 }
                 
                 // ========== firstintro SCROLL TRANSITION ==========
@@ -192,6 +339,7 @@
                             step: '.trigger-step',
                             offset: 0.55,
                             threshold: 0.2,
+                            progress: true,
                             debug: false
                         })
                         .onStepEnter(response => {
@@ -200,6 +348,21 @@
                                 if (triggerIndex !== currentActiveIndex) {
                                     activateSlide(triggerIndex);
                                 }
+                            }
+
+                            // Delay bubble entry until after the slide transition settles
+                            if (triggerIndex === 3) {
+                                buildGenreBubbleChart();
+                                setSlide4FilterMode('nominated');
+                                setSlide4RankMode('count');
+                                setSlide4TextProgress(0);
+                                scheduleBubbleEnter();
+                            }
+                        })
+                        .onStepProgress(response => {
+                            if (response.index === 3) {
+                                setSlide4TextProgress(response.progress);
+                                updateRankColors(response.progress);
                             }
                         })
                         .onStepExit(response => {
@@ -223,6 +386,12 @@
                                 if (currentActiveIndex !== 0) {
                                     activateSlide(0);
                                 }
+                            }
+
+                            // Exit bubbles when leaving step 4 upward (to slide 3)
+                            if (exitingIndex === 3 && direction === 'up') {
+                                startBubbleExitAnimation();
+                                clearBubbleEnterTimer();
                             }
                         });
                 }
@@ -298,10 +467,12 @@
                 `;
                 document.head.appendChild(style);
                 
-                console.log("✅ Ready! 3 custom slides:");
+                console.log("✅ Ready! 5 custom slides:");
                 console.log("  Slide 1: Image only");
                 console.log("  Slide 2: Text only"); 
                 console.log("  Slide 3: Text (LHS) + Image (RHS)");
+                console.log("  Slide 4: Genre bubble chart");
+                console.log("  Slide 5: Placeholder");
                 console.log("To customize: edit each .narrative-slide div with your own HTML/CSS");
             
 
@@ -309,6 +480,717 @@
                 activateSlide(0);
                 scrollContainer.style.opacity = '1';
 
+                // Build slide 4 bubble chart after layout is ready
+                buildGenreBubbleChart();
+
+            }
+
+            // ========== SLIDE 4: GENRE BUBBLE CHART (D3) ==========
+            function buildGenreBubbleChart() {
+                const chartHost = document.getElementById('genreBubbleChart');
+                if (!chartHost || chartHost.dataset.chartReady === 'true') return;
+                if (!window.d3) {
+                    console.warn('D3 is not available for the bubble chart.');
+                    return;
+                }
+
+                // Mark as initialized to avoid duplicate renders
+                chartHost.dataset.chartReady = 'true';
+
+                const width = chartHost.clientWidth || 800;
+                const height = chartHost.clientHeight || 500;
+
+                const svg = d3.select(chartHost)
+                    .append('svg')
+                    .attr('class', 'bubble-chart-svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .attr('viewBox', `0 0 ${width} ${height}`)
+                    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+                // Load CSV and build genre counts
+                d3.csv('.ipynb_checkpoints/movies-checkpoint.csv').then(rows => {
+                    const nominatedCounts = new Map();
+                    const rottenCounts = new Map();
+                    const rottenThreshold = 59; // Derived from dataset (Rotten max)
+
+                    rows.forEach(row => {
+                        const rawGenres = row.genres || '';
+                        const genres = parseGenreList(rawGenres);
+                        // Oscar-bait filter: Rotten or rating <= threshold, and has Oscar count
+                        const status = (row.tomatometer_status || '').trim().toLowerCase();
+                        const rating = parseRating(row.tomatometer_rating);
+                        const oscarCount = parseOscarCount(row.oscars);
+                        const isRotten = status === 'rotten' || (rating !== null && rating <= rottenThreshold);
+                        const hasOscar = oscarCount > 0;
+
+                        if (hasOscar) {
+                            genres.forEach(genre => {
+                                nominatedCounts.set(genre, (nominatedCounts.get(genre) || 0) + 1);
+                            });
+                        }
+
+                        if (isRotten && hasOscar) {
+                            genres.forEach(genre => {
+                                rottenCounts.set(genre, (rottenCounts.get(genre) || 0) + 1);
+                            });
+                        }
+                    });
+
+                    const genreUniverse = new Set([...nominatedCounts.keys(), ...rottenCounts.keys()]);
+
+                    const nodes = Array.from(genreUniverse, genre => ({
+                        genre,
+                        nominatedCount: nominatedCounts.get(genre) || 0,
+                        rottenCount: rottenCounts.get(genre) || 0,
+                        activeCount: nominatedCounts.get(genre) || 0
+                    }));
+
+                    const maxCount = d3.max(nodes, d => d.nominatedCount) || 1;
+                    const radiusScale = d3.scaleSqrt()
+                        .domain([0, maxCount])
+                        .range([29, 149]);
+
+                    const colorScale = d3.scaleLinear()
+                        .domain([0, maxCount])
+                        .range(['#f0af47', '#f5d666']);
+
+                    const centerX = width / 2;
+                    const centerY = height / 2;
+                    const offscreenPad = Math.max(width, height) * 0.7;
+
+                    nodes.forEach(node => {
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = offscreenPad + Math.random() * 240;
+                        node.r = radiusScale(node.activeCount);
+                        node.x = centerX + Math.cos(angle) * distance;
+                        node.y = centerY + Math.sin(angle) * distance;
+                    });
+
+                    const bubbleGroup = svg.append('g').attr('class', 'genre-bubbles');
+
+                    const bubble = bubbleGroup
+                        .selectAll('g')
+                        .data(nodes)
+                        .enter()
+                        .append('g')
+                        .attr('class', 'bubble-node')
+                        .style('opacity', 0);
+
+                    // Outer ghost ring representing original nominations (stroke only, faded golden color)
+                    bubble.append('circle')
+                        .attr('class', 'bubble-ghost')
+                        .attr('r', d => radiusScale(d.nominatedCount))
+                        .attr('fill', 'rgba(240, 175, 71, 0.15)')
+                        .attr('stroke', 'rgba(240, 175, 71, 0.35)')
+                        .attr('stroke-width', 1.2)
+                        .style('opacity', 0);
+
+                    // Inner core circle representing the currently active measure (filled)
+                    bubble.append('circle')
+                        .attr('class', 'bubble-core')
+                        .attr('r', d => d.r)
+                        .attr('cy', 0)
+                        .attr('fill', d => colorScale(d.activeCount))
+                        .attr('stroke', 'rgba(255, 210, 130, 0.65)')
+                        .attr('stroke-width', 1.2);
+
+                    bubble.append('text')
+                        .attr('class', 'bubble-label')
+                        .attr('text-anchor', 'middle')
+                        .attr('dy', '-0.2em')
+                        .text(d => d.genre)
+                        .style('fill', d => (d.nominatedCount || 0) > 0 && (d.activeCount || 0) === 0 ? '#ffffff' : '#1c1c1c');
+
+                    bubble.append('text')
+                        .attr('class', 'bubble-count')
+                        .attr('text-anchor', 'middle')
+                        .attr('dy', '1.1em')
+                        .text(d => d.activeCount)
+                        .style('fill', d => (d.nominatedCount || 0) > 0 && (d.activeCount || 0) === 0 ? '#ffffff' : '#1c1c1c');
+
+                    bubble.classed('is-ghost', d => (d.nominatedCount || 0) > 0 && (d.activeCount || 0) === 0);
+
+                    updateBubbleTextSizing();
+
+                    const tooltip = d3.select('#bubbleTooltip');
+                    const tooltipHost = document.getElementById('genreBubbleChart');
+
+                    function placeTooltip(event) {
+                        if (!tooltipHost) return;
+                        const hostRect = tooltipHost.getBoundingClientRect();
+                        const tipNode = tooltip.node();
+                        const tipWidth = tipNode ? tipNode.offsetWidth : 0;
+                        const tipHeight = tipNode ? tipNode.offsetHeight : 0;
+                        const pointerX = event.clientX - hostRect.left;
+                        const pointerY = event.clientY - hostRect.top;
+                        const offset = 12;
+
+                        let left = pointerX - tipWidth - offset;
+                        let top = pointerY - tipHeight - offset;
+
+                        if (left < 8) left = pointerX + offset;
+                        if (top < 8) top = pointerY + offset;
+                        if (left + tipWidth > hostRect.width - 8) left = hostRect.width - tipWidth - 8;
+                        if (top + tipHeight > hostRect.height - 8) top = hostRect.height - tipHeight - 8;
+
+                        tooltip
+                            .style('left', `${Math.max(8, left)}px`)
+                            .style('top', `${Math.max(8, top)}px`);
+                    }
+
+                    bubble
+                        .on('mouseenter', (event, d) => {
+                            if (!bubbleChartState) return;
+                            const countRank = getRankForNode(d);
+                            const ratioRank = getRatioRankForNode(d);
+                            const rotten = d.rottenCount || 0;
+                            const nominated = d.nominatedCount || 0;
+                            const ratio = nominated > 0 ? (rotten / nominated) : null;
+                            const ratioText = ratio === null ? '—' : `${rotten}/${nominated} (${(ratio*100).toFixed(1)}%)`;
+                            const totalGenres = bubbleChartState?.nodes?.length || 0;
+
+                            tooltip
+                                .style('opacity', 1)
+                                .html(`<strong>${d.genre}</strong><br>Count: 📊${d.activeCount} | 🏆 ${countRank}/${totalGenres}<br>Rotten Ratio: 📊 ${ratioText} | 🏆 ${ratioRank}/${totalGenres}`);
+                            placeTooltip(event);
+
+                            // Dim other nodes
+                            bubble.classed('is-dim', node => node !== d);
+                            bubble.select('.bubble-core')
+                                .style('opacity', node => node === d ? 1 : 0.08);
+                            bubble.select('.bubble-label')
+                                .style('opacity', node => node === d ? 1 : 0.08);
+                            bubble.select('.bubble-count')
+                                .style('opacity', node => node === d ? 1 : 0.08);
+
+                            // On hover: keep original colors, just increase opacity/visibility
+                            try {
+                                d3.select(event.currentTarget).select('.bubble-ghost').attr('stroke-width', 2);
+                                d3.select(event.currentTarget).select('.bubble-core').style('filter', 'brightness(1.1)');
+                            } catch (e) {
+                                // ignore
+                            }
+                        })
+                        .on('mousemove', (event) => {
+                            placeTooltip(event);
+                        })
+                        .on('mouseleave', () => {
+                            tooltip.style('opacity', 0);
+                            bubble.classed('is-dim', false);
+
+                            // Restore per-node opacity for cores
+                            bubble.select('.bubble-core')
+                                .style('opacity', node => node.activeCount > 0 ? 1 : 0);
+                            bubble.select('.bubble-label')
+                                .style('opacity', node => node.activeCount > 0 ? 1 : 0);
+                            bubble.select('.bubble-count')
+                                .style('opacity', node => node.activeCount > 0 ? 1 : 0);
+
+                            // Restore fills using current rank/progress/colorScale on cores and restore ghost stroke
+                            const progress = (bubbleChartState && bubbleChartState.lastProgress) || 0;
+                            const colorScaleUse = (bubbleChartState && bubbleChartState.colorScale) || colorScale;
+                            const rankMapsUse = (bubbleChartState && bubbleChartState.rankMaps) || buildRankMaps(nodes);
+                            bubble.select('.bubble-core').attr('fill', node => getBubbleFill(node, slide4Mode, progress, colorScaleUse, rankMapsUse)).style('filter', 'brightness(1)');
+                            bubble.select('.bubble-ghost').attr('stroke', 'rgba(240, 175, 71, 0.35)').attr('fill', 'rgba(240, 175, 71, 0.15)').attr('stroke-width', 1.2);
+                        });
+
+                    const simulation = d3.forceSimulation(nodes)
+                        .force('x', d3.forceX(centerX).strength(0.1))
+                        .force('y', d3.forceY(centerY).strength(0.12))
+                        .force('collide', d3.forceCollide().radius(d => d.r + 4).iterations(2))
+                        .force('charge', d3.forceManyBody().strength(10))
+                        .on('tick', () => {
+                            bubble.attr('transform', d => `translate(${d.x}, ${d.y})`);
+                        });
+
+                    // Store chart state for enter/exit animations
+                    bubbleChartState = {
+                        svg,
+                        bubble,
+                        nodes,
+                        simulation,
+                        centerX,
+                        centerY,
+                        offscreenPad,
+                        width,
+                        height,
+                        radiusScale,
+                        colorScale,
+                        rankMaps: buildRankMaps(nodes),
+                        lastProgress: 0
+                    };
+                    // ensure radiusScale is available for applyGenreFilter when first called
+                    bubbleChartState.radiusScale = radiusScale;
+
+                    // Start bubbles hidden; entry animation is triggered by scroll step 4
+                    bubble.attr('data-ready', 'true');
+
+                    if (bubbleEnterPending && currentActiveIndex === 3) {
+                        bubbleEnterPending = false;
+                        scheduleBubbleEnter();
+                    }
+
+                    resetBubbleHoverState();
+                }).catch(error => {
+                    console.error('Failed to load movies-checkpoint.csv:', error);
+                });
+
+                // Parse "['Drama', 'Comedy']" into ["Drama", "Comedy"]
+                function parseGenreList(raw) {
+                    if (!raw || raw === '[]') return [];
+                    const trimmed = raw.replace(/^\s*\[/, '').replace(/\]\s*$/, '');
+                    if (!trimmed) return [];
+                    return trimmed
+                        .split(',')
+                        .map(item => item.replace(/['"]/g, '').trim())
+                        .filter(Boolean);
+                }
+
+                function parseRating(raw) {
+                    if (raw === null || raw === undefined || raw === '') return null;
+                    const value = Number(raw);
+                    return Number.isFinite(value) ? value : null;
+                }
+
+                // Extract Oscar count from a non-JSON string payload
+                function parseOscarCount(raw) {
+                    if (!raw) return 0;
+                    const text = String(raw);
+                    const match = text.match(/['\"]count['\"]\s*:\s*(\d+)/i);
+                    return match ? Number(match[1]) : 0;
+                }
+            }
+
+            // Update bubble sizes for Oscar-nominated vs Oscar-nominated-Rotten dataset
+            function applyGenreFilter(mode) {
+                if (!bubbleChartState) return;
+                const { nodes, bubble, simulation, centerX, centerY } = bubbleChartState;
+                const selectedCount = node => mode === 'nominated-rotten' ? node.rottenCount : node.nominatedCount;
+                const maxCount = d3.max(nodes, selectedCount) || 1;
+                const scale = d3.scaleSqrt().domain([0, maxCount]).range([26, 149]);
+                const colorScale = d3.scaleLinear()
+                    .domain([0, maxCount])
+                    .range(['#f0af47', '#f5d666']);
+                const tvMovieNode = nodes.find(entry => entry.genre === 'TV Movie');
+                const minFilteredRadius = tvMovieNode ? Math.max(0, scale(tvMovieNode.nominatedCount) - 5) : 0;
+                const zeroRadius = Math.max(4, scale(1) * 0.25);
+
+                // Calculate ghost (original nominated) and core (active) radii
+                nodes.forEach(node => {
+                    node.activeCount = selectedCount(node);
+                    // ghost radius always reflects nominatedCount using the baseline radiusScale
+                    node._ghostR = (bubbleChartState && bubbleChartState.radiusScale) ? bubbleChartState.radiusScale(node.nominatedCount || 0) : radiusScale(node.nominatedCount || 0);
+
+                    // core radius is proportional to the ghost radius: core = ghost * (active / nominated)
+                    if ((node.nominatedCount || 0) > 0) {
+                        if (node.activeCount > 0) {
+                            const ratio = node.activeCount / node.nominatedCount;
+                            node._coreR = Math.max(zeroRadius, node._ghostR * ratio);
+                        } else {
+                            // activeCount == 0: show only ghost ring (no filled core)
+                            node._coreR = 0;
+                        }
+                    } else {
+                        node._coreR = 0;
+                    }
+
+                    // collision radius uses the larger of the two so items don't overlap
+                    node.r = Math.max(node._ghostR || 0, node._coreR || 0);
+                });
+
+                bubble.classed('is-ghost', d => (d.nominatedCount || 0) > 0 && (d.activeCount || 0) === 0);
+
+                bubbleChartState.colorScale = colorScale;
+                bubbleChartState.rankMaps = buildRankMaps(nodes);
+
+                const progress = bubbleChartState.lastProgress;
+
+                // Update ghost ring (original nominations) and core (active measure)
+                bubble.select('.bubble-ghost')
+                    .interrupt()
+                    .transition()
+                    .duration(600)
+                    .ease(d3.easeCubicOut)
+                    .attr('r', d => d._ghostR)
+                    .style('opacity', mode === 'nominated-rotten' ? 0.12 : 0);
+
+                bubble.select('.bubble-core')
+                    .interrupt()
+                    .transition()
+                    .duration(600)
+                    .ease(d3.easeCubicOut)
+                    .attr('r', d => d._coreR)
+                    .attr('cy', d => (d._coreR > 0 ? Math.max(0, d._ghostR - d._coreR) : 0))
+                    .style('opacity', d => d.activeCount > 0 ? 1 : 0.12)
+                    .attr('fill', d => getBubbleFill(d, mode, progress, colorScale, bubbleChartState.rankMaps));
+
+                bubble.select('.bubble-count')
+                    .transition()
+                    .duration(600)
+                    .ease(d3.easeCubicOut)
+                    .text(d => d.activeCount)
+                    .style('opacity', d => d.activeCount > 0 ? 1 : 0);
+
+                bubble.select('.bubble-label')
+                    .transition()
+                    .duration(600)
+                    .ease(d3.easeCubicOut)
+                    .style('opacity', d => d.activeCount > 0 ? 1 : 0);
+
+                updateBubbleTextSizing();
+
+                simulation
+                    .force('collide', d3.forceCollide().radius(d => (d.r || 0) + 4).iterations(2))
+                    .force('x', d3.forceX(centerX).strength(0.1))
+                    .force('y', d3.forceY(centerY).strength(0.1))
+                    .alpha(0.6)
+                    .restart();
+
+                updateRankColors(progress);
+            }
+
+            function updateBubbleTextSizing() {
+                if (!bubbleChartState) return;
+                const { bubble } = bubbleChartState;
+                bubble.select('.bubble-label')
+                    .style('font-size', d => `${Math.max(10, Math.min(24, d.r * 0.18))}px`)
+                    .style('line-height', 1);
+                bubble.select('.bubble-count')
+                    .style('font-size', d => `${Math.max(11, Math.min(26, d.r * 0.2))}px`)
+                    .style('line-height', 1);
+            }
+
+            function setSlide4Mode(mode) {
+                slide4Mode = mode;
+                applyGenreFilter(mode);
+                resetBubbleHoverState();
+                const slide4 = document.querySelector('.narrative-slide[data-slide="3"]');
+                if (slide4) {
+                    slide4.classList.toggle('mode-rotten', mode === 'nominated-rotten');
+                }
+            }
+
+            function getSlide4RankMap(rankMode, rankMaps) {
+                if (!rankMaps) return new Map();
+                return rankMode === 'ratio'
+                    ? rankMaps.ratio
+                    : (slide4Mode === 'nominated-rotten' ? rankMaps.rotten : rankMaps.nominated);
+            }
+
+            function getSlide4RankIntensity(progress) {
+                let intensity = 0;
+                if (progress >= 0.2 && progress < 0.5) {
+                    intensity = (progress - 0.2) / 0.15;
+                    if (intensity >= 1) intensity = 1;
+                } else if (progress >= 0.5) {
+                    intensity = 1;
+                }
+                return intensity;
+            }
+
+            function getSlide4TextColor(node, map, intensity) {
+                const baseText = d3.rgb(28, 28, 28);
+                const highlightText = d3.rgb(128, 27, 29);
+                const rank = map.get(node.genre) || 999;
+
+                if (slide4Mode === 'nominated-rotten' && (node.nominatedCount || 0) > 0 && rank > 5) {
+                    return '#ffffff';
+                }
+
+                if (rank > 5 || intensity <= 0) {
+                    return '#1c1c1c';
+                }
+                if (intensity >= 1) {
+                    return '#801b1d';
+                }
+
+                const r = Math.round(baseText.r + (highlightText.r - baseText.r) * intensity);
+                const g = Math.round(baseText.g + (highlightText.g - baseText.g) * intensity);
+                const b = Math.round(baseText.b + (highlightText.b - baseText.b) * intensity);
+                return `rgb(${r}, ${g}, ${b})`;
+            }
+
+            function getSlide4GhostColor(node, map) {
+                const rank = map.get(node.genre) || 999;
+                if (slide4Mode === 'nominated-rotten' && (node.nominatedCount || 0) > 0 && rank > 5) {
+                    return {
+                        stroke: '#ffffff',
+                        fill: '#ffffff'
+                    };
+                }
+
+                return {
+                    stroke: 'rgba(240, 175, 71, 0.35)',
+                    fill: 'rgba(240, 175, 71, 0.15)'
+                };
+            }
+
+            function getBubbleFillForMap(node, mode, progress, colorScale, rankMaps, mapOverride) {
+                const map = mapOverride || getSlide4RankMap(slide4RankMode, rankMaps);
+                const rank = map.get(node.genre) || 999;
+
+                if ((node.nominatedCount || 0) > 0 && (node.activeCount || 0) === 0 && rank > 5) {
+                    return '#ffffff';
+                }
+
+                const base = d3.color(colorScale(node.activeCount));
+                const intensity = getSlide4RankIntensity(progress);
+
+                if (rank > 5 || intensity <= 0) {
+                    return base?.formatRgb() || '#f0af47';
+                }
+
+                const strength = rank <= 2 ? 0.6 : 0.35;
+                const t = Math.min(1, intensity * strength);
+                const r = Math.round((base?.r ?? 240) + (255 - (base?.r ?? 240)) * t);
+                const g = Math.round((base?.g ?? 175) + (255 - (base?.g ?? 175)) * t);
+                const b = Math.round((base?.b ?? 71) + (255 - (base?.b ?? 71)) * t);
+                return `rgb(${r}, ${g}, ${b})`;
+            }
+
+                function buildRankMaps(nodes) {
+                const mapNominated = new Map();
+                const mapRotten = new Map();
+                const mapRatio = new Map();
+
+                const nominatedSorted = [...nodes].sort((a, b) => b.nominatedCount - a.nominatedCount);
+                nominatedSorted.forEach((node, idx) => mapNominated.set(node.genre, idx + 1));
+
+                const rottenSorted = [...nodes].sort((a, b) => b.rottenCount - a.rottenCount);
+                rottenSorted.forEach((node, idx) => mapRotten.set(node.genre, idx + 1));
+
+                const ratioSorted = [...nodes].sort((a, b) => {
+                    const aRatio = (a.nominatedCount || 0) > 0 ? (a.rottenCount || 0) / a.nominatedCount : 0;
+                    const bRatio = (b.nominatedCount || 0) > 0 ? (b.rottenCount || 0) / b.nominatedCount : 0;
+                    return bRatio - aRatio;
+                });
+                ratioSorted.forEach((node, idx) => mapRatio.set(node.genre, idx + 1));
+
+                return { nominated: mapNominated, rotten: mapRotten, ratio: mapRatio };
+            }
+
+            function getRankForNode(node) {
+                if (!bubbleChartState || !bubbleChartState.rankMaps) return '-';
+                const map = slide4Mode === 'nominated-rotten' ? bubbleChartState.rankMaps.rotten : bubbleChartState.rankMaps.nominated;
+                return map.get(node.genre) || '-';
+            }
+
+            function getRatioRankForNode(node) {
+                if (!bubbleChartState || !bubbleChartState.rankMaps) return '-';
+                const map = bubbleChartState.rankMaps.ratio;
+                return map.get(node.genre) || '-';
+            }
+
+            function updateRankColors(progress) {
+                if (!bubbleChartState) return;
+                bubbleChartState.lastProgress = progress;
+                const { bubble, colorScale, rankMaps } = bubbleChartState;
+                const map = getSlide4RankMap(slide4RankMode, rankMaps);
+                const intensity = getSlide4RankIntensity(progress);
+
+                bubble.select('.bubble-core')
+                    .attr('fill', d => getBubbleFillForMap(d, slide4Mode, progress, colorScale, rankMaps, map));
+
+                bubble.select('.bubble-ghost')
+                    .attr('stroke', d => {
+                        return getSlide4GhostColor(d, map).stroke;
+                    })
+                    .attr('fill', d => {
+                        return getSlide4GhostColor(d, map).fill;
+                    });
+
+                bubble.select('.bubble-label')
+                    .style('fill', d => getSlide4TextColor(d, map, intensity));
+
+                bubble.select('.bubble-count')
+                    .text(d => d.activeCount)
+                    .style('fill', d => getSlide4TextColor(d, map, intensity));
+            }
+
+            function setSlide4TextProgress(progress) {
+                const slide4 = document.querySelector('.narrative-slide[data-slide="3"]');
+                if (!slide4) return;
+                const steps = slide4.querySelectorAll('.slide4-step');
+                const visibleSteps = new Set();
+
+                if (progress < 0.2) {
+                    visibleSteps.add('t1');
+                    visibleSteps.add('1');
+                } else if (progress < 0.5) {
+                    visibleSteps.add('t1');
+                    visibleSteps.add('b1');
+                    visibleSteps.add('b2');
+                    visibleSteps.add('1');
+                    visibleSteps.add('2');
+                } else if (progress < 0.7) {
+                    visibleSteps.add('t2');
+                    visibleSteps.add('b1');
+                    visibleSteps.add('b2');
+                    visibleSteps.add('3');
+                } else if (progress < 0.85) {
+                    visibleSteps.add('t2');
+                    visibleSteps.add('b1');
+                    visibleSteps.add('b2');
+                    visibleSteps.add('3');
+                    visibleSteps.add('4');
+                } else {
+                    visibleSteps.add('t2');
+                    visibleSteps.add('b1');
+                    visibleSteps.add('b2');
+                    visibleSteps.add('3');
+                    visibleSteps.add('4');
+                    visibleSteps.add('5');
+                }
+
+                steps.forEach(step => {
+                    const key = step.getAttribute('data-step');
+                    step.classList.toggle('is-visible', visibleSteps.has(key));
+                });
+            }
+
+            function animateRankModeTransition(previousRankMode, nextRankMode, progress) {
+                if (!bubbleChartState) return;
+                const { bubble, colorScale, rankMaps } = bubbleChartState;
+                const previousMap = getSlide4RankMap(previousRankMode, rankMaps);
+                const nextMap = getSlide4RankMap(nextRankMode, rankMaps);
+                const duration = 450;
+
+                bubble.select('.bubble-core')
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicInOut)
+                    .attrTween('fill', function(d) {
+                        const startColor = getBubbleFillForMap(d, slide4Mode, progress, colorScale, rankMaps, previousMap);
+                        const endColor = getBubbleFillForMap(d, slide4Mode, progress, colorScale, rankMaps, nextMap);
+                        const interpolate = d3.interpolateRgb(startColor, endColor);
+                        return t => interpolate(t);
+                    });
+
+                bubble.select('.bubble-ghost')
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicInOut)
+                    .attrTween('fill', function(d) {
+                        const startColor = getSlide4GhostColor(d, previousMap).fill;
+                        const endColor = getSlide4GhostColor(d, nextMap).fill;
+                        const interpolate = d3.interpolateRgb(startColor, endColor);
+                        return t => interpolate(t);
+                    })
+                    .attrTween('stroke', function(d) {
+                        const startColor = getSlide4GhostColor(d, previousMap).stroke;
+                        const endColor = getSlide4GhostColor(d, nextMap).stroke;
+                        const interpolate = d3.interpolateRgb(startColor, endColor);
+                        return t => interpolate(t);
+                    });
+
+                bubble.select('.bubble-label')
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicInOut)
+                    .styleTween('fill', function(d) {
+                        const startColor = getSlide4TextColor(d, previousMap, getSlide4RankIntensity(progress));
+                        const endColor = getSlide4TextColor(d, nextMap, getSlide4RankIntensity(progress));
+                        const interpolate = d3.interpolateRgb(startColor, endColor);
+                        return t => interpolate(t);
+                    });
+
+                bubble.select('.bubble-count')
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicInOut)
+                    .styleTween('fill', function(d) {
+                        const startColor = getSlide4TextColor(d, previousMap, getSlide4RankIntensity(progress));
+                        const endColor = getSlide4TextColor(d, nextMap, getSlide4RankIntensity(progress));
+                        const interpolate = d3.interpolateRgb(startColor, endColor);
+                        return t => interpolate(t);
+                    });
+            }
+
+            function getBubbleFill(node, mode, progress, colorScale, rankMaps) {
+                const map = getSlide4RankMap(slide4RankMode, rankMaps);
+                return getBubbleFillForMap(node, mode, progress, colorScale, rankMaps, map);
+            }
+
+            function resetBubbleHoverState() {
+                if (!bubbleChartState) return;
+                const tooltip = d3.select('#bubbleTooltip');
+                tooltip.style('opacity', 0);
+                bubbleChartState.bubble.classed('is-dim', false);
+                logDimState('reset');
+            }
+
+            function logDimState(label) {
+                if (!bubbleChartState) return;
+                const dimCount = bubbleChartState.bubble.filter('.is-dim').size();
+                const total = bubbleChartState.bubble.size();
+            }
+
+            // Delay the entry animation so it does not overlap with slide crossfade
+            function scheduleBubbleEnter() {
+                if (!bubbleChartState) {
+                    bubbleEnterPending = true;
+                    return;
+                }
+                clearBubbleEnterTimer();
+                bubbleEnterTimer = setTimeout(() => {
+                    startBubbleEnterAnimation();
+                }, 500);
+            }
+
+            function clearBubbleEnterTimer() {
+                if (bubbleEnterTimer) {
+                    clearTimeout(bubbleEnterTimer);
+                    bubbleEnterTimer = null;
+                }
+            }
+
+            // Animate bubbles from outside toward the center
+            function startBubbleEnterAnimation() {
+                if (!bubbleChartState) return;
+                const { nodes, bubble, simulation, centerX, centerY, offscreenPad } = bubbleChartState;
+
+                nodes.forEach(node => {
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = offscreenPad + 200 + Math.random() * 240;
+                    node.x = centerX + Math.cos(angle) * distance;
+                    node.y = centerY + Math.sin(angle) * distance;
+                });
+
+                bubble.interrupt().style('opacity', 0.2);
+
+                simulation
+                    .force('radial', null)
+                    .force('x', d3.forceX(centerX).strength(0.14))
+                    .force('y', d3.forceY(centerY).strength(0.14))
+                    .alpha(1)
+                    .alphaTarget(0.08)
+                    .restart();
+
+                bubble.transition()
+                    .duration(1000)
+                    .ease(d3.easeCubicOut)
+                    .style('opacity', 1);
+            }
+
+            // Animate bubbles drifting back out of the frame
+            function startBubbleExitAnimation() {
+                if (!bubbleChartState) return;
+                const { bubble, simulation, centerX, centerY, offscreenPad } = bubbleChartState;
+                const exitRadius = offscreenPad + 240;
+
+                simulation
+                    .force('radial', d3.forceRadial(exitRadius, centerX, centerY).strength(0.08))
+                    .force('x', d3.forceX(centerX).strength(0.01))
+                    .force('y', d3.forceY(centerY).strength(0.01))
+                    .alpha(0.9)
+                    .alphaTarget(0.12)
+                    .restart();
+
+                bubble.transition()
+                    .duration(1000)
+                    .ease(d3.easeCubicIn)
+                    .style('opacity', 0.15);
             }
         })();
     </script>

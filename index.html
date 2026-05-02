@@ -8,7 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <!-- Scrollama CDN -->
     <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+    <!-- D3 library -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link href="main.css" rel="stylesheet">
+    
 </head>
 <body>
 
@@ -67,7 +70,24 @@
                     <img src="images/placeholder.png">
                 </div>
             </div>
+            
+            <!-- SLIDE 4: TEXT + BUBBLE CHART -->
+            <div class="narrative-slide slide-split" data-slide="4">
+                <div class="split-text">
+                    <div class="split-text-inner">
+                    <div class="badge">📊 THE DATA</div>
+                    <h3>Who Appears Most in Oscar-Bait Films?</h3>
+                    <p>Some actors frequently appear in films designed to win awards, while others are more common in mainstream productions.</p>
+                    <p>This visualization shows which actors are more associated with Oscar-bait films based on their participation.</p>
+                </div>
+            </div>
 
+            <div class="split-image">
+                <!-- Replace image with SVG chart -->
+                <svg id="bubbleChart" width="100%" height="500"></svg>
+            </div>
+            </div>
+        
             <div class="narrative-slide" data-slide="3">
                 <div>
                     GGGG
@@ -92,6 +112,7 @@
             <div class="trigger-step" data-trigger="1" style="height: 150vh;"></div>
             <div class="trigger-step" data-trigger="2" style="height: 150vh;"></div>
             <div class="trigger-step" data-trigger="3" style="height: 150vh;"></div>
+            <div class="trigger-step" data-trigger="4" style="height: 150vh;"></div>
         </div>
         
         <div class="scroll-spacer"></div>
@@ -116,6 +137,283 @@
             function initFlexibleNarrative() {
                 console.log("🎬 Flexible slide architecture — 3 custom slides");
                 
+                // ===========================
+                // BUBBLE CHART FUNCTION
+                // ===========================
+                function renderBubbleChart() {
+                    if (window._bubbleRendered) return;
+                    window._bubbleRendered = true;
+
+                    const data = [ 
+                        { name: "Bess Flowers", nonOscar: 90, oscarBait: 5, image: "images/actors/bess_flowers.jpg" },
+                        { name: "Irving Bacon", nonOscar: 34, oscarBait: 0, image: "images/actors/irving_bacon.jpg" },
+                        { name: "Bing Crosby", nonOscar: 30, oscarBait: 1, image: "images/actors/bing_crosby.jpg" },
+                        { name: "Spencer Tracy", nonOscar: 28, oscarBait: 1, image: "images/actors/spencer_tracy.jpg" },
+                        { name: "Sam Harris", nonOscar: 29, oscarBait: 0, image: "images/actors/sam_harris.jpg" },
+                        { name: "Meryl Streep", nonOscar: 25, oscarBait: 4, image: "images/actors/meryl_streep.jpg" },
+                        { name: "Gino Corrado", nonOscar: 29, oscarBait: 0, image: "images/actors/gino_corrado.jpg" },
+                        { name: "Cary Grant", nonOscar: 28, oscarBait: 1, image: "images/actors/cary_grant.jpg" },
+                        { name: "James Stewart", nonOscar: 25, oscarBait: 3, image: "images/actors/james_stewart.jpg" },
+                        { name: "Gary Cooper", nonOscar: 28, oscarBait: 0, image: "images/actors/gary_cooper.jpg" },
+                        { name: "Robert De Niro", nonOscar: 20, oscarBait: 7, image: "images/actors/robert_de_niro.jpg" },
+                        { name: "Dustin Hoffman", nonOscar: 25, oscarBait: 2, image: "images/actors/dustin_hoffman.jpg" },
+                        { name: "Charlton Heston", nonOscar: 21, oscarBait: 6, image: "images/actors/charlton_heston.jpg" },
+                        { name: "Bette Davis", nonOscar: 23, oscarBait: 3, image: "images/actors/bette_davis.jpg" },
+                        { name: "Alan Hale", nonOscar: 23, oscarBait: 3, image: "images/actors/alan_hale.jpg" }
+                    ];
+
+                    const width = 560;
+                    const height = 500;
+
+                    const svg = d3.select("#bubbleChart")
+                        .attr("viewBox", `0 0 ${width} ${height}`)
+                        .attr("width", "100%")
+                        .attr("height", "500");
+
+                    // ✅ nodes
+                    const nodes = data.map(d => ({
+                        ...d,
+                        total: d.nonOscar + d.oscarBait,
+                        r: Math.sqrt(d.nonOscar + d.oscarBait) * 6.2,
+                        patternId: `actor-${d.name.toLowerCase().replace(/\s+/g, "-")}`
+                    }));
+
+                    // Image patterns for circle fills
+                    const defs = svg.append("defs");
+                    const patterns = defs.selectAll("pattern")
+                        .data(nodes)
+                        .enter()
+                        .append("pattern")
+                        .attr("id", d => d.patternId)
+                        .attr("patternUnits", "objectBoundingBox")
+                        .attr("width", 1)
+                        .attr("height", 1);
+
+                    patterns.append("image")
+                        .attr("href", d => d.image)
+                        .attr("width", d => d.r * 2)
+                        .attr("height", d => d.r * 2)
+                        .attr("preserveAspectRatio", "xMidYMid slice");
+
+                    // ✅ tooltip
+                    const tooltip = d3.select("body")
+                        .append("div")
+                        .style("position", "absolute")
+                        .style("background", "#222")
+                        .style("color", "#fff")
+                        .style("padding", "8px 12px")
+                        .style("border-radius", "6px")
+                        .style("font-size", "13px")
+                        .style("pointer-events", "none")
+                        .style("opacity", 0)
+                        .style("z-index", 100);
+
+                    const pie = d3.pie()
+                        .value(d => d.value)
+                        .sort(null);
+
+                    const pieColors = d3.scaleOrdinal()
+                        .domain(["nonOscar", "oscarBait"])
+                        .range(["rgba(40, 94, 143, 0.38)", "rgba(255, 157, 51, 0.58)"]);
+
+                    // ✅ node groups
+                    const nodeGroups = svg.selectAll(".bubble-node")
+                        .data(nodes)
+                        .enter()
+                        .append("g")
+                        .attr("class", "bubble-node")
+                        .style("cursor", "pointer")
+
+                    // Dim actor photo background
+                    nodeGroups.append("circle")
+                        .attr("class", "photo-bg")
+                        .attr("r", d => d.r)
+                        .attr("fill", d => `url(#${d.patternId})`)
+                        .style("opacity", 1);
+
+                    // Pie slices on top of actor photos
+                    nodeGroups.each(function(d) {
+                        const arc = d3.arc().innerRadius(0).outerRadius(d.r);
+                        const slices = [
+                            { key: "nonOscar", value: d.nonOscar },
+                            { key: "oscarBait", value: d.oscarBait }
+                        ].filter(item => item.value > 0);
+
+                        d3.select(this)
+                            .selectAll("path.pie-slice")
+                            .data(pie(slices))
+                            .enter()
+                            .append("path")
+                            .attr("class", "pie-slice")
+                            .attr("d", arc)
+                            .attr("fill", seg => pieColors(seg.data.key))
+                            .style("stroke", "rgba(255,255,255,0.8)")
+                            .style("stroke-width", 1.1);
+                    });
+
+                    // Outline ring
+                    nodeGroups.append("circle")
+                        .attr("class", "bubble-outline")
+                        .attr("r", d => d.r)
+                        .attr("fill", "none")
+                        .style("stroke", "#ffbc6e")
+                        .style("stroke-width", 2.2)
+                        .style("filter", "drop-shadow(0px 0px 8px rgba(255,188,110,0.7))");
+
+                    // Center labels
+                    const labels = nodeGroups.append("text")
+                        .attr("class", "label")
+                        .attr("text-anchor", "middle")
+                        .attr("dominant-baseline", "middle")
+                        .style("pointer-events", "none")
+                        .style("fill", "#fff")
+                        .style("paint-order", "stroke")
+                        .style("stroke", "rgba(0,0,0,0.72)")
+                        .style("stroke-width", 2.5)
+                        .style("font-weight", "700")
+                        .style("font-size", d => `${Math.max(9, Math.min(d.r / 3.3, 13))}px`);
+
+                    // Right-side legend
+                    const legend = svg.append("g")
+                        .attr("class", "bubble-legend")
+                        .attr("transform", `translate(${width - 110}, 30)`);
+
+                    legend.append("text")
+                        .attr("x", 0)
+                        .attr("y", 0)
+                        .style("fill", "#f2f2f2")
+                        .style("font-size", "12px")
+                        .style("font-weight", "700")
+                        .text("Legend");
+
+                    const legendItems = [
+                        { key: "oscarBait", label: "Oscar-bait count" },
+                        { key: "nonOscar", label: "Non-oscar bait count" }
+                    ];
+
+                    legend.selectAll(".legend-item")
+                        .data(legendItems)
+                        .enter()
+                        .append("g")
+                        .attr("class", "legend-item")
+                        .attr("transform", (_, i) => `translate(0, ${16 + i * 22})`)
+                        .each(function(item) {
+                            const row = d3.select(this);
+                            row.append("rect")
+                                .attr("width", 12)
+                                .attr("height", 12)
+                                .attr("rx", 2)
+                                .attr("fill", pieColors(item.key))
+                                .attr("stroke", "rgba(255,255,255,0.7)");
+                            row.append("text")
+                                .attr("x", 18)
+                                .attr("y", 10)
+                                .style("fill", "#f2f2f2")
+                                .style("font-size", "11px")
+                                .text(item.label);
+                        });
+
+                    labels.each(function(d) {
+                        const text = d3.select(this);
+                        const words = d.name.split(" ");
+                        text.selectAll("tspan").remove();
+                        const lineHeight = 12;
+                        const offset = -(words.length - 1) * lineHeight / 2;
+
+                        words.forEach((word, i) => {
+                            text.append("tspan")
+                                .attr("x", 0)
+                                .attr("dy", i === 0 ? offset : lineHeight)
+                                .text(word);
+                        });
+                    });
+
+                    nodeGroups
+                        .on("mouseover", function(event, d) {
+                        const others = nodeGroups.filter(n => n !== d);
+
+                        others.selectAll(".photo-bg")
+                            .transition().duration(180)
+                            .style("opacity", 0.22);
+                        others.selectAll(".pie-slice")
+                            .transition().duration(180)
+                            .style("opacity", 0.22);
+                        others.selectAll(".bubble-outline")
+                            .transition().duration(180)
+                            .style("opacity", 0.25);
+                        others.selectAll(".label")
+                            .transition().duration(180)
+                            .style("opacity", 0.35);
+
+                        d3.select(this)
+                            .transition().duration(200)
+                            .style("opacity", 1)
+                        d3.select(this).select(".bubble-outline")
+                            .transition().duration(200)
+                            .style("stroke-width", 3)
+                            .style("filter", "drop-shadow(0px 0px 14px rgba(255,188,110,0.95))");
+                        d3.select(this).select(".photo-bg")
+                            .style("opacity", 1);
+                        d3.select(this).selectAll(".pie-slice")
+                            .style("opacity", 1);
+                        d3.select(this).select(".bubble-outline")
+                            .style("opacity", 1);
+                        d3.select(this).select(".label")
+                            .style("opacity", 1);
+
+                        tooltip
+                            .style("opacity", 1)
+                            .html(
+                                `<strong>${d.name}</strong><br>` +
+                                `Non-oscar bait: ${d.nonOscar}<br>` +
+                                `Oscar bait: ${d.oscarBait}<br>` +
+                                `Total: ${d.total}`
+                            );
+                        })
+
+                        .on("mousemove", (event) => {
+                        tooltip
+                            .style("left", event.pageX + 10 + "px")
+                            .style("top", event.pageY - 20 + "px");
+                        })
+
+                        .on("mouseout", function() {
+                        nodeGroups.selectAll(".photo-bg")
+                            .transition().duration(180)
+                            .style("opacity", 1);
+                        nodeGroups.selectAll(".pie-slice")
+                            .transition().duration(180)
+                            .style("opacity", 1);
+                        nodeGroups.selectAll(".bubble-outline")
+                            .transition().duration(180)
+                            .style("opacity", 1);
+                        nodeGroups.selectAll(".label")
+                            .transition().duration(180)
+                            .style("opacity", 1);
+
+                        d3.select(this)
+                            .style("opacity", 1);
+                        d3.select(this).select(".bubble-outline")
+                            .transition().duration(180)
+                            .style("stroke-width", 2.2)
+                            .style("filter", "drop-shadow(0px 0px 8px rgba(255,188,110,0.7))");
+
+                        tooltip.style("opacity", 0);
+                        });
+
+
+
+                    const simulation = d3.forceSimulation(nodes)
+                        .force("center", d3.forceCenter(width * 0.43, height / 2))
+                        .force("x", d3.forceX(width * 0.43).strength(0.09))
+                        .force("y", d3.forceY(height / 2).strength(0.08))
+                        .force("charge", d3.forceManyBody().strength(1))
+                        .force("collision", d3.forceCollide().radius(d => d.r + 5))
+                        .on("tick", () => {
+                        nodeGroups
+                            .attr("transform", d => `translate(${d.x}, ${d.y})`);
+                        });
+                    }
                 // DOM elements
                 const firstintro = document.getElementById('firstintroSection');
                 const scrollContainer = document.getElementById('scrollContainer');
@@ -196,6 +494,12 @@
                         })
                         .onStepEnter(response => {
                             const triggerIndex = response.index;
+                            
+                    
+                            if (triggerIndex === 4) {
+                            renderBubbleChart();
+                            }
+
                             if (triggerIndex >= 0 && triggerIndex < totalSlides) {
                                 if (triggerIndex !== currentActiveIndex) {
                                     activateSlide(triggerIndex);

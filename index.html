@@ -8,9 +8,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <!-- Scrollama CDN -->
     <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
-    <link href="main.css" rel="stylesheet">
+    <!-- <link href="main.css" rel="stylesheet">     -->
+     <!-- In your <head> section, after Google Fonts -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/slides/arpit.css">
+    <link rel="stylesheet" href="css/slides/image-only.css">
+    <link rel="stylesheet" href="css/slides/text-only.css">
+    <link rel="stylesheet" href="css/slides/split.css">
+    <link rel="stylesheet" href="css/slides/search.css">
+    <link rel="stylesheet" href="css/slides/linegraph.css">
+    <link rel="stylesheet" href="css/slides/ratio.css">
+    <link rel="stylesheet" href="css/components/posters.css">
+    <link rel="stylesheet" href="css/components/oscarbaitintro.css">
+    <link rel="stylesheet" href="css/components/temp.css">
+    <link rel="stylesheet" href="css/slides/oscar_categories.css">
+    <link rel="stylesheet" href="css/slides/oscar_categories_list.css">
 </head>
 <body>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.5/build/d3.layout.cloud.js"></script>
+
 
     <!-- firstintro SECTION -->
     <section class="firstintro" id="firstintroSection">
@@ -21,13 +40,6 @@
     </section>
 
 
-        <!-- <section class="oscarbaitintro-section">
-            <div class="oscarbaitintro-box">
-                <div class="oscarbaitintro-small">Which begs the question</div>
-                <div class="oscarbaitintro-large">What makes a movie Oscar Bait?</div>
-            </div>
-        </section> -->
-
     <!-- SCROLL CONTAINER (fades in after firstintro) -->
     <div class="scroll-container" id="scrollContainer">
         
@@ -35,307 +47,237 @@
         <div class="fixed-narrative" id="fixedNarrative">
             
             <!-- SLIDE 1: IMAGE ONLY -->
-            <div class="narrative-slide slide-image-only" data-slide="0">
-                <div class="image-only-content">
-                    <img src="images/graphs.jpg" alt="Oscar statue and cinema">
-                    <div class="image-caption">✨ The Golden Statue — symbol of prestige, but at what cost?</div>
-                </div>
-            </div>
-            
-            <!-- SLIDE 2: TEXT ONLY -->
-            <div class="narrative-slide slide-text-only" data-slide="1">
-                <div class="text-only-content">
-                    <h2>The Academy's Blind Spot</h2>
-                    <p>For decades, the Oscars have celebrated a very specific type of film: period dramas, tragic biopics, and stories about Hollywood itself. These "Oscar bait" movies follow a predictable formula — serious subject matter, transformative makeup, and a soaring orchestral score.</p>
-                    <p>But here's the problem: <strong>audiences are tired of it.</strong> While critics praise these technically flawless films, regular moviegoers are checking their watches.</p>
-                    <div class="quote">"The more a film tries to win an Oscar, the less it tries to win an audience."</div>
-                </div>
-            </div>
-            
-            <!-- SLIDE 3: TEXT (LHS) + IMAGE (RHS) -->
-            <div class="narrative-slide slide-split" data-slide="2">
-                <div class="split-text">
-                    <div class="split-text-inner">
-                        <div class="badge">📊 THE DATA</div>
-                        <h3>The Widening Gap</h3>
-                        <p><strong>Audience scores are plummeting.</strong> Since 2010, Rotten Tomatoes audience ratings for Best Picture nominees have dropped by nearly 28%, while the number of nominations for "prestige" films has barely changed.</p>
-                        <p>This scatter plot tells the story: each dot represents a nominee. Notice how the cluster moves leftward (lower audience scores) while staying high on the nomination axis.</p>
-                        <div class="highlight">⭐ The conclusion? The Academy is out of touch with what people actually enjoy watching.</div>
+            <!-- SLIDE 4: Centered with Image + Quote -->
+
+
+            <div class="narrative-slide slide-centered-quote" data-slide="0">
+                <div class="centered-quote-content">
+                    <div class="professor-image">
+                        <img src="images/arpit_complaining.png" alt="Professor Arpit">
+                    </div>
+                    <div class="professor-quote">
+                        <p class="quote-text">"How did this movie even win an Oscar?"</p>
+                        <p class="quote-attribution">— A renowned professor named Arpit, expressing his views towards <em>Everything Everywhere All At Once</em></p>
+                    </div>
+                    <div class="professor-message">
+                        <p>While I do not agree with his opinions, the sentiment is valid. Why do awful movies sometimes win Oscar awards?</p>
+                    </div>
+                    <div class="call-to-action">
+                        Enter the world of Oscar Bait.
                     </div>
                 </div>
-                <div class="split-image">
-                    <img src="images/placeholder.png">
+            </div>
+
+
+
+            <div class="narrative-slide slide-search-definition" data-slide="1">
+                <div class="search-definition-container">
+                    <!-- NEW TITLE BOX -->
+                    <div class="title-box">
+                        <h2 class="section-title">What is Oscar Bait?</h2>
+                    </div>
+                    
+                    <!-- Definition Card -->
+                    <div class="definition-card">
+                        <p class="definition-text">
+                            Oscar Bait movies can be understood as bad movies that somehow got Oscar awards.
+                        </p>
+                        <p class="definition-text">
+                            Using popular movie reviewing site <i>RottenTomatoes</i>, we technically define Oscar Bait movies as 
+                            <b>oscar-nominated</b> movies that received a poor audience rating of <b>Spilled</b> in RottenTomatoes.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="narrative-slide slide-line-graph" data-slide="2">
+                <div class="line-graph-container">
+                    <div class="title-box">
+                        <h2 class="section-title">Oscar Bait Movies over time</h2>
+                    </div>
+                    <div class="graph-insight">
+                        <p class="insight-text">Over the years, the trend of Oscar-bait movies being nominated is <strong class="rising">rising</strong>.</p>
+                        <p class="insight-note">From 1950 to 2017, the frequency of poorly received Oscar-nominated films has notably increased.</p>
+                    </div>
+                    <div class="graph-wrapper">
+                        <svg id="lineGraph" width="800" height="400" viewBox="0 0 800 400"></svg>
+                    </div>
                 </div>
             </div>
 
-            <div class="narrative-slide" data-slide="3">
-                <div>
-                    GGGG
+            <div class="narrative-slide slide-ratio" data-slide="3">
+                <div class="ratio-container">
+                    <div class="title-box">
+                        <h2 class="section-title">Ratio of Good Oscars to Oscar Baits</h2>
+                    </div>
+                    
+                    <div class="ratio-text-above">
+                        <div class="ratio-item">
+                            <span class="ratio-number good">4.8</span>
+                            <span class="ratio-label-small">Good Oscar Movies</span>
+                        </div>
+                        <span class="ratio-colon">:</span>
+                        <div class="ratio-item">
+                            <span class="ratio-number bad">1</span>
+                            <span class="ratio-label-small">Oscar Bait</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ratio-text-below">
+                        <p>Since 1980, the number of good Oscar movies to Oscar bait is also significant. On average, for every <strong class="good-text">4.8 Good Oscar movies</strong>, there exists <strong class="bad-text">1 Oscar Bait</strong>.</p>
+                    </div>
                 </div>
             </div>
-
-            <!-- SLIDE 2: TEXT ONLY
-            <div class="narrative-slide slide-text-only" data-slide="3">
-                <div class="text-only-content">
-                    <h2>The Academy's Blind Spot</h2>
-                    <p>For decades, the Oscars have celebrated a very specific type of film: period dramas, tragic biopics, and stories about Hollywood itself. These "Oscar bait" movies follow a predictable formula — serious subject matter, transformative makeup, and a soaring orchestral score.</p>
-                    <p>But here's the problem: <strong>audiences are tired of it.</strong> While critics praise these technically flawless films, regular moviegoers are checking their watches.</p>
-                    <div class="quote">"The more a film tries to win an Oscar, the less it tries to win an audience."</div>
-                </div>
-            </div> -->
-            
         </div>
-        
         <!-- INVISIBLE TRIGGER STEPS (one per slide) -->
         <div class="scroll-triggers" id="triggerContainer">
-            <div class="trigger-step" data-trigger="0" style="height: 20vh;"></div>
-            <div class="trigger-step" data-trigger="1" style="height: 150vh;"></div>
-            <div class="trigger-step" data-trigger="2" style="height: 150vh;"></div>
-            <div class="trigger-step" data-trigger="3" style="height: 150vh;"></div>
+            <div class="trigger-step" data-trigger="0" style="height: 50vh;"></div>
+            <div class="trigger-step" data-trigger="1" style="height: 100vh;"></div>
+            <div class="trigger-step" data-trigger="2" style="height: 100vh;"></div>
+            <div class="trigger-step" data-trigger="3" style="height: 100vh;"></div>
         </div>
         
         <div class="scroll-spacer"></div>
     </div>
 
+    <section class="oscarbaitintro-section">
+        <div class="oscarbaitintro-box">
+            <div class="oscarbaitintro-small">Which begs the question</div>
+            <div class="oscarbaitintro-large">What makes a movie Oscar Bait?</div>
+        </div>
+    </section>
+
+    <!-- SECOND FIXED NARRATIVE SECTION -->
+    <div class="second-scroll-container" id="secondScrollContainer">
+        
+        <div class="second-fixed-narrative" id="secondFixedNarrative">
+            
+            <!-- SHARED WORD CLOUD -->
+            <div class="second-wordcloud-wrapper">
+                <div id="wordcloudWrapper" style="width: 100%; height: 350px;"></div>
+            </div>
+            
+            <!-- SLIDE 1: Pure Textbox -->
+            <div class="second-slide second-slide-text-only" data-second-slide="0">
+                <div class="second-textbox-large">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Oscar Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">Let's look at this question using Oscar categories. The kinds of awards that movies win might be linked to Oscar Bait movies.</p>
+                        <div class="second-decoration">
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SLIDE 2 -->
+            <div class="second-slide second-slide-with-wordcloud" data-second-slide="1">
+                <div class="second-textbox-bottom" id="secondSlide2Textbox">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Oscar Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">In addition to Best Picture, there are a myriad of Oscar awards that exist.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SLIDE 3 -->
+            <div class="second-slide second-slide-with-wordcloud" data-second-slide="2">
+                <div class="second-textbox-bottom" id="secondSlide3Textbox">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Most Oscar Bait Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">For <strong style="color: #f44336;">Oscar Bait</strong> movies, the most common categories they are nominated for are <span class="second-highlight">technical categories</span>.</p>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="second-slide second-slide-filtered" data-second-slide="3">
+                <div class="filtered-words-container" id="filteredWordsContainer">
+                </div>
+                    <div class="filtered-images-container">
+                        <img src="images/shortfilm_reel.png" alt="film reel" class="filtered-image" data-index="0">
+                        <img src="images/dance_reel.png" alt="film reel" class="filtered-image" data-index="1">
+                        <img src="images/makeup_reel.png" alt="film reel" class="filtered-image" data-index="2">
+                        <img src="images/visual_reel.png" alt="film reel" class="filtered-image" data-index="3">
+                    </div>
+                <div class="second-textbox-bottom slide4-textbox" id="secondSlide4Textbox">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Most Oscar Bait Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">The top 4 <strong style="color: #f44336;">Oscar Bait</strong> categories are shown. Aside from Short Film, the rest are technical awards. <br>The ratios are high. For Instance, for Dance Direction,  <span class="second-highlight">about 3 out of every 10</span> nominated films are <strong style="color: #f44336;">Oscar bait</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        -->
+            <div class="second-slide second-slide-filtered" data-second-slide="3">
+                <div class="filtered-words-container" id="filteredWordsContainer">
+                    <!-- Original SVG text elements will be animated here, no new divs -->
+                </div>
+                <div class="filtered-images-container" id="filteredImagesContainer">
+                    <!-- Images will be dynamically created here -->
+                </div>
+                <div class="second-textbox-bottom slide4-textbox" id="secondSlide4Textbox">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Most Oscar Bait Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">The top 4 <strong style="color: #f44336;">Oscar Bait</strong> categories are shown. Aside from Short Film, the rest are technical awards. <br>The ratios are high. For Instance, for Dance Direction,  <span class="second-highlight">about 3 out of every 10</span> nominated films are <strong style="color: #f44336;">Oscar bait</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 - Final conclusion -->
+            <div class="second-slide second-slide-conclusion" data-second-slide="4">
+                <div class="second-textbox-middle">
+                    <div class="second-textbox-content">
+                        <!-- <div class="second-icon">🎬</div>-->
+                        <h2 class="second-slide-title">Oscar Categories</h2>
+                        <!-- <div class="second-divider"></div> -->
+                        <p class="second-slide-message conclusion-message">
+                            Perhaps a reason why Oscar bait movies get nominated is because of their technical achievement, 
+                            which is independent to the overall quality of film.
+                        </p>
+                        <div class="second-decoration">
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="second-triggers" id="secondTriggerContainer">
+            <div class="second-trigger-step" data-second-trigger="0" style="height: 10px;"></div>
+            <div class="second-trigger-step" data-second-trigger="1" style="height: 150vh;"></div>
+            <div class="second-trigger-step" data-second-trigger="2" style="height: 150vh;"></div>
+            <div class="second-trigger-step" data-second-trigger="3" style="height: 150vh;"></div>
+            <div class="second-trigger-step" data-second-trigger="4" style="height: 100vh;"></div>
+        </div>
+        
+        <div class="second-spacer"></div>
+    </div>
+
+
+
+
+    <section class="temp-section">
+        <div class="temp-box">
+            <div class="temp-small">TEMP</div>
+            <div class="temp-large">TEMP</div>
+        </div>
+    </section>
     <!-- <div class="scroll-hint" id="scrollHint">↓ scroll past firstintro → narrative begins</div> -->
     <!-- <div class="progress-pill" id="progressPill">🎬 Slide 1 / 3</div> -->
 
-    <script>
-        // ============================================================
-        // FLEXIBLE SLIDE ARCHITECTURE
-        // Each slide is a self-contained div inside .fixed-narrative
-        // You can design each slide ANY WAY YOU WANT
-        // ============================================================
-        (function() {
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initFlexibleNarrative);
-            } else {
-                initFlexibleNarrative();
-            }
-            
-            function initFlexibleNarrative() {
-                console.log("🎬 Flexible slide architecture — 3 custom slides");
-                
-                // DOM elements
-                const firstintro = document.getElementById('firstintroSection');
-                const scrollContainer = document.getElementById('scrollContainer');
-                const slides = document.querySelectorAll('.narrative-slide');
-                const triggerSteps = document.querySelectorAll('.trigger-step');
-                // const progressPill = document.getElementById('progressPill');
-                // const scrollHint = document.getElementById('scrollHint');
-                
-                const totalSlides = slides.length; // Should be 3
-                console.log(`Total slides: ${totalSlides}`);
-                
-                const slideNames = ["Image Only", "Text Only", "Split Layout"];
-                
-                let currentActiveIndex = 0;
-                
-                // Function to activate a slide (crossfade)
-                function activateSlide(index) {
-                    if (index < 0 || index >= totalSlides) return;
-                    if (index === currentActiveIndex && document.querySelector('.narrative-slide.active')?.getAttribute('data-slide') == index) return;
-                    
-                    // Crossfade slides
-                    slides.forEach((slide, i) => {
-                        if (i === index) {
-                            slide.classList.add('active');
-                        } else {
-                            slide.classList.remove('active');
-                        }
-                    });
-                    
-                    // Update progress pill
-                    // progressPill.innerHTML = `🎬 ${slideNames[index]} · ${index+1}/${totalSlides}`;
-                    
-                    // // Update scroll hint
-                    // if (index === totalSlides - 1) {
-                    //     scrollHint.innerHTML = '🏁 End of narrative — scroll up to revisit';
-                    //     scrollHint.style.color = '#ffbc6e';
-                    // } else {
-                    //     scrollHint.innerHTML = `↓ scroll to next: ${slideNames[index+1]}`;
-                    //     scrollHint.style.color = '#aaa';
-                    // }
-                    
-                    currentActiveIndex = index;
-                    console.log(`Activated slide ${index+1}: ${slideNames[index]}`);
-                }
-                
-                // ========== firstintro SCROLL TRANSITION ==========
-                // function checkfirstintroScroll() {
-                //     if (!firstintro) return;
-                //     const firstintroBottom = firstintro.getBoundingClientRect().bottom;
-                    
-                //     if (firstintroBottom <= 0) {
-                //         if (scrollContainer && !scrollContainer.classList.contains('visible')) {
-                //             scrollContainer.classList.add('visible');
-                //             console.log("firstintro scrolled past — narrative revealed");
-                //             if (scroller) setTimeout(() => scroller.resize(), 100);
-                //         }
-                //     } else {
-                //         if (scrollContainer && scrollContainer.classList.contains('visible')) {
-                //             scrollContainer.classList.remove('visible');
-                //         }
-                //     }
-                // }
-                
-                // ========== SCROLLAMA SETUP ==========
-                let scroller = null;
-                
-                function setupScrollama() {
-                    if (scroller) scroller.destroy();
-                    
-                    scroller = scrollama();
-                    
-                    scroller
-                        .setup({
-                            step: '.trigger-step',
-                            offset: 0.55,
-                            threshold: 0.2,
-                            debug: false
-                        })
-                        .onStepEnter(response => {
-                            const triggerIndex = response.index;
-                            if (triggerIndex >= 0 && triggerIndex < totalSlides) {
-                                if (triggerIndex !== currentActiveIndex) {
-                                    activateSlide(triggerIndex);
-                                }
-                            }
-                        })
-                        .onStepExit(response => {
-                            const exitingIndex = response.index;
-                            const direction = response.direction;
-                            
-                            if (direction === 'up' && exitingIndex > 0) {
-                                const prevIndex = exitingIndex - 1;
-                                if (prevIndex !== currentActiveIndex && prevIndex >= 0) {
-                                    const prevTrigger = triggerSteps[prevIndex];
-                                    if (prevTrigger) {
-                                        const rect = prevTrigger.getBoundingClientRect();
-                                        const viewportMid = window.innerHeight * 0.55;
-                                        if (rect.top <= viewportMid && rect.bottom >= viewportMid) {
-                                            activateSlide(prevIndex);
-                                        }
-                                    }
-                                }
-                            }
-                            if (direction === 'up' && exitingIndex === 0) {
-                                if (currentActiveIndex !== 0) {
-                                    activateSlide(0);
-                                }
-                            }
-                        });
-                }
-                
-                setupScrollama();
-                
-                // Helper to determine active slide from scroll
-                function determineActiveFromScroll() {
-                    if (!scrollContainer.classList.contains('visible')) return;
-                    
-                    const viewportMid = window.innerHeight * 0.55;
-                    let bestIndex = 0;
-                    triggerSteps.forEach((step, idx) => {
-                        const rect = step.getBoundingClientRect();
-                        if (rect.top <= viewportMid && rect.bottom >= viewportMid) {
-                            bestIndex = idx;
-                        } else if (rect.top <= viewportMid && idx === 0 && rect.bottom > 0) {
-                            bestIndex = 0;
-                        }
-                    });
-                    if (bestIndex !== currentActiveIndex) {
-                        activateSlide(bestIndex);
-                    }
-                }
-                
-                // ========== EVENT LISTENERS ==========
-                // window.addEventListener('scroll', checkfirstintroScroll);
-                // checkfirstintroScroll();
-                
-                let resizeTimer;
-                window.addEventListener('resize', () => {
-                    if (resizeTimer) clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(() => {
-                        if (scroller) scroller.resize();
-                        if (scrollContainer.classList.contains('visible')) {
-                            determineActiveFromScroll();
-                        }
-                    }, 200);
-                });
-                
-                window.addEventListener('scroll', () => {
-                    if (scrollContainer.classList.contains('visible')) {
-                        if (!window._scrollFrame) {
-                            window._scrollFrame = requestAnimationFrame(() => {
-                                determineActiveFromScroll();
-                                window._scrollFrame = null;
-                            });
-                        }
-                    }
-                });
-                
-                // Initial activation
-                setTimeout(() => {
-                    // Force initial slide to be active
-                    if (!scrollContainer.classList.contains('visible')) {
-                        // Even if hidden, pre-activate slide 0
-                        activateSlide(0);
-                    } else {
-                        determineActiveFromScroll();
-                    }
-                    if (scroller) scroller.resize();
-                }, 100);
-                
-                // Add style for smooth transitions
-                const style = document.createElement('style');
-                style.textContent = `
-                    .narrative-slide {
-                        transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                    }
-                    .scroll-container {
-                        transition: opacity 0.7s ease;
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                console.log("✅ Ready! 3 custom slides:");
-                console.log("  Slide 1: Image only");
-                console.log("  Slide 2: Text only"); 
-                console.log("  Slide 3: Text (LHS) + Image (RHS)");
-                console.log("To customize: edit each .narrative-slide div with your own HTML/CSS");
-            
-
-                // Make sure slide 1 is active immediately
-                activateSlide(0);
-                scrollContainer.style.opacity = '1';
-
-            }
-        })();
-    </script>
-    <!-- 
-        ========== HOW TO CUSTOMIZE SLIDES ==========
-        
-        Each slide is a self-contained <div class="narrative-slide"> inside .fixed-narrative.
-        You can put ANY HTML inside each slide and style it however you want.
-        
-        CURRENT SLIDES:
-        - Slide 1: Image only (.slide-image-only)
-        - Slide 2: Text only (.slide-text-only)  
-        - Slide 3: Split layout (.slide-split) - text left, image right
-        
-        TO ADD A NEW SLIDE:
-        1. Add a new .narrative-slide div with your custom content
-        2. Add a matching .trigger-step div inside .scroll-triggers
-        3. Update slideNames array if you want custom labels
-        
-        TO CHANGE SLIDE ORDER:
-        Just reorder the .narrative-slide divs (and corresponding .trigger-step divs)
-        
-        SLIDE TYPES ARE COMPLETELY FLEXIBLE:
-        - Fullscreen video? Yes
-        - Complex grid layout? Yes  
-        - Animated chart? Yes
-        - Anything you can build with HTML/CSS
-    -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

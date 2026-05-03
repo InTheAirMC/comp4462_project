@@ -1,0 +1,115 @@
+/* ========== SLIDE 7: RATIO SLIDE ========== */
+.slide-ratio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.ratio-container {
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Ratio Text Above - with flex layout */
+.ratio-text-above {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.ratio-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* First item (4.8) - align to the right */
+.ratio-item:first-child {
+    align-items: flex-end;
+}
+
+/* Last item (1) - align to the left */
+.ratio-item:last-child {
+    align-items: flex-start;
+}
+
+.ratio-number {
+    font-size: 10rem;
+    font-weight: 900;
+    display: inline-block;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    line-height: 1;
+}
+
+.ratio-number.good {
+    color: #4CAF50;
+    text-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+}
+
+.ratio-number.bad {
+    color: #f44336;
+    text-shadow: 0 0 20px rgba(244, 67, 54, 0.3);
+}
+
+.ratio-label-small {
+    font-size: 0.85rem;
+    color: #aaa;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.ratio-colon {
+    font-size: 8rem;
+    font-weight: 700;
+    color: #ffbc6e;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    line-height: 1;
+    align-self: center;
+}
+
+/* Text below */
+.ratio-text-below {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(25, 30, 40, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 180, 71, 0.3);
+}
+
+.ratio-text-below p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #eef2ff;
+}
+
+.ratio-text-below .good-text {
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+.ratio-text-below .bad-text {
+    color: #f44336;
+    font-weight: 700;
+}
+
+@media (max-width: 700px) {
+    .ratio-number { font-size: 2.8rem; }
+    .ratio-colon { font-size: 2rem; margin: 0 0.5rem; }
+    .ratio-label-small { font-size: 0.65rem; }
+    .ratio-text-above { gap: 0rem; padding: 1.5rem; }
+    .ratio-text-below p { font-size: 1rem; }
+}

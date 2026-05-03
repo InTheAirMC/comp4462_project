@@ -1,0 +1,127 @@
+/* Slide 4 - Filtered words on LHS */
+.second-slide-filtered {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    background: linear-gradient(135deg, #0a0d14, #12161f);
+}
+
+.filtered-words-container {
+    flex: 1;
+    position: relative;
+    min-height: 500px;
+    /* This container is just a placeholder - the actual words are still in SVG */
+}
+
+/* Make sure SVG is visible during slide 4 */
+.second-slide-filtered .second-wordcloud-wrapper {
+    display: block !important;
+    position: relative;
+    top: 0;
+    transform: none;
+}
+
+.second-slide-filtered .second-textbox-bottom {
+    flex: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    padding-right: 5%;
+}
+
+/* Ensure the SVG text elements are visible during animation */
+.second-slide-filtered svg {
+    overflow: visible !important;
+}
+
+
+/* Remove any conflicting transitions */
+.second-wordcloud-wrapper svg {
+    overflow: visible !important;
+}
+
+/* Ensure SVG text elements transition properly */
+.second-wordcloud-wrapper svg text {
+    transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    will-change: transform, x, y, font-size;
+}
+
+/* Slide 4 specific */
+.second-slide-filtered .second-wordcloud-wrapper {
+    display: block !important;
+}
+
+.second-slide-filtered svg text {
+    cursor: pointer;
+}
+
+
+/* Ensure SVG text elements support transform transitions */
+.second-wordcloud-wrapper svg text {
+    will-change: transform, font-size, opacity;
+    transition-property: transform, font-size, opacity;
+    transition-timing-function: cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    transition: none;
+}
+
+.second-wordcloud-wrapper svg {
+    overflow: visible;
+}
+.second-wordcloud-wrapper svg text {
+    cursor: pointer;
+}
+
+.filtered-image {
+    width: 80%;
+    height: 100px;
+    opacity: 0;
+}
+
+
+
+
+
+
+
+/* Oscar Statues Container */
+.oscar-statues-main-container {
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.statue-wrapper {
+    transition: transform 0.2s ease;
+}
+
+.statue-wrapper:hover {
+    transform: scale(1.15);
+}
+
+.statue-wrapper img {
+    transition: all 0.3s ease;
+}
+
+.statue-ratio-label {
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #ffbc6e;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 25px;
+    display: inline-block;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 180, 71, 0.3);
+}

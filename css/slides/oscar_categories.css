@@ -1,0 +1,428 @@
+/* ========== SECOND NARRATIVE - CORRECTED CSS ========== */
+
+/* Shared word cloud - POSITIONED AT TOP */
+.second-wordcloud-wrapper {
+    position: absolute;
+    top: 5%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+#wordcloudWrapper {
+    width: 85%;
+    height: 450px;
+    pointer-events: auto;
+}
+
+/* Slides container */
+.second-fixed-narrative {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a0d14, #12161f);
+}
+
+/* Base slide styles */
+.second-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    pointer-events: auto;
+    overflow-y: auto;
+    transition: opacity 0.3s ease;
+}
+
+.second-slide.active-second {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Slide 1 - Text only */
+.second-slide-text-only {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slides 2 & 3 layout - word cloud at top, text at bottom */
+.second-slide-with-wordcloud {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 3rem;
+}
+
+/* Textbox at bottom for slides 2 & 3 */
+.second-textbox-bottom {
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    z-index: 10;
+    position: relative;
+}
+
+/* Textbox large for slide 1 */
+.second-textbox-large {
+    max-width: 800px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Inner textbox content - consistent styling */
+.second-textbox-content {
+    max-width: 700px;
+    text-align: center;
+    padding: 2rem 2.5rem;
+    background: rgba(20, 25, 35, 0.85);
+    backdrop-filter: blur(16px);
+    border-radius: 48px;
+    border: 1px solid rgba(255, 180, 71, 0.25);
+    box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.second-textbox-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 55px -15px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 180, 71, 0.5);
+}
+
+/* Icon */
+.second-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    animation: secondFloat 3s ease-in-out infinite;
+}
+
+@keyframes secondFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Title */
+.second-slide-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #FFD966, #FFB347, #E25822);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+/* Divider */
+.second-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #FFD966, #FFB347, #E25822);
+    margin: 0.8rem auto;
+    border-radius: 3px;
+}
+
+/* Message */
+.second-slide-message {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #eef2ff;
+    margin: 1rem 0;
+    font-weight: 400;
+}
+
+/* Highlight text */
+.second-highlight {
+    color: #ffbc6e;
+    font-weight: 700;
+    border-bottom: 2px solid #ffb347;
+    display: inline-block;
+}
+
+/* Tag */
+.second-tag {
+    display: inline-block;
+    background: rgba(255, 180, 71, 0.15);
+    padding: 0.4rem 1rem;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #ffbc6e;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.8rem;
+}
+
+/* Decoration dots */
+.second-decoration {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.second-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 180, 71, 0.5);
+    border-radius: 50%;
+}
+
+/* Triggers */
+.second-triggers {
+    position: relative;
+    width: 100%;
+    pointer-events: none;
+}
+
+.second-trigger-step {
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+    position: relative;
+}
+
+.second-spacer {
+    height: 20vh;
+    background: transparent;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+    .second-slide-title {
+        font-size: 1.6rem;
+    }
+    
+    .second-slide-message {
+        font-size: 1rem;
+    }
+    
+    .second-textbox-content {
+        padding: 1.2rem;
+        border-radius: 32px;
+    }
+    
+    .second-icon {
+        font-size: 2rem;
+    }
+    
+    .second-divider {
+        width: 50px;
+    }
+    
+    #wordcloudWrapper {
+        height: 400px;
+    }
+    
+    .second-wordcloud-wrapper {
+        top: 3%;
+    }
+}
+
+
+
+
+/* ========== SLIDE 4 - FILTERED WORDS LAYOUT ========== */
+
+/* Slide 4 specific - stacked words on left, textbox at bottom */
+.second-slide-filtered {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+}
+
+/* Container for filtered words - positioned at top/middle left */
+.filtered-words-container {
+    position: absolute;
+    left: 5%;
+    top: 15%;
+    width: auto;
+    height: auto;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Textbox at bottom for slide 4 */
+.slide4-textbox {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    z-index: 10;
+    background: transparent;
+    pointer-events: none;
+}
+
+/* Ensure textbox content is clickable */
+.slide4-textbox .second-textbox-content {
+    pointer-events: auto;
+    max-width: 600px;
+    width: 90%;
+}
+
+/* Adjust filtered words SVG styles */
+.filtered-words-container svg {
+    width: auto;
+    height: auto;
+    min-width: 300px;
+}
+
+.filtered-words-container text {
+    dominant-baseline: middle;
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments for slide 4 */
+@media (max-width: 768px) {
+    .filtered-words-container {
+        left: 3%;
+        top: 10%;
+    }
+    
+    .filtered-words-container svg {
+        min-width: 250px;
+    }
+    
+    .slide4-textbox {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .slide4-textbox .second-textbox-content {
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .filtered-words-container {
+        left: 2%;
+        top: 8%;
+    }
+    
+    .filtered-words-container svg {
+        min-width: 200px;
+    }
+    
+    .filtered-words-container text {
+        font-size: 14px !important;
+    }
+}
+
+/* Animation for filtered words appearing */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.filtered-words-container text {
+    animation: slideInFromLeft 0.6s ease-out forwards;
+    animation-delay: calc(var(--index, 0) * 0.1s);
+}
+
+
+
+
+
+/* ========== SLIDE 5 - CONCLUSION ========== */
+
+.second-slide-conclusion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(10,13,20,0.95), rgba(18,22,31,0.95));
+}
+
+.second-textbox-middle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 10;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.conclusion-message {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 1.5rem auto;
+    font-weight: 500;
+    color: #f0f3fa;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .conclusion-message {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        padding: 0 1rem;
+    }
+    
+    .second-textbox-middle .second-textbox-content {
+        padding: 1.5rem;
+        margin: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .conclusion-message {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+    
+    .second-slide-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* Optional: Add a subtle background pattern */
+.second-slide-conclusion::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 180, 71, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    opacity: 0.5;
+}

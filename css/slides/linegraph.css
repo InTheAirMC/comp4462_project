@@ -1,0 +1,80 @@
+/* ========== SLIDE 6: LINE GRAPH SLIDE ========== */
+.slide-line-graph {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.line-graph-container {
+    max-width: 1100px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.graph-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.graph-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #FFD966, #FFB347);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.graph-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+#lineGraph {
+    width: 100%;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+}
+
+.graph-insight {
+    text-align: center;
+    background: rgba(25, 30, 40, 0.7);
+    backdrop-filter: blur(8px);
+    border-radius: 32px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 180, 71, 0.3);
+    margin: 0 auto;
+    width: 100%;
+}
+
+.insight-text {
+    font-size: 1.5rem;
+    color: #eef2ff;
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+}
+
+.insight-text .rising {
+    color: #ffbc6e;
+    font-weight: 800;
+    border-bottom: 3px solid #ffb347;
+}
+
+.insight-note {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-top: 0.8rem;
+}
+
+@media (max-width: 700px) {
+    .graph-title { font-size: 1.8rem; }
+    .insight-text { font-size: 1.2rem; }
+    .graph-insight { padding: 1.5rem; }
+    .insight-note { font-size: 0.9rem; }
+}

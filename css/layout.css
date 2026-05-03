@@ -1,0 +1,86 @@
+/* ----- SCROLL CONTAINER ----- */
+.scroll-container {
+    position: relative;
+    width: 100%;
+    z-index: 15;
+    opacity: 1;
+}
+
+.scroll-container.visible {
+    opacity: 1;
+}
+
+/* FIXED NARRATIVE */
+.fixed-narrative {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    overflow: hidden;
+}
+
+/* Slide container */
+.narrative-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: auto;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.narrative-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Custom scrollbar */
+.narrative-slide::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* INVISIBLE TRIGGER STEPS */
+.scroll-triggers {
+    position: relative;
+    width: 100%;
+    pointer-events: none;
+}
+
+.trigger-step {
+    width: 100%;
+    height: 85vh;
+    pointer-events: none;
+    opacity: 0;
+    position: relative;
+}
+
+.scroll-spacer {
+    height: 15vh;
+    background: transparent;
+}
+
+
+
+
+.oscarbaitintro-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+}
+
+
+.temp-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+}

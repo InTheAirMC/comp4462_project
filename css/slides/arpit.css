@@ -1,0 +1,83 @@
+/* ========== SLIDE 0: ARPIT INTRO ========== */
+.slide-centered-quote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-quote-content {
+    max-width: 900px;
+    width: 90%;
+    text-align: center;
+    padding: 3rem;
+    backdrop-filter: blur(12px);
+    border-radius: 40px;
+    border: 1px solid rgba(255, 180, 71, 0.3);
+    box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5);
+}
+
+.professor-image {
+    margin-bottom: 2rem;
+}
+
+.professor-image img {
+    max-width: 400px;
+    max-height: 340px;
+    width: auto;
+    height: auto;
+    border-radius: 10%;
+    object-fit: cover;
+    border: 3px solid #ffb347;
+    box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5);
+}
+
+.professor-quote {
+    margin-bottom: 2rem;
+}
+
+.quote-text {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffbc6e;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.quote-attribution {
+    font-size: 1rem;
+    color: #aaa;
+    letter-spacing: 0.5px;
+}
+
+.professor-message {
+    margin-bottom: 2.5rem;
+}
+
+.professor-message p {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #eef2ff;
+}
+
+.call-to-action {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #FFD966, #FFB347, #E25822);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 180, 71, 0.3);
+}
+
+@media (max-width: 700px) {
+    .quote-text { font-size: 1.4rem; }
+    .professor-message p { font-size: 1.1rem; }
+    .call-to-action { font-size: 1.3rem; }
+    .centered-quote-content { padding: 1.8rem; }
+    .professor-image img { max-width: 200px; max-height: 180px; }
+}

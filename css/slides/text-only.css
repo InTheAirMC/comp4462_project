@@ -1,0 +1,40 @@
+/* ========== SLIDE 2: TEXT ONLY ========== */
+.text-only-content {
+    max-width: 800px;
+    text-align: center;
+    padding: 3rem;
+    backdrop-filter: blur(12px);
+    border-radius: 40px;
+    border: 1px solid rgba(255, 180, 71, 0.3);
+}
+
+.text-only-content h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #FFD966, #FFB347);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.text-only-content p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: #eef2ff;
+    margin-bottom: 1.5rem;
+}
+
+.text-only-content .quote {
+    font-style: italic;
+    color: #ffbc6e;
+    border-left: 4px solid #ffb347;
+    padding-left: 2rem;
+    margin-top: 2rem;
+    font-size: 1.4rem;
+}
+
+@media (max-width: 700px) {
+    .text-only-content { padding: 1.8rem; }
+    .text-only-content h2 { font-size: 1.8rem; }
+    .text-only-content p { font-size: 1.1rem; }
+}

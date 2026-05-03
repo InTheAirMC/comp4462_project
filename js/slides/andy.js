@@ -330,6 +330,7 @@
                     nodeGroups
                         .on("mouseover", function(event, d) {
                             actorSelect.property("value", d.name);
+                            setSelectedActorInfo(d);
                             focusActor(d, this, {
                                 left: event.pageX + 10,
                                 top: event.pageY - 20

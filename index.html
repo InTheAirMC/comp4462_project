@@ -87,7 +87,7 @@
                         </p>
                         <p class="definition-text">
                             Using popular movie reviewing site <i>RottenTomatoes</i>, we technically define Oscar Bait movies as 
-                            <b>oscar-nominated</b> movies that received a poor audience rating of <b>Spilled</b> in RottenTomatoes.
+                            <b style="text-decoration: underline;">oscar-nominated</b> movies that received a poor audience rating of <b style="text-decoration: underline;">Spilled</b> in RottenTomatoes.
                         </p>
                     </div>
 
@@ -282,10 +282,10 @@
     </div>
 
 
-    <section class="oscarbaitintro-section">
+    <section class="tempgenres-section">
         <div class="oscarbaitintro-box">
-            <div class="oscarbaitintro-small">Which begs the question</div>
-            <div class="oscarbaitintro-large">What makes a movie Oscar Bait?</div>
+            <div class="oscarbaitintro-small">What about</div>
+            <div class="oscarbaitintro-large">A MOVIE'S GENRE?</div>
         </div>
     </section>
 
@@ -427,7 +427,7 @@
                             <h3>Ghost Bars: Rotten Count Ranking</h3>
                             <p><strong>Dimmer bars</strong> show the "rotten" nominees within each genre.</p>
                             <p>This reveals which genres sneak low-quality films into the Oscar conversation.</p>
-                            <div class="highlight">👻 Rising in rank inside this graph is not a great phenomenon.</div>
+                            <div class="highlight">Rising in rank inside this graph is not a great phenomenon.</div>
                         </div>
                         
                         <!-- Phase 3a: Ratio-based reordering -->
@@ -439,8 +439,8 @@
 
                         <!-- Phase 3b: Ratio-based result -->
                         <div class="genres_slide5-step" data-step="3b">
-                            <div class="highlight">🎯 Adventure and Action: the true Oscar bait masters.</div>
-                            <div class="highlight">💥 An excuse to Horror: Can't bait audiences if it is not a nomination-friendly genre.</div>
+                            <div class="highlight">Adventure and Action: the true Oscar bait masters.</div>
+                            <div class="highlight">An excuse to Horror: Can't bait audiences if it is not a nomination-friendly genre.</div>
                         </div>
                     </div>
                 </div>
@@ -492,72 +492,9 @@
 
 
 
-    <section class="temp-section">
-        <div class="temp-box">
-            <div class="temp-small">What about</div>
-            <div class="temp-large">A Movie's Budget?</div>
-        </div>
-    </section>
 
 
-
-
-    <!-- SCROLL CONTAINER (fades in after firstintro) -->
-    <div class="scroll-container-jon" id="scrollFourthContainer">
-        
-        <!-- FIXED NARRATIVE: each slide is COMPLETELY CUSTOMIZABLE -->
-        <div class="fixed-narrative-jon" id="fixedFourthNarrative">
-            <div class="narrative-slide-jon" data-slide="0">
-                <div class="stacked-layout-jon">
-                    <div class="stacked-image-jon">
-                        <!-- Container for the D3 tree map -->
-                        <div id="tree-diagram"></div>
-                    </div>
-                    <div class="stacked-text-jon">
-                        <div class="stacked-text-inner-jon">
-                            <h3>Pay to Win?</h3>
-                            <p><strong>Does a movie's budget influence Oscar baitiness?</strong></p>
-                            <p>Some movies are known for having massive budgets. But does that make them more Oscar worthy? Or can spending more money "buy" the movie an Oscar?</p>
-                            <p>This tree map tells the story: The size of each block represents the movie's budget size. And the movies coloured <strong>RED</strong> indicate the Oscar-bait movies.</p>
-                            <div class="highlight">The conclusion? There is no clear correlation between budget and Oscar-baitiness. It would seem an Oscar cannot be bought.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="narrative-slide-jon slide-text-only-jon" data-slide="1">
-                <div class="second-textbox-middle-jon">
-                    <div class="second-textbox-content">
-                        <!-- <div class="second-icon">🎬</div>-->
-                        <h2 class="second-slide-title">Movie Budgets</h2>
-                        <!-- <div class="second-divider"></div> -->
-                        <p class="second-slide-message conclusion-message">
-                            It seems like there isn't a clear correlation. Maybe the other factors outweigh a movie's budget.
-                        </p>
-                        <div class="second-decoration">
-                            <span class="second-dot"></span>
-                            <span class="second-dot"></span>
-                            <span class="second-dot"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        
-        <!-- INVISIBLE TRIGGER STEPS (one per slide) -->
-        <div class="scroll-triggers" id="FourthTriggerContainer">
-            <div class="trigger-step" data-trigger="0" style="height: 150vh;"></div>
-            <div class="trigger-step" data-trigger="1" style="height: 150vh;"></div>
-            <!-- <div class="trigger-step" data-trigger="2" style="height: 150vh;"></div> -->
-        </div>
-        
-        <div class="scroll-spacer"></div>
-    </div>
-
-
-
-    <section class="temp-section">
+    <section class="tempactors-section">
         <div class="temp-box">
             <div class="temp-small">What about</div>
             <div class="temp-large">The Actors in the Movie?</div>
@@ -575,7 +512,7 @@
                     <div class="split-text-inner-andy">
                     <h3>Who Appears Most in Oscar-Bait Films?</h3>
                     <p>This bubble chart profiles the top 20 actors by total appearances in our dataset. Bigger bubbles mean the actor appears in more films overall.</p>
-                    <p>Inside each bubble, the pie split compares film types: <strong>orange</strong> is Oscar-bait count, while <strong>blue</strong> is non-oscar-bait count.</p>
+                    <p>Inside each bubble, the pie split compares film types: <strong style="text-decoration:underline; ; color: orange;">orange</strong> is Oscar-bait count, while <strong style="text-decoration:underline;color: #8888FF;">blue</strong> is non-oscar-bait count.</p>
                     <p>Hover over an actor to isolate their profile and see exact values.</p>
                     <div class="actor-jump-panel">
                         <div class="actor-jump-control">
@@ -674,16 +611,43 @@
 
 
 
-    <section class="temp-section">
-        <div class="temp-box">
-            <div class="temp-small">TEMP</div>
-            <div class="temp-large">TEMP</div>
+    <!-- ========== CONCLUSION SECTION ========== -->
+    <section class="conclusion-section" id="conclusionSection">
+        <div class="conclusion-container">
+            <h1 class="conclusion-title">Conclusion</h1>
+            
+            <p class="conclusion-intro">
+                After going through an Oscar movie's nominated category, genres, and actors involved, 
+                the conclusion about a film's Oscar baity-ness are...
+            </p>
+            
+            <div class="conclusion-table">
+                <div class="conclusion-row">
+                    <div class="conclusion-label">Nominated Category</div>
+                    <div class="conclusion-value">A film's Oscar-baity-ness has high correlation to whether it receives technical awards.</div>
+                </div>
+                <div class="conclusion-row">
+                    <div class="conclusion-label">Genres</div>
+                    <div class="conclusion-value">Adventure and Action are the most Oscar-baity genres</div>
+                </div>
+                <div class="conclusion-row">
+                    <div class="conclusion-label">Actors Involved</div>
+                    <div class="conclusion-value">Robert De Niro, Charlton Heston, and Meryl Streep are most seen in Oscar bait movies</div>
+                </div>
+            </div>
         </div>
     </section>
 
 
-
-
+    <!-- ========== FINAL TAKEAWAY SECTION ========== -->
+    <!-- <section class="final-takeaway-section" id="finalTakeawaySection">
+        <div class="final-takeaway-overlay"></div>
+        <div class="final-takeaway-container">
+            <div class="final-takeaway-textbox">
+                <p>So if a movie you are watching stars Robert De Niro, is nominated for many technical awards, and is either an Adventure or Action movie, chances are, it is an Oscar Bait movie.</p>
+            </div>
+        </div>
+    </section> -->
 
 
     <!-- <div class="scroll-hint" id="scrollHint">↓ scroll past firstintro → narrative begins</div> -->

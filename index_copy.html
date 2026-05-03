@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Oscar Bait · Flexible Slide Narrative</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Scrollama CDN -->
+    <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+    <!-- <link href="main.css" rel="stylesheet">     -->
+     <!-- In your <head> section, after Google Fonts -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/slides/arpit.css">
+    <link rel="stylesheet" href="css/slides/image-only.css">
+    <link rel="stylesheet" href="css/slides/text-only.css">
+    <link rel="stylesheet" href="css/slides/split.css">
+    <link rel="stylesheet" href="css/slides/search.css">
+    <link rel="stylesheet" href="css/slides/linegraph.css">
+    <link rel="stylesheet" href="css/slides/ratio.css">
+    <link rel="stylesheet" href="css/components/posters.css">
+    <link rel="stylesheet" href="css/components/oscarbaitintro.css">
+    <link rel="stylesheet" href="css/components/temp.css">
+    <link rel="stylesheet" href="css/slides/oscar_categories.css">
+    <link rel="stylesheet" href="css/slides/oscar_categories_list.css">
+    <link rel="stylesheet" href="css/anson.css">
+    <link rel="stylesheet" href="css/jonathan.css">
+    <link rel="stylesheet" href="css/andy.css">
+</head>
+<body>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.5/build/d3.layout.cloud.js"></script>
+
+
+    <!-- firstintro SECTION -->
+    <section class="firstintro" id="firstintroSection">
+        <div class="firstintro-content">
+            <h1 class="firstintro-title">Oscar Bait Movies</h1>
+            <div class="firstintro-sub">Why are there so many bad movies getting Oscars?</div>
+        </div>
+    </section>
+
+
+    <!-- SCROLL CONTAINER (fades in after firstintro) -->
+    <div class="scroll-container" id="scrollContainer">
+        
+        <!-- FIXED NARRATIVE: each slide is COMPLETELY CUSTOMIZABLE -->
+        <div class="fixed-narrative" id="fixedNarrative">
+            
+            <!-- SLIDE 1: IMAGE ONLY -->
+            <!-- SLIDE 4: Centered with Image + Quote -->
+
+
+            <div class="narrative-slide slide-centered-quote" data-slide="0">
+                <div class="centered-quote-content">
+                    <div class="professor-image">
+                        <img src="images/arpit_complaining.png" alt="Professor Arpit">
+                    </div>
+                    <div class="professor-quote">
+                        <p class="quote-text">"How did this movie even win an Oscar?"</p>
+                        <p class="quote-attribution">— A renowned professor named Arpit, expressing his views towards <em>Everything Everywhere All At Once</em></p>
+                    </div>
+                    <div class="professor-message">
+                        <p>While I do not agree with his opinions, the sentiment is valid. Why do awful movies sometimes win Oscar awards?</p>
+                    </div>
+                    <div class="call-to-action">
+                        Enter the world of Oscar Bait.
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="narrative-slide slide-search-definition" data-slide="1">
+                <div class="search-definition-container">
+                    <!-- NEW TITLE BOX -->
+                    <div class="title-box">
+                        <h2 class="section-title">What is Oscar Bait?</h2>
+                    </div>
+                    
+                    <!-- Definition Card -->
+                    <div class="definition-card">
+                        <p class="definition-text">
+                            Oscar Bait movies can be understood as bad movies that somehow got Oscar awards.
+                        </p>
+                        <p class="definition-text">
+                            Using popular movie reviewing site <i>RottenTomatoes</i>, we technically define Oscar Bait movies as 
+                            <b>oscar-nominated</b> movies that received a poor audience rating of <b>Spilled</b> in RottenTomatoes.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="narrative-slide slide-line-graph" data-slide="2">
+                <div class="line-graph-container">
+                    <div class="title-box">
+                        <h2 class="section-title">Oscar Bait Movies over time</h2>
+                    </div>
+                    <div class="graph-insight">
+                        <p class="insight-text">Over the years, the trend of Oscar-bait movies being nominated is <strong class="rising">rising</strong>.</p>
+                        <p class="insight-note">From 1950 to 2017, the frequency of poorly received Oscar-nominated films has notably increased.</p>
+                    </div>
+                    <div class="graph-wrapper">
+                        <svg id="lineGraph" width="800" height="400" viewBox="0 0 800 400"></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="narrative-slide slide-ratio" data-slide="3">
+                <div class="ratio-container">
+                    <div class="title-box">
+                        <h2 class="section-title">Ratio of Good Oscars to Oscar Baits</h2>
+                    </div>
+                    
+                    <div class="ratio-text-above">
+                        <div class="ratio-item">
+                            <span class="ratio-number good">4.8</span>
+                            <span class="ratio-label-small">Good Oscar Movies</span>
+                        </div>
+                        <span class="ratio-colon">:</span>
+                        <div class="ratio-item">
+                            <span class="ratio-number bad">1</span>
+                            <span class="ratio-label-small">Oscar Bait</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ratio-text-below">
+                        <p>Since 1980, the number of good Oscar movies to Oscar bait is also significant. On average, for every <strong class="good-text">4.8 Good Oscar movies</strong>, there exists <strong class="bad-text">1 Oscar Bait</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="narrative-slide slide-line-graph" data-slide="4">
+                <div class="line-graph-container">
+                    <div class="title-box">
+                        <h2 class="section-title">Oscar Bait Movies over time</h2>
+                    </div>
+                    <div class="graph-insight">
+                        <p class="insight-text">Over the years, the trend of Oscar-bait movies being nominated is <strong class="rising">rising</strong>.</p>
+                        <p class="insight-note">From 1950 to 2017, the frequency of poorly received Oscar-nominated films has notably increased.</p>
+                    </div>
+                    <div class="graph-wrapper">
+                        <svg id="lineGraph" width="800" height="400" viewBox="0 0 800 400"></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- INVISIBLE TRIGGER STEPS (one per slide) -->
+        <div class="scroll-triggers" id="triggerContainer">
+            <div class="trigger-step" data-trigger="0" style="height: 50vh;"></div>
+            <div class="trigger-step" data-trigger="1" style="height: 100vh;"></div>
+            <div class="trigger-step" data-trigger="2" style="height: 100vh;"></div>
+            <div class="trigger-step" data-trigger="3" style="height: 100vh;"></div>
+        </div>
+        
+        <div class="scroll-spacer"></div>
+    </div>
+
+    <section class="oscarbaitintro-section">
+        <div class="oscarbaitintro-box">
+            <div class="oscarbaitintro-small">Which begs the question</div>
+            <div class="oscarbaitintro-large">What makes a movie Oscar Bait?</div>
+        </div>
+    </section>
+
+    <!-- SECOND FIXED NARRATIVE SECTION -- CATEGORIES -->
+    <div class="second-scroll-container" id="secondScrollContainer">
+        
+        <div class="second-fixed-narrative" id="secondFixedNarrative">
+            
+            <!-- SHARED WORD CLOUD -->
+            <div class="second-wordcloud-wrapper">
+                <div id="wordcloudWrapper" style="width: 100%; height: 350px;"></div>
+            </div>
+            
+            <!-- SLIDE 1: Pure Textbox -->
+            <div class="second-slide second-slide-text-only" data-second-slide="0">
+                <div class="second-textbox-large">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Oscar Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">Let's look at this question using Oscar categories. The kinds of awards that movies win might be linked to Oscar Bait movies.</p>
+                        <div class="second-decoration">
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SLIDE 2 -->
+            <div class="second-slide second-slide-with-wordcloud" data-second-slide="1">
+                <div class="second-textbox-bottom" id="secondSlide2Textbox">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Oscar Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">In addition to Best Picture, there are a myriad of Oscar awards that exist.<br>Hover over the text to see their Oscar nominated counts.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SLIDE 3 -->
+            <div class="second-slide second-slide-with-wordcloud" data-second-slide="2">
+                <div class="second-textbox-bottom" id="secondSlide3Textbox">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Most Oscar Bait Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">For <strong style="color: #f44336;">Oscar Bait</strong> movies, the most common categories they are nominated for are <span class="second-highlight">technical categories</span>.<br>Hover over the text to see their Oscar bait counts.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="second-slide second-slide-filtered" data-second-slide="3">
+                <div class="slide4-grid-container">
+                    <!-- Row 1 -->
+                    <div class="category-title" data-category="SHORT FILM">SHORT FILM</div>
+                    <div class="statue-row" id="statueRow0"></div>
+                    
+                    <!-- Row 2 -->
+                    <div class="category-title" data-category="DANCE DIRECTION">DANCE DIRECTION</div>
+                    <div class="statue-row" id="statueRow1"></div>
+                    
+                    <!-- Row 3 -->
+                    <div class="category-title" data-category="MAKEUP HAIRSTYLING">MAKEUP HAIRSTYLING</div>
+                    <div class="statue-row" id="statueRow2"></div>
+                    
+                    <!-- Row 4 -->
+                    <div class="category-title" data-category="VISUAL EFFECTS">VISUAL EFFECTS</div>
+                    <div class="statue-row" id="statueRow3"></div>
+                </div>
+                
+                <div class="second-textbox-bottom slide4-textbox" id="secondSlide4Textbox">
+                    <div class="second-textbox-content">
+                        <h2 class="second-slide-title">Most Oscar Bait Categories</h2>
+                        <div class="second-divider"></div>
+                        <p class="second-slide-message">The top 4 <strong style="color: #f44336;">Oscar Bait</strong> categories are shown. Aside from Short Film, the rest are technical awards. <br>The ratios are high. For Instance, for Dance Direction, <span class="second-highlight">about 3 out of every 10</span> nominated films are <strong style="color: #f44336;">Oscar bait</strong>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 - Final conclusion -->
+            <div class="second-slide second-slide-conclusion" data-second-slide="4">
+                <div class="second-textbox-middle">
+                    <div class="second-textbox-content">
+                        <!-- <div class="second-icon">🎬</div>-->
+                        <h2 class="second-slide-title">Oscar Categories</h2>
+                        <!-- <div class="second-divider"></div> -->
+                        <p class="second-slide-message conclusion-message">
+                            Perhaps a reason why Oscar bait movies get nominated is because of their technical achievement, 
+                            which is independent to the overall quality of film.
+                        </p>
+                        <div class="second-decoration">
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="second-triggers" id="secondTriggerContainer">
+            <div class="second-trigger-step" data-second-trigger="0" style="height: 10px;"></div>
+            <div class="second-trigger-step" data-second-trigger="1" style="height: 150vh;"></div>
+            <div class="second-trigger-step" data-second-trigger="2" style="height: 150vh;"></div>
+            <div class="second-trigger-step" data-second-trigger="3" style="height: 150vh;"></div>
+            <div class="second-trigger-step" data-second-trigger="4" style="height: 100vh;"></div>
+        </div>
+        <div class="second-spacer"></div>
+    </div>
+
+
+    <section class="oscarbaitintro-section">
+        <div class="oscarbaitintro-box">
+            <div class="oscarbaitintro-small">Which begs the question</div>
+            <div class="oscarbaitintro-large">What makes a movie Oscar Bait?</div>
+        </div>
+    </section>
+
+    <!--  THIRD FIXED NARRATIVE SECTION -- GENRES -->
+    <div class="scroll-container-genres" id="scrollThirdContainer">
+        
+        <!-- ========== FIXED NARRATIVE: 5 CUSTOM SLIDES ========== -->
+        <!-- Each slide is positioned absolutely and crossfades on scroll -->
+        <div class="fixed-narrative-genres" id="thirdFixedNarrative">
+            
+            <!-- ========== SLIDE 2: TEXT ONLY ========== -->
+            <div class="narrative-slide-genres slide-text-only-genres" data-slide="0">
+                <div class="second-textbox-middle">
+                    <div class="second-textbox-content">
+                        <!-- <div class="second-icon">🎬</div>-->
+                        <h2 class="second-slide-title">Oscar Genres</h2>
+                        <!-- <div class="second-divider"></div> -->
+                        <p class="second-slide-message conclusion-message">
+                            In addition to Oscar categories, the specific genres of Oscar-nominated movies might also show a correlation with how 'Oscar baity' they are.
+                        </p>
+                        <div class="second-decoration">
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== SLIDE 4: BUBBLE CHART + NARRATIVE TEXT ========== -->
+            <!-- Left side: scrollytelling text with multi-step visibility -->
+            <!-- Right side: D3 bubble chart visualization -->
+            <div class="narrative-slide-genres slide-split-genres slide-bubble-genres" data-slide="1">
+                <div class="split-text-genres genres_slide4-copy">
+                    <div class="split-text-inner-genres">
+                        <!-- <div class="badge"> THE DATA</div> -->
+                        
+                        <!-- Title steps: Switch between "Nominations" and "Oscar-Baitness" -->
+                        <div class="genres_slide4-step" data-step="t1"><h3>Oscars Nominations</h3></div>
+                        <div class="genres_slide4-step" data-step="t2"><h3>Oscar-Baiting Nominations</h3></div>
+                        <div class="genres_slide4-step" data-step="t3"><h3>Oscar-Bait Ratio</h3></div>
+                        
+                        <!-- Phase 1a: Introduction to genre bubbles -->
+                        <div class="genres_slide4-step" data-step="1a">
+                            <p><strong  style="text-decoration: underline;">Every genre has its audiences.</strong> If every genre is shown as a bubble, we get a bubble view of the Oscars.</p>
+                            <p>The more movies in a genre, the bigger the bubble.</p>
+                            <p></p>
+                            <div class="highlight">Hover on the bubbles to inspect them.</div>
+                            <p></p>
+                        </div>
+
+                        <!-- Phase 1b: Bubble color explanation -->
+                        <div class="genres_slide4-step" data-step="1b">
+                            <p>Now, top nominated genres are labeled with <strong style="text-decoration: underline;">whiter color</strong> and <strong><font color="red" style="text-decoration: underline;">red fonts</font></strong>.</p>
+                            <!-- pop out legend -->
+                            <p>Drama, Comedy, and Romance gets the most weight.</p>
+                            <p></p>
+                        </div>
+                        
+                        <!-- Phase 2a: Explanation of rotten nominees -->
+                        <div class="genres_slide4-step" data-step="2a">
+                            <p><strong>But not every movie satisfies the genre audiences.</strong> We keep movies that are Rotten, with the rotten rating lower than 60, but get an Oscar nomination.</p>
+                            <!-- insert ghost bubbles animation -->
+                             <p><strong><font color="red" style="text-decoration: underline;">Red fonts</font></strong> now represent top genres which have the most amount of Oscar-bait movie.</p>
+                             <p></p>
+                        </div>
+                        
+                        <!-- Phase 2b: Ghost bubbles explanation -->
+                        <div class="genres_slide4-step" data-step="2b">
+                            <div class="highlight">Observe how Oscar-bait genres fills the ghost bubbles. Empty bubbles reveal good genres!</div>
+                            <p></p>
+                            <p>Drama, Comedy, and Romance still gets the most weight, but are they the most baiting genres?</p>
+                            <p></p>
+                        </div>
+                        
+                        <!-- Phase 3a: Ratio ranking explanation -->
+                        <div class="genres_slide4-step" data-step="3a">
+                            <div class="highlight">Watch genres rerank themselves by "bait ratio" — the proportion of rotten to nominated.</div>
+                            <!-- rerank bubbles and change bubble main value to ratio -->
+                        </div>
+                    
+                        
+                        <!-- Phase 3b: Rotten mode explanation -->
+                        <div class="genres_slide4-step" data-step="3b">
+                            <p><strong><font color="red" style="text-decoration: underline;">Red fonts</font></strong> now represent top baiting genres.</p>
+                            <p> </p>
+                            <div class="highlight">Higher amount of rotten films does not entirely mean the genre is baiting.</div>
+                            <p></p>
+                            <p>Notice those larger bubbles did have smaller ranking. Those are the genres that "bait" audience only due to large amount of movies published.</p>
+                            <p>Then, there are those smaller bubbles which get filled up greatly, but only due to them being hard to get a nomination.</p>
+                            <p></p>
+                        </div>
+                        
+                        <!-- Final insight -->
+                        <div class="genres_slide4-step" data-step="3c">
+                            <div class="highlight"><strong>Conclusion should be conducted by taking both ranking into consideration.</strong></div>
+                            <p></p>
+                        </div>
+
+                        <div class="genres_slide4-legend">
+                            <div class="genres_slide4-legend-title">Rank</div>
+                            <div class="genres_slide4-legend-bar">
+                                <div class="genres_slide4-legend-fill"></div>
+                            </div>
+                            <div class="genres_slide4-legend-labels">
+                                <span>Top</span>
+                                <span>Bottom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bubble chart visualization area -->
+                <div class="split-image-genres genres_slide4-visual">
+                    <div class="bubble-chart-host" id="genreBubbleChart">
+                        <div class="bubble-tooltip" id="bubbleTooltip"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== SLIDE 5: BAR CHART RANKING + NARRATIVE TEXT ========== -->
+            <!-- Left side: scrollytelling text for bar chart phases -->
+            <!-- Right side: D3 horizontal bar chart visualization -->
+            <div class="narrative-slide-genres slide-split-genres slide-bars-genres" data-slide="2">
+                <div class="split-text-genres genres_slide5-copy">
+                    <div class="split-text-inner-genres">
+                        <div class="badge"> TOP BAIT GENRES</div>
+                        
+                        <!-- Phase 1: Count-based ranking -->
+                        <div class="genres_slide5-step" data-step="1">
+                            <h3>Ranking by Count</h3>
+                            <p><strong style="text-decoration: underline;">Here are the top 10 genres</strong> with the most Oscar nominations in our dataset.</p>
+                            <p>Bars are colored by ranking: white for top nominees, fading to yellow for lower ranks, orange for not being top 10.</p>
+                            <div class="highlight">Bar color is correlated to only the overall nominations.</div>
+                        </div>
+                        
+                        <!-- Phase 2: Ghost bars (rotten nominees) -->
+                        <div class="genres_slide5-step" data-step="2">
+                            <h3>Ghost Bars: Rotten Count Ranking</h3>
+                            <p><strong>Dimmer bars</strong> show the "rotten" nominees within each genre.</p>
+                            <p>This reveals which genres sneak low-quality films into the Oscar conversation.</p>
+                            <div class="highlight">Rising in rank inside this graph is not a great phenomenon.</div>
+                        </div>
+                        
+                        <!-- Phase 3a: Ratio-based reordering -->
+                        <div class="genres_slide5-step" data-step="3a">
+                            <h3>Ranking by Bait Ratio</h3>
+                            <p><strong>Now watch the bars reorder themselves</strong> by "Oscar bait ratio":</p>
+                            <p>The ratio of rotten nominees to total nominees. Higher ratio = more bait!</p>
+                        </div>
+
+                        <!-- Phase 3b: Ratio-based result -->
+                        <div class="genres_slide5-step" data-step="3b">
+                            <div class="highlight">Adventure and Action: the true Oscar bait masters.</div>
+                            <div class="highlight">An excuse to Horror: Can't bait audiences if it is not a nomination-friendly genre.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bar chart visualization area -->
+                <div class="split-image genres_slide5-visual">
+                    <div class="bar-chart-host" id="genreBarChart">
+                        <div class="bar-tooltip" id="barTooltip"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== SLIDE 6: TEXT (LHS) + IMAGE (RHS) ========== -->
+            <div class="narrative-slide-genres slide-text-only-genres" data-slide="3">
+                <div class="second-textbox-middle">
+                    <div class="second-textbox-content">
+                        <!-- <div class="second-icon">🎬</div>-->
+                        <h2 class="second-slide-title">Oscar Genres</h2>
+                        <!-- <div class="second-divider"></div> -->
+                        <p class="second-slide-message conclusion-message">
+                            It seems like Adventure and Action are the true Oscar bait masters.
+                        </p>
+                        <div class="second-decoration">
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- ========== SCROLL TRIGGERS ========== -->
+        <!-- Invisible elements that trigger slide changes based on scroll position -->
+        <!-- Each trigger corresponds to one slide -->
+        <div class="scroll-triggers" id="triggerContainer">
+            <div class="genres_trigger-step" data-trigger="0" style="height: 150vh;"></div>
+            <div class="genres_trigger-step" data-trigger="1" style="height: 600vh;"></div>
+            <div class="genres_trigger-step" data-trigger="2" style="height: 300vh;"></div>
+            <div class="genres_trigger-step" data-trigger="3" style="height: 150vh;"></div>
+        </div>
+        
+        <!-- Spacer to allow scrolling past final slide -->
+        <div class="scroll-spacer"></div>
+    </div>
+
+
+
+
+
+    <!-- <section class="temp-section">
+        <div class="temp-box">
+            <div class="temp-small">What about</div>
+            <div class="temp-large">A Movie's Budget?</div>
+        </div>
+    </section> -->
+
+
+
+
+    <!-- SCROLL CONTAINER (fades in after firstintro) -->
+    <div class="scroll-container-jon" id="scrollFourthContainer">
+        
+        <!-- FIXED NARRATIVE: each slide is COMPLETELY CUSTOMIZABLE -->
+        <div class="fixed-narrative-jon" id="fixedFourthNarrative">
+            <div class="narrative-slide-jon" data-slide="0">
+                <div class="stacked-layout-jon">
+                    <div class="stacked-image-jon">
+                        <!-- Container for the D3 tree map -->
+                        <div id="tree-diagram"></div>
+                    </div>
+                    <div class="stacked-text-jon">
+                        <div class="stacked-text-inner-jon">
+                            <h3>Pay to Win?</h3>
+                            <p><strong>Does a movie's budget influence Oscar baitiness?</strong></p>
+                            <p>Some movies are known for having massive budgets. But does that make them more Oscar worthy? Or can spending more money "buy" the movie an Oscar?</p>
+                            <p>This tree map tells the story: The size of each block represents the movie's budget size. And the movies coloured <strong>RED</strong> indicate the Oscar-bait movies.</p>
+                            <div class="highlight">The conclusion? There is no clear correlation between budget and Oscar-baitiness. It would seem an Oscar cannot be bought.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="narrative-slide-jon slide-text-only-jon" data-slide="1">
+                <div class="second-textbox-middle-jon">
+                    <div class="second-textbox-content">
+                        <!-- <div class="second-icon">🎬</div>-->
+                        <h2 class="second-slide-title">Movie Budgets</h2>
+                        <!-- <div class="second-divider"></div> -->
+                        <p class="second-slide-message conclusion-message">
+                            It seems like there isn't a clear correlation. Maybe the other factors outweigh a movie's budget.
+                        </p>
+                        <div class="second-decoration">
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- INVISIBLE TRIGGER STEPS (one per slide) -->
+        <div class="scroll-triggers" id="FourthTriggerContainer">
+            <div class="trigger-step" data-trigger="0" style="height: 150vh;"></div>
+            <div class="trigger-step" data-trigger="1" style="height: 150vh;"></div>
+            <!-- <div class="trigger-step" data-trigger="2" style="height: 150vh;"></div> -->
+        </div>
+        
+        <div class="scroll-spacer"></div>
+    </div>
+
+
+
+    <section class="temp-section">
+        <div class="temp-box">
+            <div class="temp-small">What about</div>
+            <div class="temp-large">The Actors in the Movie?</div>
+        </div>
+    </section>
+
+    <div class="scroll-container-andy" id="scrollFifthContainer">
+        
+        <!-- FIXED NARRATIVE: each slide is COMPLETELY CUSTOMIZABLE -->
+        <div class="fixed-narrative-andy" id="fixedFifthNarrative">
+
+            <!-- SLIDE 4: TEXT + BUBBLE CHART -->
+            <div class="narrative-slide-andy slide-split-andy" data-slide="0">
+                <div class="split-text-andy">
+                    <div class="split-text-inner-andy">
+                    <h3>Who Appears Most in Oscar-Bait Films?</h3>
+                    <p>This bubble chart profiles the top 20 actors by total appearances in our dataset. Bigger bubbles mean the actor appears in more films overall.</p>
+                    <p>Inside each bubble, the pie split compares film types: <strong>orange</strong> is Oscar-bait count, while <strong>blue</strong> is non-oscar-bait count.</p>
+                    <p>Hover over an actor to isolate their profile and see exact values.</p>
+                    <div class="actor-jump-panel">
+                        <div class="actor-jump-control">
+                            <label class="actor-jump-label" for="actorJumpSelect">Jump to actor</label>
+                            <select id="actorJumpSelect" class="actor-jump-select" aria-label="Select an actor to highlight">
+                                <option value="">Select an actor...</option>
+                            </select>
+                        </div>
+                        <div id="selectedActorInfo" class="selected-actor-info" aria-live="polite">
+                            <div class="selected-actor-placeholder">Select a name to see the actor's stats.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="split-image-andy">
+                <div class="chart-panel-andy">
+                    <h2 class="chart-title-andy">Top 20 Actors: Oscar-Bait vs Non-Oscar-Bait</h2>
+                    <div class="bubble-chart-wrap-andy">
+                        <svg id="bubbleChartAndy" class="bubble-chart-svg-andy" width="100%" height="650" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Top 20 actors bubble chart"></svg>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- SLIDE 5: TEXT + OSCAR-BAIT BAR CHART (ranked by Oscar-bait count) -->
+            <div class="narrative-slide-andy slide-split-andy" data-slide="1">
+                <div class="split-text-andy">
+                    <div class="split-text-inner-andy">
+                        <h3>Who Acts in the Most Oscar-Bait Movies?</h3>
+                        <p>Our last view showed total screen time; this chart zooms in on <strong>Oscar bait alone</strong>. Each bar counts how many films in the dataset we labeled Oscar bait for that actor.</p>
+                        <p>Bigger isn’t always “more bait”: some legends rack up huge careers in every other genre, so their bar stays at zero. At the top, you’ll see who kept returning to the Academy’s favorite kind of role.</p>
+                        <div class="highlight"><strong>Robert De Niro</strong> leads the pack — seven Oscar-bait credits in this slice of film history.</div>
+                    </div>
+                </div>
+                <div class="split-image-andy">
+                    <div class="chart-panel-andy">
+                        <h2 class="chart-title-andy">Oscar-Bait Count by Actor</h2>
+                        <svg id="oscarBaitBarChart" class="bar-chart-svg-andy" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Oscar-bait count by actor"></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: TEXT + OSCAR-BAIT RATIO CHART -->
+            <div class="narrative-slide-andy slide-split-andy" data-slide="2">
+                <div class="split-text-andy">
+                    <div class="split-text-inner-andy">
+                        <h3>Who Has the Highest Oscar-Bait Ratio?</h3>
+                        <p>Counting raw Oscar-bait roles rewards actors with long careers. A ratio asks a sharper question: <strong>what share</strong> of each actor’s films are Oscar bait?</p>
+                        <p>This view focuses on actors with at least one Oscar-bait credit and compares Oscar-bait films against their total appearances.</p>
+                        <div class="highlight"><strong>Robert De Niro</strong> and <strong>Charlton Heston</strong> rise to the top — not just because they appear often, but because a larger share of their work fits the Oscar-bait pattern.</div>
+                    </div>
+                </div>
+                <div class="split-image-andy">
+                    <div class="chart-panel-andy">
+                        <h2 class="chart-title-andy">Oscar-Bait Ratio by Actor</h2>
+                        <svg id="oscarBaitRatioChart" class="bar-chart-svg-andy" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Oscar-bait ratio by actor"></svg>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- ========== SLIDE 6: TEXT (LHS) + IMAGE (RHS) ========== -->
+            <div class="narrative-slide-andy slide-text-only-andy" data-slide="3">
+                <div class="second-textbox-middle">
+                    <div class="second-textbox-content">
+                        <!-- <div class="second-icon">🎬</div>-->
+                        <h2 class="second-slide-title">Oscar Actors</h2>
+                        <!-- <div class="second-divider"></div> -->
+                        <p class="second-slide-message conclusion-message">
+                            Interestingly, the top 3 Oscar-bait actors are Robert De Niro, Charlton Heston, and Meryl Streep.<br>
+                            The next time you see these actors, chances are the movie could be Oscar-bait.
+                        </p>
+                        <div class="second-decoration">
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                            <span class="second-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- INVISIBLE TRIGGER STEPS (one per slide) -->
+        <div class="scroll-triggers" id="FifthTriggerContainer">
+            <div class="trigger-step" data-trigger="0" style="height: 150vh;"></div>
+            <div class="trigger-step" data-trigger="1" style="height: 150vh;"></div>
+            <div class="trigger-step" data-trigger="2" style="height: 150vh;"></div>
+            <div class="trigger-step" data-trigger="3" style="height: 150vh;"></div>
+        </div>
+
+        <div class="scroll-spacer"></div>
+    </div>
+
+
+
+
+
+    <section class="temp-section">
+        <div class="temp-box">
+            <div class="temp-small">TEMP</div>
+            <div class="temp-large">TEMP</div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <!-- <div class="scroll-hint" id="scrollHint">↓ scroll past firstintro → narrative begins</div> -->
+    <!-- <div class="progress-pill" id="progressPill">🎬 Slide 1 / 3</div> -->
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/slides/anson.js"></script>
+    <script type="module" src="js/slides/jonathan.js"></script>
+    <script type="module" src="js/slides/jonathan_graphs.js"></script>
+    <script type="module" src="js/slides/andy.js"></script>
+</body>
+</html>

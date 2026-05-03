@@ -1,0 +1,17 @@
+[
+    { "Person Name": "Michael Bay", "Oscar Bait Count": 6, "Oscar Count": 8, "Oscar Bait Ratio": 0.75 },
+    { "Person Name": "Mike Newell", "Oscar Bait Count": 5, "Oscar Count": 9, "Oscar Bait Ratio": 0.5555555555555556 },
+    { "Person Name": "Ivan Reitman", "Oscar Bait Count": 5, "Oscar Count": 7, "Oscar Bait Ratio": 0.7142857142857143 },
+    { "Person Name": "William Wyler", "Oscar Bait Count": 4, "Oscar Count": 14, "Oscar Bait Ratio": 0.2857142857142857 },
+    { "Person Name": "David Hugh Jones", "Oscar Bait Count": 4, "Oscar Count": 9, "Oscar Bait Ratio": 0.4444444444444444 },
+    { "Person Name": "Ridley Scott", "Oscar Bait Count": 4, "Oscar Count": 9, "Oscar Bait Ratio": 0.4444444444444444 },
+    { "Person Name": "Rob Marshall", "Oscar Bait Count": 4, "Oscar Count": 8, "Oscar Bait Ratio": 0.5 },
+    { "Person Name": "Costa-Gavras", "Oscar Bait Count": 4, "Oscar Count": 6, "Oscar Bait Ratio": 0.6666666666666666 },
+    { "Person Name": "Joel Schumacher", "Oscar Bait Count": 4, "Oscar Count": 6, "Oscar Bait Ratio": 0.6666666666666666 },
+    { "Person Name": "Chen Kaige", "Oscar Bait Count": 4, "Oscar Count": 5, "Oscar Bait Ratio": 0.8 },
+    { "Person Name": "Terry George", "Oscar Bait Count": 4, "Oscar Count": 5, "Oscar Bait Ratio": 0.8 },
+    { "Person Name": "AJ Kparr", "Oscar Bait Count": 4, "Oscar Count": 4, "Oscar Bait Ratio": 1 },
+    { "Person Name": "Anton Corbijn", "Oscar Bait Count": 4, "Oscar Count": 4, "Oscar Bait Ratio": 1 },
+    { "Person Name": "Brad Mirman", "Oscar Bait Count": 4, "Oscar Count": 4, "Oscar Bait Ratio": 1 },
+    { "Person Name": "Charles Nemes", "Oscar Bait Count": 4, "Oscar Count": 4, "Oscar Bait Ratio": 1 }
+  ]

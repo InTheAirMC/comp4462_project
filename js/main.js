@@ -4,6 +4,8 @@ import { initLineGraph } from './slides/linegraph.js';
 import { renderWordCloud, rescaleWordCloud, filterToLeftColumn, restoreFromLeftColumn, categoryFrequencyData1, categoryFrequencyData2 } from './slides/wordcloud.js';
 
 
+
+
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM loaded - initializing narratives");
@@ -182,9 +184,9 @@ function initSecondNarrative() {
             if (slide3Textbox) slide3Textbox.style.display = 'none';
             if (slide4Textbox) slide4Textbox.style.display = 'flex';
             
-            if (wordcloudContainer) {
-                wordcloudContainer.style.display = 'flex';
-            }
+            // if (wordcloudContainer) {
+            //     wordcloudContainer.style.display = 'flex';
+            // }
             
             const targetWords = ['SHORT FILM', 'DANCE DIRECTION', 'MAKEUP AND HAIRSTYLING', 'VISUAL EFFECTS'];
             setTimeout(() => {

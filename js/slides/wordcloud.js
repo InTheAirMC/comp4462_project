@@ -3,6 +3,7 @@
 const cloudWidth = 800;
 const cloudHeight = 200;
 
+
 const categoryFrequencyData1 = {
     'MUSIC': 1,
     'WRITING': 0.8278,
@@ -140,7 +141,7 @@ export function addColorIntensityBar(containerId) {
     // Right label (Oscar baity)
     const rightLabel = document.createElement('span');
     rightLabel.textContent = 'Oscar baity →';
-    rightLabel.style.color = '#801B1D';
+    rightLabel.style.color = '#d22e31';
     rightLabel.style.letterSpacing = '0.5px';
     
     labelsContainer.appendChild(leftLabel);
@@ -197,33 +198,28 @@ let originalWordData = {};
 
 
 
-
-// Transition to Slide 4 - move original text elements to left column and create oscar statues
 export function filterToLeftColumn(containerId, targetWords, duration = 1000) {
     const container = document.getElementById(containerId);
     if (!container) return;
     
-        // CHECK IF STATUES ALREADY EXIST - if yes, don't recreate
-    const existingMainContainer = document.getElementById('oscarStatuesMainContainer');
-    if (existingMainContainer && existingMainContainer.children.length > 0) {
-        console.log('Statues already exist, skipping creation');
+    // Check if statues already exist
+    if (window.statuesCreated) {
+        console.log('Statues already exist, skipping');
         return;
     }
-
-    // Hide gradient bar when filtering to left column
+    
+    // Hide gradient bar
     const gradientBar = container.querySelector('.color-intensity-bar');
     if (gradientBar) {
-        gradientBar.style.transition = 'opacity 0.4s ease';
         gradientBar.style.opacity = '0';
     }
     
-    const svg = container.querySelector('svg');
-    if (!svg) return;
+    // Hide the word cloud container
+    const wordcloudWrapper = document.querySelector('.second-wordcloud-wrapper');
+    if (wordcloudWrapper) {
+        wordcloudWrapper.style.display = 'none';
+    }
     
-    const textElements = svg.querySelectorAll('text');
-    const targetWordList = ['SHORT FILM', 'DANCE DIRECTION', 'MAKEUP HAIRSTYLING', 'VISUAL EFFECTS'];
-    
-    // Ratio data for each category (how many statues out of 10 should be red)
     const categoryRatios = {
         'SHORT FILM': 4.1,
         'DANCE DIRECTION': 3.3,
@@ -231,90 +227,17 @@ export function filterToLeftColumn(containerId, targetWords, duration = 1000) {
         'VISUAL EFFECTS': 2.9
     };
     
-    console.log('Starting filterToLeftColumn - creating oscar statues');
+    // Color values for category titles
+    const categoryColorValues = {
+        'SHORT FILM': 1,
+        'DANCE DIRECTION': 0.9,
+        'MAKEUP HAIRSTYLING': 0.8329,
+        'VISUAL EFFECTS': 0.76
+    };
     
-    // Get or create main container for all statues
-    let statuesMainContainer = document.getElementById('oscarStatuesMainContainer');
-    if (!statuesMainContainer) {
-        statuesMainContainer = document.createElement('div');
-        statuesMainContainer.className = 'oscar-statues-main-container';
-        statuesMainContainer.id = 'oscarStatuesMainContainer';
-        statuesMainContainer.style.position = 'relative';
-        statuesMainContainer.style.width = '100%';
-        statuesMainContainer.style.minHeight = '400px';
-        
-        // Find where to insert it
-        const wordsContainer = document.getElementById('filteredWordsContainer');
-        if (wordsContainer && wordsContainer.parentNode) {
-            wordsContainer.parentNode.insertBefore(statuesMainContainer, wordsContainer.nextSibling);
-        } else {
-            container.appendChild(statuesMainContainer);
-        }
-    }
+    const targetWordList = ['SHORT FILM', 'DANCE DIRECTION', 'MAKEUP HAIRSTYLING', 'VISUAL EFFECTS'];
     
-    // Clear existing content
-    statuesMainContainer.innerHTML = '';
-    
-    // Store original position data and reposition texts
-    textElements.forEach(element => {
-        const wordText = element.textContent;
-        
-        if (targetWordList.includes(wordText)) {
-            const currentXAttr = parseFloat(element.getAttribute('x'));
-            const currentYAttr = parseFloat(element.getAttribute('y'));
-            const currentSize = parseFloat(element.getAttribute('font-size'));
-            const currentColor = element.getAttribute('fill');
-            const currentAnchor = element.getAttribute('text-anchor') || 'middle';
-            
-            originalWordData[wordText] = {
-                attrX: currentXAttr,
-                attrY: currentYAttr,
-                size: currentSize,
-                color: currentColor,
-                anchor: currentAnchor,
-                element: element
-            };
-        }
-    });
-    
-    // Force reflow
-    void document.body.offsetHeight;
-    
-    // Animate target words to new position
-    const textPositions = {};
-    
-    textElements.forEach(element => {
-        const wordText = element.textContent;
-        
-        if (targetWordList.includes(wordText)) {
-            const original = originalWordData[wordText];
-            const index = targetWordList.indexOf(wordText);
-            
-            // Target position for text - left column
-            const targetX = 40;
-            const targetY = 50 + (index * 65);
-            
-            textPositions[wordText] = { x: targetX, y: targetY, index: index };
-            
-            const deltaX = targetX - original.attrX;
-            const deltaY = targetY - original.attrY;
-            
-            element.style.transition = `transform ${duration}ms cubic-bezier(0.2, 0.9, 0.4, 1.1), font-size ${duration}ms cubic-bezier(0.2, 0.9, 0.4, 1.1)`;
-            element.style.transform = 'translate(0px, 0px)';
-            
-            void element.offsetHeight;
-            
-            element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-            element.setAttribute('font-size', '18px');
-            element.setAttribute('text-anchor', 'start');
-            element.style.opacity = '1';
-        } else {
-            element.style.transition = `opacity ${duration}ms ease`;
-            element.style.opacity = '0';
-        }
-    });
-    
-    // Function to create red overlay for a statue
+    // Helper function for red overlay
     function addRedOverlay(statueWrapper, percentage) {
         const overlayDiv = document.createElement('div');
         overlayDiv.style.position = 'absolute';
@@ -324,190 +247,157 @@ export function filterToLeftColumn(containerId, targetWords, duration = 1000) {
         overlayDiv.style.height = '100%';
         overlayDiv.style.background = '#cc0000';
         overlayDiv.style.clipPath = `polygon(0% 0%, ${percentage}% 0%, ${percentage}% 100%, 0% 100%)`;
-        overlayDiv.style.borderRadius = '4px';
+        overlayDiv.style.borderRadius = '3px';
         overlayDiv.style.pointerEvents = 'none';
         overlayDiv.style.opacity = '0.85';
-        
-        statueWrapper.style.position = 'relative';
         statueWrapper.appendChild(overlayDiv);
     }
     
-    // Create all statues at once per column
-    setTimeout(() => {
-        targetWordList.forEach((category, categoryIdx) => {
-            // Create card for this category
-            const categoryCard = document.createElement('div');
-            categoryCard.className = 'category-card';
-            categoryCard.style.display = 'flex';
-            categoryCard.style.flexDirection = 'column';
-            categoryCard.style.marginBottom = '25px';
-            categoryCard.style.position = 'relative';  // ← REQUIRED for 'top' to work
-            categoryCard.style.top = '-100px';          // ← Moves up 30px
-            categoryCard.style.opacity = '0';
-            categoryCard.style.transition = 'opacity 0.5s ease';
+    // Color the category titles
+    targetWordList.forEach((category) => {
+        const titleElement = document.querySelector(`.category-title[data-category="${category}"]`);
+        if (titleElement) {
+            const colorValue = categoryColorValues[category];
+            const titleColor = getColorByValue(colorValue);
+            titleElement.style.color = titleColor;
+        }
+    });
+    
+    // Store all statue wrappers for gradual appearance
+    const allStatueWrappers = [];
+    
+    // Create all statues first (hidden), store references
+    targetWordList.forEach((category, categoryIdx) => {
+        const statueRow = document.getElementById(`statueRow${categoryIdx}`);
+        if (!statueRow) return;
+        
+        statueRow.innerHTML = '';
+        
+        const statuesContainer = document.createElement('div');
+        statuesContainer.className = 'statues-container';
+        
+        const totalStatues = 10;
+        const redCountFull = Math.floor(categoryRatios[category]);
+        const redFraction = categoryRatios[category] - redCountFull;
+        
+        // Create statues but keep them hidden initially
+        for (let i = 0; i < totalStatues; i++) {
+            const statueWrapper = document.createElement('div');
+            statueWrapper.className = 'statue-wrapper';
+            statueWrapper.style.opacity = '0';  // Start hidden
+            statueWrapper.style.transition = 'opacity 0.3s ease';
             
-            // Statues row - all statues appear together
-            const statuesRow = document.createElement('div');
-            statuesRow.style.display = 'flex';
-            statuesRow.style.flexDirection = 'row';
-            statuesRow.style.gap = '0px';
-            statuesRow.style.alignItems = 'center';
-            statuesRow.style.marginLeft = '700px';
-            statuesRow.style.flexWrap = 'wrap';
+            const statueImg = document.createElement('img');
+            statueImg.src = 'images/oscarstatue.png';
+            statueImg.alt = 'Oscar Statue';
             
-            const totalStatues = 10;
-            const redCountFull = Math.floor(categoryRatios[category]);
-            const redFraction = categoryRatios[category] - redCountFull;
+            statueWrapper.appendChild(statueImg);
             
-            // Create ALL statues for this category at once
-            for (let i = 0; i < totalStatues; i++) {
-                const statueWrapper = document.createElement('div');
-                statueWrapper.className = 'statue-wrapper';
-                statueWrapper.style.display = 'inline-block';
-                statueWrapper.style.position = 'relative';
-                statueWrapper.style.width = '50px';
-                statueWrapper.style.height = '50px';
-                statueWrapper.style.margin = '0 0px';
-                statueWrapper.style.cursor = 'pointer';
-                
-                const statueImg = document.createElement('img');
-                statueImg.src = 'images/oscarstatue.png';
-                statueImg.alt = 'Oscar Statue';
-                statueImg.style.width = '100%';
-                statueImg.style.height = '100%';
-                statueImg.style.objectFit = 'contain';
-                statueImg.style.transition = 'all 0.3s ease';
-                
-                statueWrapper.appendChild(statueImg);
-                statuesRow.appendChild(statueWrapper);
-                
-                // Color the statue based on ratio
-                if (i < redCountFull) {
-                    addRedOverlay(statueWrapper, 100);
-                    statueImg.style.transform = 'scale(1.05)';
-                } else if (i === redCountFull && redFraction > 0) {
-                    const slicePercent = redFraction * 100;
-                    addRedOverlay(statueWrapper, slicePercent);
-                    statueImg.style.transform = 'scale(1.02)';
+            if (i < redCountFull) {
+                addRedOverlay(statueWrapper, 100);
+            } else if (i === redCountFull && redFraction > 0) {
+                addRedOverlay(statueWrapper, redFraction * 100);
+            }
+            
+            statuesContainer.appendChild(statueWrapper);
+            
+            // Store with metadata
+            allStatueWrappers.push({
+                wrapper: statueWrapper,
+                categoryIdx: categoryIdx,
+                statueIdx: i
+            });
+        }
+        
+        statueRow.appendChild(statuesContainer);
+        
+        // Add label (hidden initially)
+        const label = document.createElement('div');
+        label.className = 'statue-label';
+        label.textContent = `${categoryRatios[category]}/10 Oscar Bait ratio`;
+        label.style.opacity = '0';
+        label.style.transition = 'opacity 0.5s ease';
+        statueRow.appendChild(label);
+        
+        // Store label reference
+        if (!window.statueLabels) window.statueLabels = [];
+        window.statueLabels.push(label);
+    });
+    
+    // Show statues one by one with staggered timing
+    let currentIndex = 0;
+    const totalStatues = allStatueWrappers.length;
+    
+    function showNextStatue() {
+        if (currentIndex < totalStatues) {
+            const item = allStatueWrappers[currentIndex];
+            item.wrapper.style.opacity = '1';
+            currentIndex++;
+            
+            // Schedule next statue
+            setTimeout(showNextStatue, 80);  // 80ms between each statue
+        } else {
+            // All statues shown, now show labels gradually
+            let labelIndex = 0;
+            
+            function showNextLabel() {
+                if (window.statueLabels && labelIndex < window.statueLabels.length) {
+                    window.statueLabels[labelIndex].style.opacity = '1';
+                    labelIndex++;
+                    setTimeout(showNextLabel, 200);
+                } else {
+                    // Finally, show the red gradient bar
+                    setTimeout(() => {
+                        if (gradientBar) {
+                            gradientBar.style.transition = 'opacity 1s ease';
+                            gradientBar.style.opacity = '1';
+                            console.log('Gradient bar appeared');
+                        }
+                    }, 300);
                 }
             }
             
-            categoryCard.appendChild(statuesRow);
-            
-            // Label aligned left-bottom with statues
-            const labelContainer = document.createElement('div');
-            labelContainer.style.marginLeft = '700px';
-            labelContainer.style.marginTop = '0px';
-            labelContainer.style.textAlign = 'left';
-            
-            const label = document.createElement('div');
-            label.className = 'statue-ratio-label';
-            label.textContent = `${categoryRatios[category]}/10 Oscar Bait ratio`;
-            label.style.fontSize = '13px';
-            label.style.fontFamily = "'Inter', sans-serif";
-            label.style.fontWeight = '600';
-            label.style.color = '#ffbc6e';
-            label.style.padding = '6px 12px';
-            label.style.backgroundColor = 'rgba(0,0,0,0.65)';
-            label.style.borderRadius = '25px';
-            label.style.display = 'inline-block';
-            label.style.backdropFilter = 'blur(4px)';
-            label.style.border = '1px solid rgba(255,180,71,0.3)';
-            
-            labelContainer.appendChild(label);
-            categoryCard.appendChild(labelContainer);
-            
-            statuesMainContainer.appendChild(categoryCard);
-            
-            // Fade in the card
-            setTimeout(() => {
-                categoryCard.style.opacity = '1';
-            }, categoryIdx * 200);
-            
-            console.log(`Added ${totalStatues} statues and label for ${category}`);
-        });
-    }, duration + 100);
+            // Start showing labels
+            showNextLabel();
+        }
+    }
     
-    // Store created containers for cleanup
-    window.currentStatuesMainContainer = statuesMainContainer;
+    // Start the animation after a short delay
+    setTimeout(showNextStatue, 200);
+    
+    window.statuesCreated = true;
+    console.log(`Starting gradual appearance of ${totalStatues} statues`);
 }
 
-// Restore function - remove statues
+
 export function restoreFromLeftColumn(containerId, originalData, duration = 1000) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    
-    // Show gradient bar when restoring
-    const gradientBar = container.querySelector('.color-intensity-bar');
+    // Show gradient bar
+    const gradientBar = document.querySelector('.color-intensity-bar');
     if (gradientBar) {
         gradientBar.style.transition = 'opacity 0.6s ease';
         gradientBar.style.opacity = '1';
     }
     
-    const svg = container.querySelector('svg');
-    if (!svg) return;
-    
-    const textElements = svg.querySelectorAll('text');
-    const targetWordList = ['SHORT FILM', 'DANCE DIRECTION', 'MAKEUP HAIRSTYLING', 'VISUAL EFFECTS'];
-    
-    console.log('Starting restoreFromLeftColumn - removing oscar statues');
-    
-    // Remove statues main container
-    const statuesMainContainer = document.getElementById('oscarStatuesMainContainer');
-    if (statuesMainContainer) {
-        statuesMainContainer.style.transition = 'opacity 0.4s ease';
-        statuesMainContainer.style.opacity = '0';
-        setTimeout(() => {
-            if (statuesMainContainer && statuesMainContainer.parentNode) {
-                statuesMainContainer.remove();
-            }
-        }, 400);
+    // Show word cloud container
+    const wordcloudWrapper = document.querySelector('.second-wordcloud-wrapper');
+    if (wordcloudWrapper) {
+        wordcloudWrapper.style.display = 'flex';
     }
     
-    textElements.forEach(element => {
-        const wordText = element.textContent;
-        
-        if (targetWordList.includes(wordText) && originalWordData[wordText]) {
-            const original = originalWordData[wordText];
-            
-            // Set transition
-            element.style.transition = `transform ${duration}ms cubic-bezier(0.2, 0.9, 0.4, 1.1), font-size ${duration}ms cubic-bezier(0.2, 0.9, 0.4, 1.1)`;
-            
-            // Force reflow
-            void element.offsetHeight;
-            
-            // Reset transform and restore original attributes
-            element.style.transform = 'translate(0px, 0px)';
-            element.setAttribute('x', original.attrX);
-            element.setAttribute('y', original.attrY);
-            element.setAttribute('font-size', `${original.size}px`);
-            element.setAttribute('fill', original.color);
-            element.setAttribute('text-anchor', original.anchor);
-            element.style.opacity = '1';
-            
-            // Also reset any inline styles
-            element.style.fontSize = '';
-        } else if (!targetWordList.includes(wordText)) {
-            element.style.transition = `opacity ${duration}ms ease`;
-            element.style.opacity = '1';
+    // Clear statues from all rows
+    for (let i = 0; i < 4; i++) {
+        const statueRow = document.getElementById(`statueRow${i}`);
+        if (statueRow) {
+            statueRow.innerHTML = '';
         }
-    });
+    }
     
-    // Clean up after animation
-    setTimeout(() => {
-        textElements.forEach(element => {
-            const wordText = element.textContent;
-            if (targetWordList.includes(wordText) && originalWordData[wordText]) {
-                element.style.transform = '';
-            }
-        });
-    }, duration);
+    // Reset labels array
+    window.statueLabels = [];
+    window.statuesCreated = false;
+    
+    console.log('Restored from slide 4');
 }
-
-
-
-
-
 
 // Function to calculate text width
 function getTextWidth(text, fontSize) {
@@ -584,7 +474,7 @@ function calculateWordPosition(word, allWords, placedWords, centerX, centerY, cl
     };
 }
 
-// Render initial word cloud
+// Render initial word cloud (Slide 2)
 export function renderWordCloud(containerId, data, opacityLevel = 0.9) {
     const container = document.getElementById(containerId);
     if (!container) {
@@ -602,6 +492,36 @@ export function renderWordCloud(containerId, data, opacityLevel = 0.9) {
     svg.style.display = 'block';
     container.appendChild(svg);
     
+    const slide2Counts = {
+        'SHORT FILM': 103,
+        'DANCE DIRECTION': 9,
+        'MAKEUP HAIRSTYLING': 123,
+        'VISUAL EFFECTS': 224,
+        'MUSIC': 1126,
+        'WRITING': 843,
+        'SPECIAL ACHIEVEMENT AWARD': 24,
+        'ACTRESS IN A LEADING ROLE': 412,
+        'ART DIRECTION': 579,
+        'CINEMATOGRAPHY': 596,
+        'COSTUME DESIGN': 461,
+        'DIRECTING': 477,
+        'ACTOR IN A LEADING ROLE': 459,
+        'ACTRESS IN A SUPPORTING ROLE': 418,
+        'ACTOR IN A SUPPORTING ROLE': 403,
+        'FILM EDITING': 433,
+        'BEST PICTURE': 628,
+        'ASSISTANT DIRECTOR': 24,
+        'DOCUMENTARY': 117,
+        'SOUND MIXING': 342,
+        'SOUND EDITING': 144,
+        'INTERNATIONAL FEATURE FILM': 115,
+        'SPECIAL AWARD': 12,
+        'SOUND RECORDING': 128,
+        'HONORARY AWARD': 5,
+        'SHORT SUBJECT': 4,
+        'ANIMATED FEATURE FILM': 60
+    };
+    
     const words = Object.entries(data).map(([text, value]) => ({
         text: text,
         size: Math.max(5, Math.min(40, Math.pow(value, 2) * 40)),
@@ -609,11 +529,52 @@ export function renderWordCloud(containerId, data, opacityLevel = 0.9) {
     }));
     
     const sortedWords = [...words].sort((a, b) => b.size - a.size);
-    // Slide 2 color palette - warm earthy tones
-    const slide2ColorPalette = ['#ccb68e', '#ae9f7c', '#88785d', '#5b5b5b', '#393939'];
+    // const slide2ColorPalette = ['#ccb68e', '#ae9f7c', '#88785d', '#5b5b5b', '#393939'];
+    const slide2ColorPalette = ['#ccb68e', '#ae9f7c', '#88785d'];
     const placedWords = [];
     const centerX = cloudWidth / 2;
     const centerY = cloudHeight / 2;
+    
+    // Store all text elements for hover effect
+    const allTextElements = [];
+    
+    // Create tooltip element
+    let tooltip = document.querySelector('.wordcloud-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.className = 'wordcloud-tooltip hidden';
+        document.body.appendChild(tooltip);
+    }
+    
+    function showTooltip(event, text, count) {
+        tooltip.innerHTML = `Category <strong>${text}</strong><br>Awarded to <strong>${count}</strong> Oscar Movies`;
+        tooltip.style.left = (event.clientX + 15) + 'px';
+        tooltip.style.top = (event.clientY + 15) + 'px';
+        tooltip.classList.remove('hidden');
+    }
+    
+    function hideTooltip() {
+        tooltip.classList.add('hidden');
+    }
+    
+    function handleMouseEnter(event, wordText, count) {
+        // Dim all other text elements to 30% opacity
+        allTextElements.forEach(el => {
+            if (el !== event.target) {
+                el.style.transition = 'opacity 0.2s ease';
+                el.style.opacity = '0.1';
+            }
+        });
+        showTooltip(event, wordText, count);
+    }
+    
+    function handleMouseLeave(event) {
+        // Restore all text elements to full opacity
+        allTextElements.forEach(el => {
+            el.style.opacity = '1';
+        });
+        hideTooltip();
+    }
     
     sortedWords.forEach((word, idx) => {
         const { x, y, wordWidth, wordHeight, bounds } = calculateWordPosition(
@@ -630,13 +591,23 @@ export function renderWordCloud(containerId, data, opacityLevel = 0.9) {
         textElement.setAttribute('font-size', `${word.size}px`);
         textElement.setAttribute('font-family', 'Inter, sans-serif');
         textElement.setAttribute('font-weight', 'bold');
-        textElement.setAttribute('text-anchor', 'middle');
-        // Use slide 2 color palette
         textElement.setAttribute('fill', slide2ColorPalette[idx % slide2ColorPalette.length]);
         textElement.setAttribute('opacity', opacityLevel);
         textElement.textContent = word.text;
         
+        const count = slide2Counts[word.text] || Math.floor(word.value * 100);
+        textElement.style.cursor = 'pointer';
+        
+        // Add hover events
+        textElement.addEventListener('mouseenter', (e) => handleMouseEnter(e, word.text, count));
+        textElement.addEventListener('mouseleave', handleMouseLeave);
+        textElement.addEventListener('mousemove', (e) => {
+            tooltip.style.left = (e.clientX + 15) + 'px';
+            tooltip.style.top = (e.clientY + 15) + 'px';
+        });
+        
         svg.appendChild(textElement);
+        allTextElements.push(textElement);
         
         currentWordElements.push({
             element: textElement,
@@ -651,7 +622,8 @@ export function renderWordCloud(containerId, data, opacityLevel = 0.9) {
     return svg;
 }
 
-// Smooth transition/rescale of word cloud to new data
+
+// Smooth transition/rescale of word cloud to new data (Slide 3)
 export function rescaleWordCloud(containerId, newData, duration = 800) {
     const container = document.getElementById(containerId);
     if (!container) {
@@ -666,16 +638,117 @@ export function rescaleWordCloud(containerId, newData, duration = 800) {
         return;
     }
     
-    // Determine which dataset we're transitioning to
+    // Slide 3 percentage data for tooltips
+    const data2Percentages = {
+        'SHORT FILM': 41.75,
+        'DANCE DIRECTION': 33.33,
+        'MAKEUP HAIRSTYLING': 31.71,
+        'SHORT SUBJECT': 25.0,
+        'VISUAL EFFECTS': 20.54,
+        'INTERNATIONAL FEATURE FILM': 19.13,
+        'SOUND EDITING': 18.75,
+        'MUSIC': 18.03,
+        'SOUND MIXING': 17.84,
+        'COSTUME DESIGN': 17.35,
+        'ART DIRECTION': 17.27,
+        'CINEMATOGRAPHY': 13.93,
+        'SPECIAL ACHIEVEMENT AWARD': 12.5,
+        'DOCUMENTARY': 11.97,
+        'ACTOR IN A SUPPORTING ROLE': 9.43,
+        'DIRECTING': 9.01,
+        'FILM EDITING': 9.01,
+        'ASSISTANT DIRECTOR': 8.33,
+        'BEST PICTURE': 7.64,
+        'ACTRESS IN A LEADING ROLE': 7.52,
+        'ACTOR IN A LEADING ROLE': 6.32,
+        'SOUND RECORDING': 18.25,
+        'ACTRESS IN A SUPPORTING ROLE': 6.22,
+        'WRITING': 6.05,
+        'ANIMATED FEATURE FILM': 5.0
+    };
+    
+    // Slide 2 counts for tooltips
+    const slide2Counts = {
+        'SHORT FILM': 103,
+        'DANCE DIRECTION': 9,
+        'MAKEUP HAIRSTYLING': 123,
+        'VISUAL EFFECTS': 224,
+        'MUSIC': 1126,
+        'WRITING': 843,
+        'SPECIAL ACHIEVEMENT AWARD': 24,
+        'ACTRESS IN A LEADING ROLE': 412,
+        'ART DIRECTION': 579,
+        'CINEMATOGRAPHY': 596,
+        'COSTUME DESIGN': 461,
+        'DIRECTING': 477,
+        'ACTOR IN A LEADING ROLE': 459,
+        'ACTRESS IN A SUPPORTING ROLE': 418,
+        'ACTOR IN A SUPPORTING ROLE': 403,
+        'FILM EDITING': 433,
+        'BEST PICTURE': 628,
+        'ASSISTANT DIRECTOR': 24,
+        'DOCUMENTARY': 117,
+        'SOUND MIXING': 342,
+        'SOUND EDITING': 144,
+        'INTERNATIONAL FEATURE FILM': 115,
+        'SPECIAL AWARD': 12,
+        'SOUND RECORDING': 128,
+        'HONORARY AWARD': 5,
+        'SHORT SUBJECT': 4,
+        'ANIMATED FEATURE FILM': 60
+    };
+    
     const isTransitioningToData2 = (newData === categoryFrequencyData2);
     const slide2Palette = ['#ccb68e', '#ae9f7c', '#88785d', '#5b5b5b', '#393939'];
     
-    // Add color intensity bar if transitioning to Slide 3 (categoryFrequencyData2)
     if (isTransitioningToData2) {
         addColorIntensityBar(containerId);
     } else {
-        // Remove color intensity bar when leaving Slide 3
         removeColorIntensityBar(containerId);
+    }
+    
+    // Create tooltip element if it doesn't exist
+    let tooltip = document.querySelector('.wordcloud-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.className = 'wordcloud-tooltip hidden';
+        document.body.appendChild(tooltip);
+    }
+    
+    // Store all text elements for hover effect
+    const allTextElements = Array.from(svg.querySelectorAll('text'));
+    
+    function handleMouseEnterSlide2(event, wordText, count) {
+        allTextElements.forEach(el => {
+            if (el !== event.target) {
+                el.style.transition = 'opacity 0.2s ease';
+                el.style.opacity = '0.1';
+            }
+        });
+        tooltip.innerHTML = `Category <strong>${wordText}</strong><br>Awarded to <strong>${count}</strong> Oscar Movies`;
+        tooltip.style.left = (event.clientX + 15) + 'px';
+        tooltip.style.top = (event.clientY + 15) + 'px';
+        tooltip.classList.remove('hidden');
+    }
+    
+    function handleMouseEnterSlide3(event, wordText, percentage, categoryColor) {
+        allTextElements.forEach(el => {
+            if (el !== event.target) {
+                el.style.transition = 'opacity 0.2s ease';
+                el.style.opacity = '0.1';
+            }
+        });
+        tooltip.innerHTML = `Category <strong style="color: ${categoryColor}">${wordText}</strong><br><strong style="color: ${categoryColor}">${percentage.toFixed(1)}%</strong> of nominated movies are Oscar Baits`;
+        tooltip.style.left = (event.clientX + 15) + 'px';
+        tooltip.style.top = (event.clientY + 15) + 'px';
+        tooltip.classList.remove('hidden');
+    }
+    
+    function handleMouseLeave() {
+        allTextElements.forEach(el => {
+            el.style.opacity = '1';
+        });
+        tooltip.classList.add('hidden');
     }
     
     // Calculate new sizes for each word
@@ -684,12 +757,10 @@ export function rescaleWordCloud(containerId, newData, duration = 800) {
         newSizeMap[text] = Math.max(5, Math.min(40, Math.pow(value, 2) * 40));
     });
 
-    // Store current positions and calculate new positions
     const textElements = svg.querySelectorAll('text');
     const centerX = cloudWidth / 2;
     const centerY = cloudHeight / 2;
     
-    // Get all words with their new sizes
     const wordsWithNewSizes = [];
     textElements.forEach((element, idx) => {
         const wordText = element.textContent;
@@ -707,6 +778,41 @@ export function rescaleWordCloud(containerId, newData, duration = 800) {
                 currentColor: currentColor,
                 index: idx
             });
+            
+            // Update tooltip events based on current slide
+            element.style.cursor = 'pointer';
+            
+            // Remove old listeners
+            if (element._mouseEnterHandler) {
+                element.removeEventListener('mouseenter', element._mouseEnterHandler);
+            }
+            if (element._mouseLeaveHandler) {
+                element.removeEventListener('mouseleave', element._mouseLeaveHandler);
+            }
+            if (element._mouseMoveHandler) {
+                element.removeEventListener('mousemove', element._mouseMoveHandler);
+            }
+            
+            if (isTransitioningToData2) {
+                // Slide 3 tooltips
+                const percentage = data2Percentages[wordText] || (newData[wordText] * 100);
+                const categoryColor = getColorByValue(newData[wordText]);
+                element._mouseEnterHandler = (e) => handleMouseEnterSlide3(e, wordText, percentage, categoryColor);
+            } else {
+                // Slide 2 tooltips
+                const count = slide2Counts[wordText] || 0;
+                element._mouseEnterHandler = (e) => handleMouseEnterSlide2(e, wordText, count);
+            }
+            
+            element._mouseLeaveHandler = handleMouseLeave;
+            element._mouseMoveHandler = (e) => {
+                tooltip.style.left = (e.clientX + 15) + 'px';
+                tooltip.style.top = (e.clientY + 15) + 'px';
+            };
+            
+            element.addEventListener('mouseenter', element._mouseEnterHandler);
+            element.addEventListener('mouseleave', element._mouseLeaveHandler);
+            element.addEventListener('mousemove', element._mouseMoveHandler);
         }
     });
     
@@ -777,25 +883,19 @@ export function rescaleWordCloud(containerId, newData, duration = 800) {
     
     // Helper function to interpolate between two colors
     function interpolateColor(color1, color2, progress) {
-        // Parse RGB values
         let r1, g1, b1, r2, g2, b2;
         
-        // Handle hex colors
         if (color1.startsWith('#')) {
             r1 = parseInt(color1.slice(1, 3), 16);
             g1 = parseInt(color1.slice(3, 5), 16);
             b1 = parseInt(color1.slice(5, 7), 16);
-        } 
-        // Handle rgb() format
-        else if (color1.startsWith('rgb')) {
+        } else if (color1.startsWith('rgb')) {
             const match = color1.match(/\d+/g);
             r1 = parseInt(match[0]);
             g1 = parseInt(match[1]);
             b1 = parseInt(match[2]);
-        }
-        // Handle slide 2 palette colors (already hex)
-        else {
-            r1 = 204, g1 = 182, b1 = 142; // default #ccb68e
+        } else {
+            r1 = 204, g1 = 182, b1 = 142;
         }
         
         if (color2.startsWith('#')) {
@@ -823,13 +923,10 @@ export function rescaleWordCloud(containerId, newData, duration = 800) {
         const newPos = newPositions[word.text];
         
         if (newPos) {
-            // Calculate target color
             let targetColor;
             if (isTransitioningToData2) {
-                // Slide 3: Red-Green gradient using getColorByValue
                 targetColor = getColorByValue(word.newValue);
             } else {
-                // Slide 2: Earthy palette - use consistent color based on word index
                 targetColor = slide2Palette[word.index % slide2Palette.length];
             }
             
@@ -845,7 +942,6 @@ export function rescaleWordCloud(containerId, newData, duration = 800) {
                 const progress = Math.min(1, elapsed / duration);
                 const easeProgress = 1 - Math.pow(1 - progress, 3);
                 
-                // Animate size and position
                 const currentSize = oldSize + (newSize - oldSize) * easeProgress;
                 const currentX = oldX + (newPos.x - oldX) * easeProgress;
                 const currentY = oldY + (newPos.y - oldY) * easeProgress;
@@ -854,14 +950,12 @@ export function rescaleWordCloud(containerId, newData, duration = 800) {
                 word.element.setAttribute('x', currentX);
                 word.element.setAttribute('y', currentY);
                 
-                // Animate color throughout the entire transition
                 const currentColor = interpolateColor(startColor, targetColor, easeProgress);
                 word.element.setAttribute('fill', currentColor);
                 
                 if (progress < 1) {
                     requestAnimationFrame(animate);
                 } else {
-                    // Ensure final color is exactly set
                     word.element.setAttribute('fill', targetColor);
                 }
             }
@@ -870,7 +964,15 @@ export function rescaleWordCloud(containerId, newData, duration = 800) {
         }
     });
     
-    console.log(`Rescaling and repositioning word cloud - ${wordsWithNewSizes.length} words, ${duration}ms`);
+    // After animation, ensure all text elements have correct opacity
+    setTimeout(() => {
+        const updatedTextElements = svg.querySelectorAll('text');
+        updatedTextElements.forEach(el => {
+            el.style.opacity = '1';
+        });
+    }, duration + 100);
+    
+    console.log(`Rescaling word cloud - ${wordsWithNewSizes.length} words, ${duration}ms`);
 }
 
 export { categoryFrequencyData1, categoryFrequencyData2 };

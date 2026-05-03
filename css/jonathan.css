@@ -1,0 +1,322 @@
+/* ----- SCROLL CONTAINER (appears after firstintro scrolls past) ----- */
+.scroll-container-jon {
+    position: relative;
+    width: 100%;
+    /* background: #393939; */
+    z-index: 15;
+    opacity: 1;  /* Always visible */
+}
+.scroll-container-jon.visible {
+    opacity: 1;
+}
+
+/* FIXED NARRATIVE - each slide is a FULLY CUSTOMIZABLE div */
+.fixed-narrative-jon {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    /* background: #393939; */
+    overflow: hidden;
+}
+.narrative-slide-jon[data-slide="1"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 100vh;
+}
+
+/* Slide container - each slide takes full viewport */
+.narrative-slide-jon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: auto;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.narrative-slide-jon.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Custom scrollbar for slide content */
+.narrative-slide-jon::-webkit-scrollbar {
+    width: 4px;
+}
+.narrative-slide-jon::-webkit-scrollbar-track {
+    background: 	#393939;
+}
+.narrative-slide-jon::-webkit-scrollbar-thumb {
+    background: #ffb347;
+    border-radius: 10px;
+}
+
+/* ========== SLIDE 1: IMAGE ONLY ========== */
+.slide-image-only-jon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a0d14 0%, #121620 100%);
+}
+.image-only-content-jon {
+    text-align: center;
+    max-width: 80%;
+}
+.image-only-content-jon img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 32px;
+    box-shadow: 0 25px 45px -12px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,180,71,0.3);
+}
+.image-caption-jon {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #ffbc6e;
+    letter-spacing: 1px;
+}
+
+/* ========== SLIDE 2: TEXT ONLY ========== */
+.slide-text-only-jon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #0b0f17 0%, #11161f 100%);
+}
+.text-only-content-jon {
+    max-width: 700px;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(25, 30, 40, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 180, 71, 0.3);
+}
+.text-only-content-jon h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #FFD966, #FFB347);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.text-only-content-jon p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #eef2ff;
+    margin-bottom: 1rem;
+}
+.text-only-content-jon .quote {
+    font-style: italic;
+    color: #ffbc6e;
+    border-left: 3px solid #ffb347;
+    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* ========== SLIDE 3: TEXT (LHS) + IMAGE (RHS) ========== */
+.slide-split-jon {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background: #55565a;
+}
+
+/* New styles for stacked layout */
+.stacked-layout-jon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem; /* Adds spacing between the image and text */
+}
+
+.stacked-image-jon {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0d14; /* Same background as .split-image */
+    padding: 2rem;
+}
+
+.stacked-image-jon img {
+    max-width: 90%; /* Same as .split-image */
+    max-height: 80%; /* Same as .split-image */
+    object-fit: contain;
+    border-radius: 28px; /* Same rounded corners */
+    box-shadow: 0 20px 35px -10px black; /* Same shadow effect */
+    border: 1px solid rgba(255,180,71,0.2); /* Same border */
+}
+
+.stacked-text-jon {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: #0f1219e6; /* Same background as .split-text */
+}
+
+.stacked-text-inner-jon {
+    max-width: 1500px;
+    padding: 1rem;
+}
+
+.stacked-text-inner-jon .badge {
+    display: inline-block;
+    background: #ffb44733;
+    padding: 0.25rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffbc6e;
+    margin-bottom: 1rem;
+}
+
+.stacked-text-inner-jon h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ffb347;
+}
+
+.stacked-text-inner-jon p {
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: #eef2ff;
+    margin-bottom: 1rem;
+}
+
+.stacked-text-inner-jon .highlight {
+    color: #f5b042;
+    border-left: 3px solid #f5b042;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+#tree-diagram {
+    width: 100%;
+    height: 400px; /* Adjust height as needed */
+    margin: 0 auto;
+}
+
+.split-text-jon {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(15, 18, 25, 0.9);
+}
+.split-text-inner-jon {
+    max-width: 500px;
+}
+.split-text-inner-jon .badge {
+    display: inline-block;
+    background: rgba(255, 180, 71, 0.2);
+    padding: 0.25rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffbc6e;
+    margin-bottom: 1rem;
+}
+.split-text-inner-jon h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #ffb347;
+}
+.split-text-inner-jon p {
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: #eef2ff;
+    margin-bottom: 1rem;
+}
+.split-text-inner-jon .highlight {
+    color: #f5b042;
+    border-left: 3px solid #f5b042;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+.split-image-jon {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0d14;
+    padding: 2rem;
+}
+.split-image-jon img {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+    border-radius: 28px;
+    box-shadow: 0 20px 35px -10px black;
+    border: 1px solid rgba(255,180,71,0.2);
+}
+
+/* Responsive for slide 3 (split layout) */
+@media (max-width: 900px) {
+    .slide-split-jon {
+        flex-direction: column;
+    }
+    .split-image-jon {
+        order: -1;
+        height: 40vh;
+        padding: 1rem;
+    }
+    .split-text-jon {
+        padding: 1rem;
+    }
+    .split-text-inner-jon h3 {
+        font-size: 1.5rem;
+    }
+    .split-text-inner-jon p {
+        font-size: 1rem;
+    }
+}
+
+
+
+
+
+.second-textbox-middle-jon {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align:center;
+    padding: 2rem;
+    z-index: 10;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+
+/* Simple centered textbox */
+.narrative-slide-jon.slide-text-only-jon[data-slide="1"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 80vh;
+}
+
+/* .second-textbox-middle-jon {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffd700;
+    padding: 40px;
+} */

@@ -1,127 +1,80 @@
-/* Slide 4 - Filtered words on LHS */
-.second-slide-filtered {
+/* Slide 4 Grid Layout */
+.slide4-grid-container {
+    display: grid;
+    grid-template-columns: 325px 1fr;  /* Increased from 250px by 30% */
+    gap: 26px 39px;  /* Increased from 20px 30px by 30% */
+    width: 85%;
+    max-width: 1300px;  /* Increased from 1000px by 30% */
+    margin: 39px auto 0;  /* Increased from 30px by 30% */
+    padding: 26px;  /* Increased from 20px by 30% */
+}
+
+.category-title {
+    font-size: 1.56rem;
+    font-weight: 700;
+    text-align: left;
+    padding: 5px 0;
+    letter-spacing: 1.3px;
+    border-bottom: 1.3px solid rgba(255, 180, 71, 0.3);
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    padding: 2rem;
-    background: linear-gradient(135deg, #0a0d14, #12161f);
+    transition: color 0.3s ease;  /* Add transition for smooth color change */
 }
 
-.filtered-words-container {
-    flex: 1;
-    position: relative;
-    min-height: 500px;
-    /* This container is just a placeholder - the actual words are still in SVG */
-}
-
-/* Make sure SVG is visible during slide 4 */
-.second-slide-filtered .second-wordcloud-wrapper {
-    display: block !important;
-    position: relative;
-    top: 0;
-    transform: none;
-}
-
-.second-slide-filtered .second-textbox-bottom {
-    flex: 1;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 0;
-    padding-right: 5%;
-}
-
-/* Ensure the SVG text elements are visible during animation */
-.second-slide-filtered svg {
-    overflow: visible !important;
-}
-
-
-/* Remove any conflicting transitions */
-.second-wordcloud-wrapper svg {
-    overflow: visible !important;
-}
-
-/* Ensure SVG text elements transition properly */
-.second-wordcloud-wrapper svg text {
-    transition: all 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    will-change: transform, x, y, font-size;
-}
-
-/* Slide 4 specific */
-.second-slide-filtered .second-wordcloud-wrapper {
-    display: block !important;
-}
-
-.second-slide-filtered svg text {
-    cursor: pointer;
-}
-
-
-/* Ensure SVG text elements support transform transitions */
-.second-wordcloud-wrapper svg text {
-    will-change: transform, font-size, opacity;
-    transition-property: transform, font-size, opacity;
-    transition-timing-function: cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    transition: none;
-}
-
-.second-wordcloud-wrapper svg {
-    overflow: visible;
-}
-.second-wordcloud-wrapper svg text {
-    cursor: pointer;
-}
-
-.filtered-image {
-    width: 80%;
-    height: 100px;
-    opacity: 0;
-}
-
-
-
-
-
-
-
-/* Oscar Statues Container */
-.oscar-statues-main-container {
-    position: relative;
-    margin-top: 10px;
-    width: 100%;
-    padding-bottom: 20px;
-}
-
-.category-card {
+.statue-row {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
-    width: 100%;
+    justify-content: center;
+    padding: 4px 0;  /* Increased from 10px by 30% */
+    border-bottom: 1.3px solid rgba(255, 180, 71, 0.3);  /* Increased from 1px by 30% */
+}
+
+.statues-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2.4px;  /* Increased from 8px by 30% */
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .statue-wrapper {
-    transition: transform 0.2s ease;
-}
-
-.statue-wrapper:hover {
-    transform: scale(1.15);
+    display: inline-block;
+    position: relative;
+    width: 35.5px;  /* Increased from 35px by 30% */
+    height: 35.5px;  /* Increased from 35px by 30% */
+    cursor: pointer;
 }
 
 .statue-wrapper img {
-    transition: all 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
-.statue-ratio-label {
-    font-size: 13px;
+.statue-label {
+    font-size: 14.3px;  /* Increased from 11px by 30% */
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     color: #ffbc6e;
-    padding: 6px 12px;
+    padding: 5.2px 13px;  /* Increased from 4px 10px by 30% */
     background: rgba(0, 0, 0, 0.65);
-    border-radius: 25px;
+    border-radius: 26px;  /* Increased from 20px by 30% */
     display: inline-block;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 180, 71, 0.3);
+    margin-top: 10.4px;  /* Increased from 8px by 30% */
+    width: fit-content;
+}
+
+/* Hide word cloud during slide 4 */
+.second-slide-filtered .second-wordcloud-wrapper {
+    display: none !important;
+}
+
+/* Textbox positioning */
+.second-slide-filtered .second-textbox-bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 26px;  /* Increased from 20px by 30% */
+    margin-bottom: 26px;  /* Increased from 20px by 30% */
 }

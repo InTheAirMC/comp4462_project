@@ -302,83 +302,7 @@ body {
     height: auto;
     overflow: visible;
 }
-.slide4-filter-toggle {
-    margin-left: 0.75rem;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 17rem;
-    height: 2.25rem;
-    padding: 0 0.6rem;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: #000000;
-    color: #ffffff;
-    font: inherit;
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    vertical-align: middle;
-    overflow: hidden;
-    transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
-}
-.slide4-filter-toggle:hover {
-    transform: translateY(-1px);
-}
-.slide4-filter-toggle.is-active {
-    background: #b69f66;
-    border-color: rgba(214, 194, 128, 0.7);
-    color: #ffffff;
-}
-.slide4-filter-track {
-    position: absolute;
-    inset: 0.23rem;
-    border-radius: inherit;
-    pointer-events: none;
-}
-.slide4-filter-thumb {
-    position: absolute;
-    top: 50%;
-    left: 0.22rem;
-    width: 1.55rem;
-    height: 1.55rem;
-    border-radius: 50%;
-    background: #55565a;
-    transform: translateY(-50%);
-    transition: left 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
-}
-.slide4-filter-toggle.is-active .slide4-filter-thumb {
-    left: calc(100% - 1.55rem - 0.22rem);
-    background: #d5ba6d;
-}
-.slide4-filter-text {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    text-align: center;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-    transition: opacity 0.2s ease;
-}
-.slide4-filter-text-off {
-    opacity: 1;
-}
-.slide4-filter-text-on {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-}
-.slide4-filter-toggle.is-active .slide4-filter-text-off {
-    opacity: 0;
-}
-.slide4-filter-toggle.is-active .slide4-filter-text-on {
-    opacity: 1;
-}
+/* Toggle button styles removed — using automatic scrollytelling */
 .bubble-chart-host {
     width: 100%;
     height: 100%;
@@ -394,12 +318,106 @@ body {
     width: 100%;
     height: 100%;
 }
+.bubble-legend {
+    pointer-events: none;
+}
+.legend-title {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* Bar chart styles */
+.bar-chart-host {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 18px;
+    border: none;
+    background: rgba(9, 12, 18, 0.35);
+    box-shadow: none;
+    overflow: hidden;
+    position: relative;
+}
+.bar-chart-svg {
+    width: 100%;
+    height: 100%;
+}
+.bar-ghost {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+.bar-core {
+    transition: x 0.6s ease, width 0.6s ease, fill 0.6s ease;
+}
+.bar-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+.bar-count {
+    font-family: monospace;
+    font-weight: 600;
+}
+
+/* Slide 5 specific */
+.slide-bars {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 1.5rem 1.5rem 1rem;
+    background: linear-gradient(180deg, rgba(10, 13, 20, 0.35) 0%, rgba(57, 57, 57, 0.96) 100%);
+}
+.slide-bars .split-text {
+    flex: 0 0 37%;
+    width: 37%;
+}
+.slide-bars .split-image {
+    flex: 0 0 63%;
+    width: 63%;
+}
+.slide5-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 1rem 0.5rem 0.25rem 0.25rem;
+    background: transparent;
+    border-radius: 0;
+    overflow: hidden;
+}
+.slide-bars .split-text {
+    align-items: center;
+}
+.slide-bars .split-text-inner {
+    width: 100%;
+    align-self: center;
+}
+.slide5-visual {
+    min-height: 0;
+    display: flex;
+}
+.slide5-step {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease;
+}
+.slide5-step.is-visible {
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+}
 .bubble-node {
     cursor: pointer;
 }
 .bubble-node.is-dim circle,
 .bubble-node.is-dim text {
     opacity: 0.2;
+}
+.bubble-fill {
+    transition: r 0.6s cubic-bezier(0.22,0.9,0.34,1), fill 0.45s ease, opacity 0.45s ease;
 }
 .bubble-tooltip {
     position: absolute;
@@ -420,9 +438,10 @@ body {
     font-weight: 700;
     pointer-events: none;
 }
-.bubble-ghost {
+.bubble-outline {
     stroke: rgba(240, 175, 71, 0.35);
-    fill: rgba(240, 175, 71, 0.15);
+    fill: none;
+    stroke-width: 5px;
 }
 .bubble-node.is-ghost text {
     fill: #ffffff;
@@ -433,6 +452,12 @@ body {
 .bubble-count {
     font-size: 0.85rem;
 }
+.bubble-liquid-base {
+    transform-origin: center center;
+    transition: x 0.6s cubic-bezier(0.22,0.9,0.34,1), y 0.6s cubic-bezier(0.22,0.9,0.34,1), width 0.6s cubic-bezier(0.22,0.9,0.34,1), height 0.6s cubic-bezier(0.22,0.9,0.34,1), rx 0.6s cubic-bezier(0.22,0.9,0.34,1), fill 0.45s ease, opacity 0.45s ease;
+    pointer-events: none;
+}
+
 .bubble-chart-error {
     color: #ffb347;
     font-size: 0.9rem;
@@ -584,7 +609,7 @@ body {
 
 .oscarbaitintro-box {
     max-width: 800px;
-    width: 90%;                      /* Responsive width */
+    width: 100%;                      /* Responsive width */
     text-align: center;
     padding: 3rem 2rem;
     background: rgba(25, 30, 40, 0.7);

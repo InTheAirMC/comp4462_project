@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Oscar Bait · Flexible Slide Narrative</title>
-    <!-- Google Fonts -->
+    
+    <!-- ========== EXTERNAL RESOURCES ========== -->
+    <!-- Google Fonts: Inter font family -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <!-- Scrollama CDN -->
+    
+    <!-- Scrollama: Scrollytelling library for step triggers -->
     <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
-    <!-- D3.js CDN (for slide 4 bubble chart) -->
+    
+    <!-- D3.js v7: Data visualization library -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Local stylesheet -->
     <link href="main.css" rel="stylesheet">
 </head>
 <body>
 
-    <!-- firstintro SECTION -->
+    <!-- ========== INTRO SECTION ========== -->
+    <!-- Full-viewport opening screen with title and subtitle -->
     <section class="firstintro" id="firstintroSection">
         <div class="firstintro-content">
             <h1 class="firstintro-title">Oscar Bait Movies</h1>
@@ -22,21 +29,15 @@
         </div>
     </section>
 
-
-        <!-- <section class="oscarbaitintro-section">
-            <div class="oscarbaitintro-box">
-                <div class="oscarbaitintro-small">Which begs the question</div>
-                <div class="oscarbaitintro-large">What makes a movie Oscar Bait?</div>
-            </div>
-        </section> -->
-
-    <!-- SCROLL CONTAINER (fades in after firstintro) -->
+    <!-- ========== MAIN SCROLL CONTAINER ========== -->
+    <!-- Contains all narrative slides and scroll triggers -->
     <div class="scroll-container" id="scrollContainer">
         
-        <!-- FIXED NARRATIVE: each slide is COMPLETELY CUSTOMIZABLE -->
+        <!-- ========== FIXED NARRATIVE: 5 CUSTOM SLIDES ========== -->
+        <!-- Each slide is positioned absolutely and crossfades on scroll -->
         <div class="fixed-narrative" id="fixedNarrative">
             
-            <!-- SLIDE 1: IMAGE ONLY -->
+            <!-- ========== SLIDE 1: IMAGE ONLY ========== -->
             <div class="narrative-slide slide-image-only" data-slide="0">
                 <div class="image-only-content">
                     <img src="images/graphs.jpg" alt="Oscar statue and cinema">
@@ -44,7 +45,7 @@
                 </div>
             </div>
             
-            <!-- SLIDE 2: TEXT ONLY -->
+            <!-- ========== SLIDE 2: TEXT ONLY ========== -->
             <div class="narrative-slide slide-text-only" data-slide="1">
                 <div class="text-only-content">
                     <h2>The Academy's Blind Spot</h2>
@@ -54,79 +55,84 @@
                 </div>
             </div>
             
-            <!-- SLIDE 3: TEXT (LHS) + IMAGE (RHS) -->
+            <!-- ========== SLIDE 3: TEXT (LHS) + IMAGE (RHS) ========== -->
             <div class="narrative-slide slide-split" data-slide="2">
                 <div class="split-text">
                     <div class="split-text-inner">
                         <div class="badge">📊 THE DATA</div>
-                        <h3>The Widening Gap</h3>
-                        <p><strong>Audience scores are plummeting.</strong> Since 2010, Rotten Tomatoes audience ratings for Best Picture nominees have dropped by nearly 28%, while the number of nominations for "prestige" films has barely changed.</p>
-                        <p>This scatter plot tells the story: each dot represents a nominee. Notice how the cluster moves leftward (lower audience scores) while staying high on the nomination axis.</p>
-                        <div class="highlight">⭐ The conclusion? The Academy is out of touch with what people actually enjoy watching.</div>
+                        <h3>Lorem Ipsum</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div class="highlight">⭐ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
                     </div>
                 </div>
                 <div class="split-image">
-                    <img src="images/placeholder.png">
+                    <img src="images/placeholder.png" alt="Data visualization placeholder">
                 </div>
             </div>
             
-            <!-- SLIDE 4: TEXT LEFT + BUBBLE CHART RIGHT -->
+            <!-- ========== SLIDE 4: BUBBLE CHART + NARRATIVE TEXT ========== -->
+            <!-- Left side: scrollytelling text with multi-step visibility -->
+            <!-- Right side: D3 bubble chart visualization -->
             <div class="narrative-slide slide-split slide-bubble" data-slide="3">
                 <div class="split-text slide4-copy">
                     <div class="split-text-inner">
                         <div class="badge">📊 THE DATA</div>
-                        <div class="slide4-step" data-step="t1"><h3>Nominations</h3></div>
-                        <div class="slide4-step" data-step="t2"><h3>Oscar-Baitness</h3></div>
-                        <div class="slide4-step" data-step="1">
-                            <p><strong>Every genre has its audiences.</strong> Perhaps the specific genre the movie is, can act as an effect on its Oscar-baityness.</p>
-                            <p>If every genre is shown as a bubble, we get a bubble view of the Oscars.</p>
+                        
+                        <!-- Title steps: Switch between "Nominations" and "Oscar-Baitness" -->
+                        <div class="slide4-step" data-step="t1"><h3>Oscars Nominations</h3></div>
+                        <div class="slide4-step" data-step="t2"><h3>Oscar-Baiting Nominations</h3></div>
+                        <div class="slide4-step" data-step="t3"><h3>Oscar-Bait Ratio</h3></div>
+                        
+                        <!-- Phase 1a: Introduction to genre bubbles -->
+                        <div class="slide4-step" data-step="1a">
+                            <p><strong>Every genre has its audiences.</strong> If every genre is shown as a bubble, we get a bubble view of the Oscars.</p>
+                            <p>The more movies in a genre, the bigger the bubble.</p>
                             <div class="highlight">☁️ Hover on the bubbles to inspect them.</div>
                         </div>
-                        <div class="slide4-step" data-step="2">
-                            <p></p>
+
+                        <!-- Phase 1b: Bubble color explanation -->
+                        <div class="slide4-step" data-step="1b">
+                            <p>Now, top nominated genres are colored with whiter color.</p>
+                            <!-- pop out legend -->
+                            <p>Drama, Comedy, and Romance gets the most weight.</p>
+                        </div>
+                        
+                        <!-- Phase 2a: Explanation of rotten nominees -->
+                        <div class="slide4-step" data-step="2a">
                             <p><strong>But not every movie satisfies the genre audiences.</strong> We keep movies that are Rotten, with the rotten rating lower than 60, but get an Oscar nomination.</p>
-                            <p></p>
+                            <!-- insert ghost bubbles animation -->
                         </div>
-                        <div class="slide4-step" data-step="b1">
-                            <div class="highlight">❓ See how many bait are inserted in Oscars through ghost bubbles by the below toggle button.</div>
+                        
+                        <!-- Phase 2b: Ghost bubbles explanation -->
+                        <div class="slide4-step" data-step="2b">
+                            <div class="highlight">👻 Observe how Oscar-bait genres fills the ghost bubbles. Empty bubbles reveal good genres!</div>
                             <p></p>
-                            <button class="slide4-filter-toggle" id="slide4FilterToggle" type="button" aria-pressed="false" aria-label="Toggle between nominations only and rotten nominations">
-                                    <span class="slide4-filter-track" aria-hidden="true">
-                                        <span class="slide4-filter-thumb"></span>
-                                    </span>
-                                    <span class="slide4-filter-text slide4-filter-text-off">Nominations Only</span>
-                                    <span class="slide4-filter-text slide4-filter-text-on">Rotten Nominations</span>
-                            </button>
+                            <p>Drama, Comedy, and Romance still gets the most weight, but are they the most baiting genres?</p>
                         </div>
-                        <div class="slide4-step" data-step="b2">
-                            <div class="highlight">❓ See how the ranking differs from counts and ratios by the toggle buttons.</div>
-                            <p></p>
-                             <button class="slide4-filter-toggle" id="slide4RankToggle" type="button" aria-pressed="false" aria-label="Toggle between count ranking and rotten ratio ranking">
-                                    <span class="slide4-filter-track" aria-hidden="true">
-                                        <span class="slide4-filter-thumb"></span>
-                                    </span>
-                                    <span class="slide4-filter-text slide4-filter-text-off">Rank by Count</span>
-                                    <span class="slide4-filter-text slide4-filter-text-on">Rank by Rotten Ratio</span>
-                                </button>
-                                <p></p>
+                        
+                        <!-- Phase 3a: Ratio ranking explanation -->
+                        <div class="slide4-step" data-step="3a">
+                            <div class="highlight">📊 Watch genres rerank themselves by "bait ratio" — the proportion of rotten to nominated.</div>
+                            <!-- rerank bubbles and change bubble main value to ratio -->
                         </div>
-                        <div class="slide4-step" data-step="3">
-                            <p>The more movies in a genre, the bigger the bubble. Watch the bubbles fly in and settle, with Drama, Comedy, and Romance getting the most weight.</p>
-                            <p>Perhaps the public just favours movies of these genres more than others.</p>
+                    
+                        
+                        <!-- Phase 3b: Rotten mode explanation -->
+                        <div class="slide4-step" data-step="3b">
+                            <div class="highlight">💥 Higher amount of rotten films does not entirely mean the genre is baiting.</div>
+                            <p></p>
+                            <p>Notice those larger bubbles did have smaller ranking. Those are the genres that "bait" audience only due to large amount of movies published.</p>
+                            <p>Then, there are those smaller bubbles which get filled up greatly, but only due to them being hard to get a nomination.</p>
                         </div>
-                        <div class="slide4-step" data-step="4">
-                            <p></p>
-                            <div class="highlight">💥 Increasing bubble size indicates higher Oscar-bait potential due to ratio of nominations to total movies in that genre.</div>
-                            <p></p>
-                            <p>Notice how the genre mix shrinks once the filter is applied. Those are the genres that do not bait the Oscar conversation.</p>
-                            <p>Then, there are those expanding bubble indicates potential outrage genres.</p>
-                            <p></p>
-                        </div>
-                        <div class="slide4-step" data-step="5">
-                            <div class="highlight">⭐ <strong>Taking both ranking into consideration, Adventure and Action movies bait their loyal audiences the most.</strong></div>
+                        
+                        <!-- Final insight -->
+                        <div class="slide4-step" data-step="3c">
+                            <div class="highlight">⭐ <strong>Conclusion should be conducted by taking both ranking into consideration.</strong></div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Bubble chart visualization area -->
                 <div class="split-image slide4-visual">
                     <div class="bubble-chart-host" id="genreBubbleChart">
                         <div class="bubble-tooltip" id="bubbleTooltip"></div>
@@ -134,43 +140,83 @@
                 </div>
             </div>
 
-            <!-- SLIDE 5: TEXT (LHS) + IMAGE (RHS) -->
-            <div class="narrative-slide slide-split" data-slide="4">
-                <div class="split-text">
+            <!-- ========== SLIDE 5: BAR CHART RANKING + NARRATIVE TEXT ========== -->
+            <!-- Left side: scrollytelling text for bar chart phases -->
+            <!-- Right side: D3 horizontal bar chart visualization -->
+            <div class="narrative-slide slide-split slide-bars" data-slide="4">
+                <div class="split-text slide5-copy">
                     <div class="split-text-inner">
-                        <div class="badge">📊 THE DATA</div>
-                        <h3>The Widening Gap</h3>
-                        <p><strong>Audience scores are plummeting.</strong> Since 2010, Rotten Tomatoes audience ratings for Best Picture nominees have dropped by nearly 28%, while the number of nominations for "prestige" films has barely changed.</p>
-                        <p>This scatter plot tells the story: each dot represents a nominee. Notice how the cluster moves leftward (lower audience scores) while staying high on the nomination axis.</p>
-                        <div class="highlight">⭐ The conclusion? The Academy is out of touch with what people actually enjoy watching.</div>
+                        <div class="badge">📊 TOP BAIT GENRES</div>
+                        
+                        <!-- Phase 1: Count-based ranking -->
+                        <div class="slide5-step" data-step="1">
+                            <h3>Ranking by Count</h3>
+                            <p><strong>Here are the top 10 genres</strong> with the most Oscar nominations in our dataset.</p>
+                            <p>Bars are colored by ranking: white for top nominees, fading to yellow for lower ranks, orange for not being top 10.</p>
+                            <div class="highlight">📈 Bar color is correlated to only the overall nominations.</div>
+                        </div>
+                        
+                        <!-- Phase 2: Ghost bars (rotten nominees) -->
+                        <div class="slide5-step" data-step="2">
+                            <h3>Ghost Bars: Rotten Count Ranking</h3>
+                            <p><strong>Dimmer bars</strong> show the "rotten" nominees within each genre.</p>
+                            <p>This reveals which genres sneak low-quality films into the Oscar conversation.</p>
+                            <div class="highlight">👻 Rising in rank inside this graph is not a great phenomenon.</div>
+                        </div>
+                        
+                        <!-- Phase 3a: Ratio-based reordering -->
+                        <div class="slide5-step" data-step="3a">
+                            <h3>Ranking by Bait Ratio</h3>
+                            <p><strong>Now watch the bars reorder themselves</strong> by "Oscar bait ratio":</p>
+                            <p>The ratio of rotten nominees to total nominees. Higher ratio = more bait!</p>
+                        </div>
+
+                        <!-- Phase 3b: Ratio-based result -->
+                        <div class="slide5-step" data-step="3b">
+                            <div class="highlight">🎯 Adventure and Action: the true Oscar bait masters.</div>
+                            <div class="highlight">💥 An excuse to Horror: Can't bait audiences if it is not a nomination-friendly genre.</div>
+                        </div>
                     </div>
                 </div>
-                <div class="split-image">
-                    <img src="images/placeholder.png">
+                
+                <!-- Bar chart visualization area -->
+                <div class="split-image slide5-visual">
+                    <div class="bar-chart-host" id="genreBarChart">
+                        <div class="bar-tooltip" id="barTooltip"></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- SLIDE 2: TEXT ONLY
-            <div class="narrative-slide slide-text-only" data-slide="3">
-                <div class="text-only-content">
-                    <h2>The Academy's Blind Spot</h2>
-                    <p>For decades, the Oscars have celebrated a very specific type of film: period dramas, tragic biopics, and stories about Hollywood itself. These "Oscar bait" movies follow a predictable formula — serious subject matter, transformative makeup, and a soaring orchestral score.</p>
-                    <p>But here's the problem: <strong>audiences are tired of it.</strong> While critics praise these technically flawless films, regular moviegoers are checking their watches.</p>
-                    <div class="quote">"The more a film tries to win an Oscar, the less it tries to win an audience."</div>
+            <!-- ========== SLIDE 6: TEXT (LHS) + IMAGE (RHS) ========== -->
+            <div class="narrative-slide slide-split" data-slide="5">
+                <div class="split-text">
+                    <div class="split-text-inner">
+                        <div class="badge">📊 THE DATA</div>
+                        <h3>Lorem Ipsum</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div class="highlight">⭐ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                    </div>
                 </div>
-            </div> -->
+                <div class="split-image">
+                    <img src="images/placeholder.png" alt="Data visualization placeholder">
+                </div>
+            </div>
             
         </div>
         
-        <!-- INVISIBLE TRIGGER STEPS (one per slide) -->
+        <!-- ========== SCROLL TRIGGERS ========== -->
+        <!-- Invisible elements that trigger slide changes based on scroll position -->
+        <!-- Each trigger corresponds to one slide -->
         <div class="scroll-triggers" id="triggerContainer">
             <div class="trigger-step" data-trigger="0" style="height: 20vh;"></div>
             <div class="trigger-step" data-trigger="1" style="height: 150vh;"></div>
             <div class="trigger-step" data-trigger="2" style="height: 150vh;"></div>
             <div class="trigger-step" data-trigger="3" style="height: 600vh;"></div>
-            <div class="trigger-step" data-trigger="4" style="height: 150vh;"></div>
+            <div class="trigger-step" data-trigger="4" style="height: 300vh;"></div>
+            <div class="trigger-step" data-trigger="5" style="height: 150vh;"></div>
         </div>
         
+        <!-- Spacer to allow scrolling past final slide -->
         <div class="scroll-spacer"></div>
     </div>
 
@@ -191,6 +237,28 @@
             let bubbleEnterPending = false;
             let slide4Mode = 'nominated';
             let slide4RankMode = 'count';
+            let slide4EnterStarted = false;
+            const debugSlide4 = true;
+
+            function slide4Debug(...args) {
+                if (debugSlide4) {
+                    console.log('[slide4]', ...args);
+                }
+            }
+
+            function setSlide4FilterMode(mode) {
+                if (mode !== 'nominated' && mode !== 'nominated-rotten') return;
+                setSlide4Mode(mode);
+            }
+
+            function setSlide4RankMode(mode) {
+                if (mode !== 'count' && mode !== 'ratio') return;
+                const previousMode = slide4RankMode;
+                slide4RankMode = mode;
+                if (bubbleChartState) {
+                    animateRankModeTransition(previousMode, mode, bubbleChartState.lastProgress || 0);
+                }
+            }
 
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initFlexibleNarrative);
@@ -206,8 +274,7 @@
                 const scrollContainer = document.getElementById('scrollContainer');
                 const slides = document.querySelectorAll('.narrative-slide');
                 const triggerSteps = document.querySelectorAll('.trigger-step');
-                const slide4FilterToggle = document.getElementById('slide4FilterToggle');
-                const slide4RankToggle = document.getElementById('slide4RankToggle');
+                // Toggle buttons removed — now automatic scrollytelling
                 // const progressPill = document.getElementById('progressPill');
                 // const scrollHint = document.getElementById('scrollHint');
                 
@@ -220,15 +287,11 @@
                 currentActiveIndex = 0;
 
                 function updateSlide4FilterButton(mode) {
-                    if (!slide4FilterToggle) return;
-                    slide4FilterToggle.setAttribute('aria-pressed', mode === 'nominated-rotten' ? 'true' : 'false');
-                    slide4FilterToggle.classList.toggle('is-active', mode === 'nominated-rotten');
+                    // Automatic mode switching — no UI button
                 }
 
                 function updateSlide4RankButton(mode) {
-                    if (!slide4RankToggle) return;
-                    slide4RankToggle.setAttribute('aria-pressed', mode === 'ratio' ? 'true' : 'false');
-                    slide4RankToggle.classList.toggle('is-active', mode === 'ratio');
+                    // Automatic mode switching — no UI button
                 }
 
                 function setSlide4FilterMode(mode) {
@@ -247,19 +310,7 @@
                     }
                 }
 
-                if (slide4FilterToggle) {
-                    slide4FilterToggle.addEventListener('click', () => {
-                        const nextMode = slide4Mode === 'nominated' ? 'nominated-rotten' : 'nominated';
-                        setSlide4FilterMode(nextMode);
-                    });
-                }
-
-                if (slide4RankToggle) {
-                    slide4RankToggle.addEventListener('click', () => {
-                        const nextMode = slide4RankMode === 'count' ? 'ratio' : 'count';
-                        setSlide4RankMode(nextMode);
-                    });
-                }
+                // Event listeners removed — automatic scrollytelling now controls filter/rank modes
                 
                 // Function to activate a slide (crossfade)
                 function activateSlide(index) {
@@ -294,10 +345,24 @@
 
                     // Trigger the bubble chart when slide 4 becomes active
                     if (index === 3) {
+                        slide4Debug('activateSlide(3)', {
+                            hasBubbleChart: !!bubbleChartState,
+                            slide4Mode,
+                            slide4RankMode,
+                            bubbleEnterPending,
+                            slide4EnterStarted
+                        });
                         buildGenreBubbleChart();
                         setSlide4FilterMode('nominated');
                         setSlide4RankMode('count');
                         scheduleBubbleEnter();
+                    }
+
+                    // Trigger the bar chart when slide 5 becomes active
+                    if (index === 4) {
+                        setTimeout(() => {
+                            buildGenreBarChart();
+                        }, 300);
                     }
 
                     // Play exit animation when leaving slide 4
@@ -344,25 +409,45 @@
                         })
                         .onStepEnter(response => {
                             const triggerIndex = response.index;
+                            if (triggerIndex === 3) {
+                                slide4Debug('onStepEnter slide 4', {
+                                    progress: response.progress,
+                                    direction: response.direction,
+                                    hasBubbleChart: !!bubbleChartState,
+                                    bubbleEnterPending,
+                                    slide4EnterStarted
+                                });
+                            }
                             if (triggerIndex >= 0 && triggerIndex < totalSlides) {
                                 if (triggerIndex !== currentActiveIndex) {
                                     activateSlide(triggerIndex);
                                 }
                             }
 
-                            // Delay bubble entry until after the slide transition settles
+                            // Enter slide 4 immediately: build the chart and start the gather animation right away.
                             if (triggerIndex === 3) {
                                 buildGenreBubbleChart();
-                                setSlide4FilterMode('nominated');
-                                setSlide4RankMode('count');
-                                setSlide4TextProgress(0);
+                                slide4EnterStarted = true;
                                 scheduleBubbleEnter();
                             }
                         })
                         .onStepProgress(response => {
                             if (response.index === 3) {
-                                setSlide4TextProgress(response.progress);
-                                updateRankColors(response.progress);
+                                slide4Debug('onStepProgress slide 4', {
+                                    progress: response.progress,
+                                    slide4Mode,
+                                    slide4RankMode,
+                                    hasBubbleChart: !!bubbleChartState,
+                                    bubbleEnterPending,
+                                    slide4EnterStarted
+                                });
+                                syncSlide4StateFromProgress(response.progress);
+                            }
+
+                            // Slide 5: Bar chart progress handling
+                            if (response.index === 4) {
+                                setSlide5TextProgress(response.progress);
+                                updateBarChartMode(response.progress);
                             }
                         })
                         .onStepExit(response => {
@@ -392,6 +477,11 @@
                             if (exitingIndex === 3 && direction === 'up') {
                                 startBubbleExitAnimation();
                                 clearBubbleEnterTimer();
+                                slide4EnterStarted = false;
+                            }
+                            // Also reset when leaving step 4 downward (to slide 5)
+                            if (exitingIndex === 3 && direction === 'down') {
+                                slide4EnterStarted = false;
                             }
                         });
                 }
@@ -488,7 +578,14 @@
             // ========== SLIDE 4: GENRE BUBBLE CHART (D3) ==========
             function buildGenreBubbleChart() {
                 const chartHost = document.getElementById('genreBubbleChart');
-                if (!chartHost || chartHost.dataset.chartReady === 'true') return;
+                if (!chartHost) {
+                    slide4Debug('buildGenreBubbleChart skipped: missing chart host');
+                    return;
+                }
+                if (chartHost.dataset.chartReady === 'true') {
+                    slide4Debug('buildGenreBubbleChart skipped: already ready');
+                    return;
+                }
                 if (!window.d3) {
                     console.warn('D3 is not available for the bubble chart.');
                     return;
@@ -496,6 +593,10 @@
 
                 // Mark as initialized to avoid duplicate renders
                 chartHost.dataset.chartReady = 'true';
+                slide4Debug('buildGenreBubbleChart start', {
+                    width: chartHost.clientWidth,
+                    height: chartHost.clientHeight
+                });
 
                 const width = chartHost.clientWidth || 800;
                 const height = chartHost.clientHeight || 500;
@@ -569,6 +670,69 @@
 
                     const bubbleGroup = svg.append('g').attr('class', 'genre-bubbles');
 
+                    // Helper to create safe clipPath ids
+                    function sanitizeId(name) {
+                        return (name || '').toString().replace(/[^a-zA-Z0-9_-]/g, '_');
+                    }
+
+                    // Create defs + per-node clipPaths so liquid fill/waves are constrained
+                    const defs = svg.append('defs');
+                    const clip = defs.selectAll('clipPath').data(nodes).enter()
+                        .append('clipPath')
+                        .attr('id', d => `clip-${sanitizeId(d.genre)}`);
+
+                    clip.append('circle')
+                        .attr('class', 'clip-circle')
+                        .attr('cx', 0)
+                        .attr('cy', 0)
+                        .attr('r', d => radiusScale(d.nominatedCount || 0));
+
+                    // Add color legend (gradient from white to yellow)
+                    const legendGroup = svg.append('g')
+                        .attr('class', 'bubble-legend')
+                        .attr('transform', `translate(${width - 200}, 20)`);
+                    
+                    legendGroup.append('text')
+                        .attr('class', 'legend-title')
+                        .attr('x', 0)
+                        .attr('y', 0)
+                        .attr('font-size', '12px')
+                        .attr('font-weight', 'bold')
+                        .attr('fill', '#ffb347')
+                        .text('Rank');
+                    
+                    const gradientId = 'bubbleRankGradient_' + Math.random().toString(36).substr(2, 9);
+                    const gradient = defs.append('linearGradient')
+                        .attr('id', gradientId)
+                        .attr('x1', '0%')
+                        .attr('x2', '100%');
+                    
+                    gradient.append('stop').attr('offset', '0%').attr('stop-color', '#ffffff');
+                    gradient.append('stop').attr('offset', '100%').attr('stop-color', '#f5d666');
+                    
+                    legendGroup.append('rect')
+                        .attr('x', 0)
+                        .attr('y', 18)
+                        .attr('width', 180)
+                        .attr('height', 16)
+                        .attr('fill', `url(#${gradientId})`)
+                        .attr('stroke', 'rgba(255, 210, 130, 0.4)')
+                        .attr('stroke-width', 0.5);
+                    
+                    legendGroup.append('text')
+                        .attr('x', 0)
+                        .attr('y', 42)
+                        .attr('font-size', '10px')
+                        .attr('fill', '#aabbcc')
+                        .text('⭐ Top');
+                    
+                    legendGroup.append('text')
+                        .attr('x', 115)
+                        .attr('y', 42)
+                        .attr('font-size', '10px')
+                        .attr('fill', '#aabbcc')
+                        .text('Bottom');
+
                     const bubble = bubbleGroup
                         .selectAll('g')
                         .data(nodes)
@@ -577,23 +741,58 @@
                         .attr('class', 'bubble-node')
                         .style('opacity', 0);
 
-                    // Outer ghost ring representing original nominations (stroke only, faded golden color)
+                    // Outer outline representing bubble boundary (stroke only)
                     bubble.append('circle')
-                        .attr('class', 'bubble-ghost')
+                        .attr('class', 'bubble-outline')
                         .attr('r', d => radiusScale(d.nominatedCount))
-                        .attr('fill', 'rgba(240, 175, 71, 0.15)')
+                        .attr('fill', 'none')
                         .attr('stroke', 'rgba(240, 175, 71, 0.35)')
-                        .attr('stroke-width', 1.2)
-                        .style('opacity', 0);
+                        .attr('stroke-width', 5)
+                        .style('opacity', 1);
 
-                    // Inner core circle representing the currently active measure (filled)
+                    // Invisible hit area keeps hover detection large even when the visible liquid shrinks
                     bubble.append('circle')
-                        .attr('class', 'bubble-core')
-                        .attr('r', d => d.r)
-                        .attr('cy', 0)
-                        .attr('fill', d => colorScale(d.activeCount))
+                        .attr('class', 'bubble-hit-area')
+                        .attr('r', d => radiusScale(d.nominatedCount))
+                        .attr('fill', 'rgba(0, 0, 0, 0)')
+                        .attr('stroke', 'none')
+                        .style('pointer-events', 'all');
+
+                    // Solid filled bubble used in early phases (pre-liquid)
+                    bubble.append('circle')
+                        .attr('class', 'bubble-fill')
+                        .attr('r', d => radiusScale(d.activeCount || d.nominatedCount || 0))
+                        .attr('fill', d => colorScale(d.activeCount || d.nominatedCount || 0))
+                        .attr('opacity', 1);
+
+                    // Inner liquid core representing the currently active measure (filled)
+                    // We use a clipped content group so the fill and wave stay inside the ghost circle
+                    const liquidGroup = bubble.append('g').attr('class', 'bubble-liquid-group');
+
+                    const content = liquidGroup.append('g')
+                        .attr('class', 'bubble-liquid-content')
+                        .attr('clip-path', d => `url(#clip-${sanitizeId(d.genre)})`);
+
+                    // Bottom-filled fluid body: height = (rottenCount / nominatedCount) * bubble diameter
+                    content.append('rect')
+                        .attr('class', 'bubble-liquid-base')
+                        .attr('x', d => -radiusScale(d.nominatedCount || 0))
+                        .attr('y', d => {
+                            const ghostR = radiusScale(d.nominatedCount || 0);
+                            const ratio = (d.nominatedCount || 0) > 0 ? (d.rottenCount || 0) / d.nominatedCount : 0;
+                            return ghostR - (2 * ghostR * ratio);
+                        })
+                        .attr('width', d => radiusScale(d.nominatedCount || 0) * 2)
+                        .attr('height', d => {
+                            const ghostR = radiusScale(d.nominatedCount || 0);
+                            const ratio = (d.nominatedCount || 0) > 0 ? (d.rottenCount || 0) / d.nominatedCount : 0;
+                            return 2 * ghostR * ratio;
+                        })
+                        .attr('rx', 0)
+                        .attr('fill', d => colorScale(d.activeCount || d.nominatedCount || 0))
                         .attr('stroke', 'rgba(255, 210, 130, 0.65)')
-                        .attr('stroke-width', 1.2);
+                        .attr('stroke-width', 1.2)
+                        .style('opacity', 1);
 
                     bubble.append('text')
                         .attr('class', 'bubble-label')
@@ -657,7 +856,7 @@
 
                             // Dim other nodes
                             bubble.classed('is-dim', node => node !== d);
-                            bubble.select('.bubble-core')
+                            bubble.select('.bubble-liquid-base')
                                 .style('opacity', node => node === d ? 1 : 0.08);
                             bubble.select('.bubble-label')
                                 .style('opacity', node => node === d ? 1 : 0.08);
@@ -666,8 +865,8 @@
 
                             // On hover: keep original colors, just increase opacity/visibility
                             try {
-                                d3.select(event.currentTarget).select('.bubble-ghost').attr('stroke-width', 2);
-                                d3.select(event.currentTarget).select('.bubble-core').style('filter', 'brightness(1.1)');
+                                d3.select(event.currentTarget).select('.bubble-outline').attr('stroke-width', 6);
+                                d3.select(event.currentTarget).select('.bubble-liquid-base').style('filter', 'brightness(1.1)');
                             } catch (e) {
                                 // ignore
                             }
@@ -680,7 +879,7 @@
                             bubble.classed('is-dim', false);
 
                             // Restore per-node opacity for cores
-                            bubble.select('.bubble-core')
+                            bubble.select('.bubble-liquid-base')
                                 .style('opacity', node => node.activeCount > 0 ? 1 : 0);
                             bubble.select('.bubble-label')
                                 .style('opacity', node => node.activeCount > 0 ? 1 : 0);
@@ -691,8 +890,8 @@
                             const progress = (bubbleChartState && bubbleChartState.lastProgress) || 0;
                             const colorScaleUse = (bubbleChartState && bubbleChartState.colorScale) || colorScale;
                             const rankMapsUse = (bubbleChartState && bubbleChartState.rankMaps) || buildRankMaps(nodes);
-                            bubble.select('.bubble-core').attr('fill', node => getBubbleFill(node, slide4Mode, progress, colorScaleUse, rankMapsUse)).style('filter', 'brightness(1)');
-                            bubble.select('.bubble-ghost').attr('stroke', 'rgba(240, 175, 71, 0.35)').attr('fill', 'rgba(240, 175, 71, 0.15)').attr('stroke-width', 1.2);
+                            bubble.select('.bubble-liquid-base').attr('fill', node => getBubbleFill(node, slide4Mode, progress, colorScaleUse, rankMapsUse)).style('filter', 'brightness(1)');
+                            bubble.select('.bubble-outline').attr('stroke', 'rgba(240, 175, 71, 0.35)').attr('stroke-width', 5);
                         });
 
                     const simulation = d3.forceSimulation(nodes)
@@ -718,8 +917,15 @@
                         radiusScale,
                         colorScale,
                         rankMaps: buildRankMaps(nodes),
-                        lastProgress: 0
+                        lastProgress: 0,
+                        ghostDisplayProgress: 0
                     };
+                    slide4Debug('bubbleChartState ready', {
+                        nodeCount: nodes.length,
+                        bubbleEnterPending,
+                        slide4EnterStarted,
+                        currentActiveIndex
+                    });
                     // ensure radiusScale is available for applyGenreFilter when first called
                     bubbleChartState.radiusScale = radiusScale;
 
@@ -728,6 +934,7 @@
 
                     if (bubbleEnterPending && currentActiveIndex === 3) {
                         bubbleEnterPending = false;
+                        slide4Debug('bubbleEnterPending resolved after build');
                         scheduleBubbleEnter();
                     }
 
@@ -760,6 +967,224 @@
                     const match = text.match(/['\"]count['\"]\s*:\s*(\d+)/i);
                     return match ? Number(match[1]) : 0;
                 }
+            }
+
+            // Build horizontal bar chart for Slide 5
+            function buildGenreBarChart() {
+                const chartHost = document.getElementById('genreBarChart');
+                if (!chartHost || chartHost.dataset.chartReady === 'true') return;
+                if (!bubbleChartState) {
+                    setTimeout(buildGenreBarChart, 500);
+                    return;
+                }
+
+                chartHost.dataset.chartReady = 'true';
+
+                const width = chartHost.clientWidth || 600;
+                const height = chartHost.clientHeight || 500;
+
+                const svg = d3.select(chartHost)
+                    .append('svg')
+                    .attr('class', 'bar-chart-svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .attr('viewBox', `0 0 ${width} ${height}`)
+                    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+                // Use bubble chart data (dynamic top 10 from full genre set)
+                const { nodes, colorScale, rankMaps } = bubbleChartState;
+                
+                const allBarData = nodes.map(d => {
+                    const nominated = d.nominatedCount || 0;
+                    const rotten = d.rottenCount || 0;
+                    const ratio = nominated > 0 ? rotten / nominated : 0;
+                    return {
+                        genre: d.genre,
+                        nominated,
+                        rotten,
+                        ratio,
+                        nominatedRank: rankMaps.nominated.get(d.genre) || 999,
+                        rottenRank: rankMaps.rotten.get(d.genre) || 999,
+                        ratioRank: rankMaps.ratio.get(d.genre) || 999
+                    };
+                });
+
+                const countOrderAll = [...allBarData]
+                    .sort((a, b) => (b.nominated || 0) - (a.nominated || 0))
+                    .map(d => d.genre);
+
+                const rottenOrderAll = [...allBarData]
+                    .sort((a, b) => (b.rotten || 0) - (a.rotten || 0))
+                    .map(d => d.genre);
+
+                const ratioOrderAll = [...allBarData]
+                    .sort((a, b) => {
+                        const delta = (b.ratio || 0) - (a.ratio || 0);
+                        if (Math.abs(delta) > 1e-9) return delta;
+                        return (b.nominated || 0) - (a.nominated || 0);
+                    })
+                    .map(d => d.genre);
+
+                const initialGenres = countOrderAll.slice(0, 10);
+                const dataByGenre = new Map(allBarData.map(d => [d.genre, d]));
+                const initialData = initialGenres.map(genre => dataByGenre.get(genre)).filter(Boolean);
+
+                const margin = { left: 130, right: 12, top: 20, bottom: 40 };
+                const basePlotWidth = Math.max(260, width - margin.left - margin.right);
+                const plotWidth = basePlotWidth * 0.97;
+
+                const maxCount = d3.max(allBarData, d => d.nominated) || 1;
+                const barScale = d3.scaleLinear()
+                    .domain([0, maxCount])
+                    .range([0, plotWidth]);
+
+                const yScale = d3.scaleBand()
+                    .domain(initialGenres)
+                    .range([50, height - 40])
+                    .padding(0.3);
+
+                // Add gradient definition for legend
+                svg.append('defs').append('linearGradient')
+                    .attr('id', 'bar-legend-gradient')
+                    .attr('x1', '0%')
+                    .attr('x2', '100%')
+                    .attr('y1', '0%')
+                    .attr('y2', '0%')
+                    .selectAll('stop')
+                    .data([
+                        { offset: '0%', color: '#ffffff' },
+                        { offset: '50%', color: '#f5d666' },
+                        { offset: '100%', color: '#f0af47' }
+                    ])
+                    .enter()
+                    .append('stop')
+                    .attr('offset', d => d.offset)
+                    .attr('stop-color', d => d.color);
+
+                // Add legend group
+                const legendGroup = svg.append('g')
+                    .attr('class', 'bar-legend');
+
+                // Legend gradient bar
+                legendGroup.append('rect')
+                    .attr('x', margin.left)
+                    .attr('y', 5)
+                    .attr('width', plotWidth)
+                    .attr('height', 24)
+                    .attr('fill', 'url(#bar-legend-gradient)')
+                    .attr('stroke', '#aabbcc')
+                    .attr('stroke-width', 0.5);
+
+                // "Top" label
+                legendGroup.append('text')
+                    .attr('x', margin.left + 4)
+                    .attr('y', 22)
+                    .attr('font-size', '10px')
+                    .attr('fill', '#000000')
+                    .attr('text-anchor', 'start')
+                    .text('Top');
+
+                // "Bottom" label
+                legendGroup.append('text')
+                    .attr('x', margin.left + plotWidth - 4)
+                    .attr('y', 22)
+                    .attr('font-size', '10px')
+                    .attr('fill', '#000000')
+                    .attr('text-anchor', 'end')
+                    .text('Bottom');
+
+                // Add bars group
+                const barGroup = svg.append('g')
+                    .attr('class', 'genre-bars')
+                    .attr('transform', `translate(${margin.left}, 0)`);
+
+                // Initial bars use nominated-count top 10; later updates can swap in/out by data join
+                const barData = initialData;
+
+                // Ghost bars (rotten nominees)
+                barGroup.selectAll('.bar-ghost')
+                    .data(barData)
+                    .enter()
+                    .append('rect')
+                    .attr('class', 'bar-ghost')
+                    .attr('x', 0)
+                    .attr('y', d => yScale(d.genre))
+                    .attr('width', d => barScale(d.nominated))
+                    .attr('height', yScale.bandwidth())
+                    .attr('fill', 'rgba(240, 175, 71, 0.15)')
+                    .attr('stroke', 'rgba(240, 175, 71, 0.35)')
+                    .attr('stroke-width', 1)
+                    .style('opacity', 0);
+
+                // Core bars (current measure)
+                barGroup.selectAll('.bar-core')
+                    .data(barData)
+                    .enter()
+                    .append('rect')
+                    .attr('class', 'bar-core')
+                    .attr('x', 0)
+                    .attr('y', d => yScale(d.genre))
+                    .attr('width', d => barScale(d.nominated))
+                    .attr('height', yScale.bandwidth())
+                    .attr('fill', d => {
+                        const rank = d.nominatedRank;
+                        if (rank <= 5) {
+                            const intensity = 1;
+                            const base = d3.color(colorScale(d.nominated));
+                            const r = Math.round((base?.r ?? 240) + (255 - (base?.r ?? 240)) * intensity * 0.6);
+                            const g = Math.round((base?.g ?? 175) + (255 - (base?.g ?? 175)) * intensity * 0.6);
+                            const b = Math.round((base?.b ?? 71) + (255 - (base?.b ?? 71)) * intensity * 0.6);
+                            return `rgb(${r}, ${g}, ${b})`;
+                        }
+                        return colorScale(d.nominated);
+                    })
+                    .attr('stroke', 'rgba(255, 210, 130, 0.65)')
+                    .attr('stroke-width', 1);
+
+                // Genre labels on left
+                barGroup.selectAll('.bar-label')
+                    .data(barData)
+                    .enter()
+                    .append('text')
+                    .attr('class', 'bar-label')
+                    .attr('x', -10)
+                    .attr('y', d => yScale(d.genre) + yScale.bandwidth() / 2)
+                    .attr('dy', '0.35em')
+                    .attr('text-anchor', 'end')
+                    .attr('font-size', '12px')
+                    .attr('fill', '#ddc319')
+                    .text(d => d.genre);
+
+                // Count labels on right
+                barGroup.selectAll('.bar-count')
+                    .data(barData)
+                    .enter()
+                    .append('text')
+                    .attr('class', 'bar-count')
+                    .attr('x', d => barScale(d.nominated) + 8)
+                    .attr('y', d => yScale(d.genre) + yScale.bandwidth() / 2)
+                    .attr('dy', '0.35em')
+                    .attr('font-size', '11px')
+                    .attr('fill', '#ffb347')
+                    .text(d => d.nominated);
+
+                // Store bar state
+                bubbleChartState.barChart = {
+                    svg,
+                    barGroup,
+                    barData,
+                    allBarData,
+                    dataByGenre,
+                    barScale,
+                    plotWidth,
+                    yScale,
+                    baseYScale: yScale,
+                    countOrderAll,
+                    rottenOrderAll,
+                    ratioOrderAll,
+                    visibleLimit: 10,
+                    rankMaps
+                };
             }
 
             // Update bubble sizes for Oscar-nominated vs Oscar-nominated-Rotten dataset
@@ -807,21 +1232,48 @@
                 const progress = bubbleChartState.lastProgress;
 
                 // Update ghost ring (original nominations) and core (active measure)
-                bubble.select('.bubble-ghost')
+                // Update clip path to match ghost radius so liquid is constrained
+                if (bubbleChartState && bubbleChartState.svg) {
+                    bubbleChartState.svg.selectAll('.clip-circle')
+                        .interrupt()
+                        .transition()
+                        .duration(600)
+                        .attr('r', d => d._ghostR);
+                }
+
+                bubble.select('.bubble-outline')
                     .interrupt()
                     .transition()
                     .duration(600)
                     .ease(d3.easeCubicOut)
                     .attr('r', d => d._ghostR)
-                    .style('opacity', mode === 'nominated-rotten' ? 0.12 : 0);
+                    .style('opacity', mode === 'nominated-rotten' ? 0.12 : 1)
+                    .attr('stroke-width', 5);
 
-                bubble.select('.bubble-core')
+                bubble.select('.bubble-hit-area')
                     .interrupt()
                     .transition()
                     .duration(600)
                     .ease(d3.easeCubicOut)
-                    .attr('r', d => d._coreR)
-                    .attr('cy', d => (d._coreR > 0 ? Math.max(0, d._ghostR - d._coreR) : 0))
+                    .attr('r', d => d._ghostR)
+                    .style('opacity', 0);
+
+                bubble.select('.bubble-liquid-base')
+                    .interrupt()
+                    .transition()
+                    .duration(600)
+                    .ease(d3.easeCubicOut)
+                    .attr('x', d => -d._ghostR)
+                    .attr('y', d => {
+                        const ratio = (d.nominatedCount || 0) > 0 ? (d.rottenCount || 0) / d.nominatedCount : 0;
+                        return d._ghostR - (2 * d._ghostR * ratio);
+                    })
+                    .attr('width', d => d._ghostR * 2)
+                    .attr('height', d => {
+                        const ratio = (d.nominatedCount || 0) > 0 ? (d.rottenCount || 0) / d.nominatedCount : 0;
+                        return 2 * d._ghostR * ratio;
+                    })
+                    .attr('rx', 0)
                     .style('opacity', d => d.activeCount > 0 ? 1 : 0.12)
                     .attr('fill', d => getBubbleFill(d, mode, progress, colorScale, bubbleChartState.rankMaps));
 
@@ -829,7 +1281,14 @@
                     .transition()
                     .duration(600)
                     .ease(d3.easeCubicOut)
-                    .text(d => d.activeCount)
+                    .text(d => {
+                        // At progress >= 0.6, show rotten ratio (percentage); before that, show count
+                        if (progress >= 0.6) {
+                            const ratio = (d.nominatedCount || 0) > 0 ? (d.rottenCount || 0) / d.nominatedCount : 0;
+                            return `${(ratio * 100).toFixed(0)}%`;
+                        }
+                        return d.activeCount;
+                    })
                     .style('opacity', d => d.activeCount > 0 ? 1 : 0);
 
                 bubble.select('.bubble-label')
@@ -879,14 +1338,23 @@
             }
 
             function getSlide4RankIntensity(progress) {
-                let intensity = 0;
-                if (progress >= 0.2 && progress < 0.5) {
-                    intensity = (progress - 0.2) / 0.15;
-                    if (intensity >= 1) intensity = 1;
-                } else if (progress >= 0.5) {
-                    intensity = 1;
+                // Compute intensity for count/ratio tinting according to explicit windows:
+                // count: ramp 0.2->0.3 to 1.0, fully 0.3->0.5, remains 1 until ratio crossfade
+                // ratio: ramp 0.6->0.7 to 1.0
+                if (typeof progress !== 'number' || !isFinite(progress)) return 0;
+                // We'll return a value [0,1] representing how strong the active rank tint should be
+                if (progress < 0.2) return 0;
+                if (progress >= 0.2 && progress < 0.3) {
+                    return (progress - 0.2) / 0.1; // 0->1
                 }
-                return intensity;
+                if (progress >= 0.3 && progress < 0.6) {
+                    return 1; // count tint fully applied until ratio crossfade starts at 0.6
+                }
+                if (progress >= 0.6 && progress < 0.7) {
+                    // during 0.6-0.7 we prefer ratio tint; return progressive intensity for ratio
+                    return (progress - 0.6) / 0.1; // 0->1 for ratio
+                }
+                return progress >= 0.7 ? 1 : 0;
             }
 
             function getSlide4TextColor(node, map, intensity) {
@@ -913,17 +1381,30 @@
 
             function getSlide4GhostColor(node, map) {
                 const rank = map.get(node.genre) || 999;
-                if (slide4Mode === 'nominated-rotten' && (node.nominatedCount || 0) > 0 && rank > 5) {
-                    return {
-                        stroke: '#ffffff',
-                        fill: '#ffffff'
-                    };
-                }
+                const baseColor = getBubbleBaseColor(node, bubbleChartState?.colorScale);
+                const strokeMix = rank <= 5 ? 0.88 : 0.8;
+                const fillMix = rank <= 5 ? 0.94 : 0.9;
+                const ghostTint = '#fff8e8';
 
                 return {
-                    stroke: 'rgba(240, 175, 71, 0.35)',
-                    fill: 'rgba(240, 175, 71, 0.15)'
+                    stroke: d3.interpolateRgb(baseColor, ghostTint)(strokeMix),
+                    fill: d3.interpolateRgb(baseColor, ghostTint)(fillMix)
                 };
+            }
+
+            function getBubbleBaseColor(node, colorScale) {
+                if (!colorScale) {
+                    return '#f0af47';
+                }
+
+                const value = node.nominatedCount || node.activeCount || 0;
+                return d3.color(colorScale(value))?.formatRgb() || '#f0af47';
+            }
+
+            function blendTowardWhite(color, amount) {
+                const base = d3.color(color);
+                if (!base) return '#ffffff';
+                return d3.interpolateRgb(base.formatRgb(), '#ffffff')(amount);
             }
 
             function getBubbleFillForMap(node, mode, progress, colorScale, rankMaps, mapOverride) {
@@ -947,6 +1428,29 @@
                 const g = Math.round((base?.g ?? 175) + (255 - (base?.g ?? 175)) * t);
                 const b = Math.round((base?.b ?? 71) + (255 - (base?.b ?? 71)) * t);
                 return `rgb(${r}, ${g}, ${b})`;
+            }
+
+            function getSlide4GhostProgress(progress) {
+                if (typeof progress !== 'number' || !isFinite(progress)) return 0;
+                if (progress <= 0.5) return 0;
+                return Math.min(1, (progress - 0.5) / 0.5);
+            }
+
+            function updateSlide4GhostDisplayProgress(progress) {
+                if (!bubbleChartState) return 0;
+
+                const target = getSlide4GhostProgress(progress);
+                const current = typeof bubbleChartState.ghostDisplayProgress === 'number'
+                    ? bubbleChartState.ghostDisplayProgress
+                    : 0;
+                const next = current + (target - current) * 0.05;
+
+                bubbleChartState.ghostDisplayProgress = next;
+                return next;
+            }
+
+            function getSlide4LiquidRatio(node, progress) {
+                return 0.01;
             }
 
                 function buildRankMaps(nodes) {
@@ -986,26 +1490,80 @@
                 if (!bubbleChartState) return;
                 bubbleChartState.lastProgress = progress;
                 const { bubble, colorScale, rankMaps } = bubbleChartState;
-                const map = getSlide4RankMap(slide4RankMode, rankMaps);
-                const intensity = getSlide4RankIntensity(progress);
+                // Determine count and ratio maps
+                const countMap = rankMaps ? rankMaps.nominated : new Map();
+                const ratioMap = rankMaps ? rankMaps.ratio : new Map();
 
-                bubble.select('.bubble-core')
-                    .attr('fill', d => getBubbleFillForMap(d, slide4Mode, progress, colorScale, rankMaps, map));
+                // Compute dual intensities for crossfading: count and ratio
+                let countIntensity = 0;
+                let ratioIntensity = 0;
+                if (progress >= 0.2 && progress < 0.6) {
+                    // count is active; intensity from getSlide4RankIntensity
+                    countIntensity = Math.min(1, getSlide4RankIntensity(progress));
+                }
+                if (progress >= 0.6) {
+                    // ratio crossfade starts at 0.6
+                    ratioIntensity = Math.min(1, getSlide4RankIntensity(progress));
+                    // reduce countIntensity during crossfade
+                    countIntensity = Math.max(0, 1 - ratioIntensity);
+                }
 
-                bubble.select('.bubble-ghost')
-                    .attr('stroke', d => {
-                        return getSlide4GhostColor(d, map).stroke;
-                    })
+                const effectiveMap = ratioIntensity > 0 ? ratioMap : countMap;
+                const effectiveIntensity = Math.max(countIntensity, ratioIntensity);
+
+                // Update solid fill (pre-liquid) for early phases
+                bubble.select('.bubble-fill')
+                    .attr('r', d => (bubbleChartState.radiusScale ? bubbleChartState.radiusScale(d.activeCount || d.nominatedCount || 0) : d.r))
                     .attr('fill', d => {
-                        return getSlide4GhostColor(d, map).fill;
+                        // blend base + count/ratio tint
+                        const base = d3.color(colorScale(d.activeCount));
+                        const countColor = (countIntensity > 0) ? getBubbleFillForMap(d, 'nominated', progress, colorScale, rankMaps, countMap) : base.formatRgb();
+                        if (ratioIntensity > 0) {
+                            const ratioColor = getBubbleFillForMap(d, 'nominated-rotten', progress, colorScale, rankMaps, ratioMap);
+                            // crossfade between countColor and ratioColor
+                            return d3.interpolateRgb(countColor, ratioColor)(ratioIntensity);
+                        }
+                        return countColor;
                     });
 
+                // Update liquid fill (used when liquid content visible)
+                bubble.select('.bubble-liquid-base')
+                    .attr('y', d => {
+                        const ghostR = d._ghostR || (bubbleChartState.radiusScale ? bubbleChartState.radiusScale(d.nominatedCount || 0) : d.r || 0);
+                        const ratio = getSlide4LiquidRatio(d, progress);
+                        return ghostR - (2 * ghostR * ratio);
+                    })
+                    .attr('height', d => {
+                        const ghostR = d._ghostR || (bubbleChartState.radiusScale ? bubbleChartState.radiusScale(d.nominatedCount || 0) : d.r || 0);
+                        const ratio = getSlide4LiquidRatio(d, progress);
+                        return 2 * ghostR * ratio;
+                    })
+                    .attr('fill', d => {
+                        const countColor = getBubbleFillForMap(d, 'nominated', progress, colorScale, rankMaps, countMap);
+                        const ratioColor = getBubbleFillForMap(d, 'nominated-rotten', progress, colorScale, rankMaps, ratioMap);
+                        // crossfade according to ratioIntensity
+                        return d3.interpolateRgb(countColor, ratioColor)(ratioIntensity);
+                    });
+
+                // Outline stroke (ghost/outline color)
+                bubble.select('.bubble-outline')
+                    .attr('stroke', d => getSlide4GhostColor(d, effectiveMap, colorScale).stroke)
+                    .attr('stroke-width', 5)
+                    .style('opacity', d => slide4Mode === 'nominated-rotten' ? 0.45 : 1);
+
                 bubble.select('.bubble-label')
-                    .style('fill', d => getSlide4TextColor(d, map, intensity));
+                    .style('fill', d => getSlide4TextColor(d, effectiveMap, effectiveIntensity));
 
                 bubble.select('.bubble-count')
-                    .text(d => d.activeCount)
-                    .style('fill', d => getSlide4TextColor(d, map, intensity));
+                    .text(d => {
+                        // At progress >= 0.6, show rotten ratio (percentage); before that, show count
+                        if (progress >= 0.6) {
+                            const ratio = (d.nominatedCount || 0) > 0 ? (d.rottenCount || 0) / d.nominatedCount : 0;
+                            return `${(ratio * 100).toFixed(0)}%`;
+                        }
+                        return d.activeCount;
+                    })
+                    .style('fill', d => getSlide4TextColor(d, effectiveMap, effectiveIntensity));
             }
 
             function setSlide4TextProgress(progress) {
@@ -1014,39 +1572,406 @@
                 const steps = slide4.querySelectorAll('.slide4-step');
                 const visibleSteps = new Set();
 
+                // Custom scrollytelling sequence:
+                // 0: 1a (intro to bubbles)
+                // 0.2-0.4: 1a+1b (color explanation)
+                // 0.4-0.5: 2a (rotten nominees intro)
+                // 0.5-0.7: 2a+2b (ghost bubbles explanation)
+                // 0.7-0.8: 3a (ratio ranking)
+                // 0.8-0.9: 3a+3b+3c (full conclusion)
+
                 if (progress < 0.2) {
                     visibleSteps.add('t1');
-                    visibleSteps.add('1');
-                } else if (progress < 0.5) {
+                    visibleSteps.add('1a');
+                } else if (progress < 0.4) {
                     visibleSteps.add('t1');
-                    visibleSteps.add('b1');
-                    visibleSteps.add('b2');
-                    visibleSteps.add('1');
-                    visibleSteps.add('2');
+                    visibleSteps.add('1a');
+                    visibleSteps.add('1b');
+                } else if (progress < 0.5) {
+                    visibleSteps.add('t2');
+                    visibleSteps.add('2a');
+                } else if (progress < 0.6) {
+                    visibleSteps.add('t2');
+                    visibleSteps.add('2a');
+                    visibleSteps.add('2b');
                 } else if (progress < 0.7) {
                     visibleSteps.add('t2');
-                    visibleSteps.add('b1');
-                    visibleSteps.add('b2');
-                    visibleSteps.add('3');
-                } else if (progress < 0.85) {
-                    visibleSteps.add('t2');
-                    visibleSteps.add('b1');
-                    visibleSteps.add('b2');
-                    visibleSteps.add('3');
-                    visibleSteps.add('4');
+                    visibleSteps.add('2a');
+                    visibleSteps.add('2b');
+                    visibleSteps.add('3a');
+                } else if (progress < 0.8) {
+                    visibleSteps.add('t3');
+                    visibleSteps.add('3a');
+                    visibleSteps.add('3b');
                 } else {
-                    visibleSteps.add('t2');
-                    visibleSteps.add('b1');
-                    visibleSteps.add('b2');
-                    visibleSteps.add('3');
-                    visibleSteps.add('4');
-                    visibleSteps.add('5');
+                    visibleSteps.add('t3');
+                    visibleSteps.add('3a');
+                    visibleSteps.add('3b');
+                    visibleSteps.add('3c');
                 }
 
                 steps.forEach(step => {
                     const key = step.getAttribute('data-step');
                     step.classList.toggle('is-visible', visibleSteps.has(key));
                 });
+            }
+
+            function syncSlide4StateFromProgress(progress) {
+                if (typeof progress !== 'number' || !isFinite(progress)) return;
+                updateSlide4GhostDisplayProgress(progress);
+
+                // Determine canonical stage flags according to requested sequence:
+                // phase A: progress < 0.2  -> filled yellow bubbles
+                // phase B: 0.2-0.3 -> top5 by count tint ramps in
+                // phase C: 0.3-0.5 -> count tint fully applied
+                // phase D: >=0.5 -> convert to ghost outline + fluid core
+                // phase E: 0.6-0.7 -> switch tint basis from count -> rotten ratio (crossfade)
+
+                // Save progress early so applyGenreFilter and other functions can use it
+                if (bubbleChartState) bubbleChartState.lastProgress = progress;
+
+                const nextFilterMode = progress < 0.5 ? 'nominated' : 'nominated-rotten';
+                const nextRankMode = progress < 0.6 ? 'count' : 'ratio';
+                const liquidEnabled = progress >= 0.5;
+
+                // Apply filter mode (this updates radii etc.)
+                if (slide4Mode !== nextFilterMode) {
+                    // applyGenreFilter will be called from setSlide4Mode
+                    setSlide4FilterMode(nextFilterMode);
+                } else {
+                    // still re-run applyGenreFilter to ensure radii reflect progress when needed
+                    applyGenreFilter(slide4Mode);
+                }
+
+                // Rank mode change handled but we also want the color mapping to be driven
+                if (slide4RankMode !== nextRankMode) {
+                    setSlide4RankMode(nextRankMode);
+                }
+
+                // Update text steps
+                setSlide4TextProgress(progress);
+
+                // Update visuals: fills, outlines, and show/hide fluid vs solid fill
+                updateRankColors(progress);
+
+                // Show or hide bubble-fill vs bubble-liquid based on liquidEnabled
+                if (bubbleChartState) {
+                    const { bubble } = bubbleChartState;
+                    if (liquidEnabled) {
+                        // hide solid fill, show liquid content
+                        bubble.select('.bubble-fill')
+                            .interrupt()
+                            .transition()
+                            .duration(450)
+                            .style('opacity', 0);
+
+                        bubble.select('.bubble-liquid-content')
+                            .interrupt()
+                            .transition()
+                            .duration(450)
+                            .style('opacity', 1);
+                    } else {
+                        bubble.select('.bubble-fill')
+                            .interrupt()
+                            .transition()
+                            .duration(450)
+                            .style('opacity', 1);
+
+                        bubble.select('.bubble-liquid-content')
+                            .interrupt()
+                            .transition()
+                            .duration(450)
+                            .style('opacity', 0);
+                    }
+                }
+            }
+
+            function setSlide5TextProgress(progress) {
+                const slide5 = document.querySelector('.narrative-slide[data-slide="4"]');
+                if (!slide5) return;
+                const steps = slide5.querySelectorAll('.slide5-step');
+                const visibleSteps = new Set();
+
+                // Slide 5 scrollytelling:
+                // 0-0.5: Show ranking by count
+                // 0.5-0.8: Show ghost bars (rotten nominees)
+                // 0.8-1.0: Reorder by ratio ranking
+
+                if (progress < 0.3) {
+                    visibleSteps.add('1');
+                } else if (progress < 0.6) {
+                    visibleSteps.add('2');
+                } else if (progress < 0.8){
+                    visibleSteps.add('3a');
+                } else {
+                    visibleSteps.add('3a');
+                    visibleSteps.add('3b');
+                }
+
+                steps.forEach(step => {
+                    const key = step.getAttribute('data-step');
+                    step.classList.toggle('is-visible', visibleSteps.has(key));
+                });
+            }
+
+            function updateBarChartMode(progress) {
+                if (!bubbleChartState || !bubbleChartState.barChart) return;
+                const { barChart, colorScale } = bubbleChartState;
+                const {
+                    barGroup,
+                    allBarData,
+                    dataByGenre,
+                    baseYScale,
+                    countOrderAll,
+                    rottenOrderAll,
+                    ratioOrderAll,
+                    visibleLimit
+                } = barChart;
+
+                // Three phases:
+                // Phase 1 (0-0.3): Show nominated count, normal colors, bar-ghost hidden
+                // Phase 2 (0.3-0.6): Bar becomes "ghosted" (faded), bar-ghost shows rotten count (filled portion)
+                // Phase 3 (0.6+): Bar stretches to 100%, bar-ghost shows ratio-based filled portion
+
+                let phase = 'phase1';
+                
+                if (progress < 0.3) {
+                    phase = 'phase1';
+                } else if (progress < 0.6) {
+                    phase = 'phase2';
+                } else {
+                    phase = 'phase3';
+                }
+
+                // Reorder timing rules:
+                // <0.4: nominated count top10 order
+                // 0.4-0.7: rotten count top10 order
+                // >=0.7: rotten ratio top10 order
+                const orderAll = progress < 0.4
+                    ? countOrderAll
+                    : (progress < 0.7 ? rottenOrderAll : ratioOrderAll);
+                const activeGenres = orderAll.slice(0, visibleLimit || 10);
+                const activeData = activeGenres
+                    .map(genre => dataByGenre.get(genre))
+                    .filter(Boolean);
+
+                const yScale = d3.scaleBand()
+                    .domain(activeGenres)
+                    .range(baseYScale.range())
+                    .padding(baseYScale.padding());
+
+                // Recalculate scales based on phase
+                let coreScale, ghostScale;
+                const chartWidth = barChart.plotWidth || 300;
+
+                if (phase === 'phase1' || phase === 'phase2') {
+                    const maxNominated = d3.max(allBarData, d => d.nominated) || 1;
+                    coreScale = d3.scaleLinear()
+                        .domain([0, maxNominated])
+                        .range([0, chartWidth]);
+                    ghostScale = coreScale;
+                } else {
+                    // Phase 3: both bars stretched to 100% (ratio view)
+                    coreScale = d3.scaleLinear()
+                        .domain([0, 1])
+                        .range([0, chartWidth]);
+                    ghostScale = coreScale;
+                }
+
+                barChart.currentPhase = phase;
+                barChart.coreScale = coreScale;
+                barChart.ghostScale = ghostScale;
+                barChart.currentYScale = yScale;
+
+                const offscreenY = (baseYScale.range()[1] || 0) + yScale.bandwidth() + 18;
+                const duration = 600;
+
+                function getBarColor(d) {
+                    const rank = d.nominatedRank;
+                    if (rank <= 5) {
+                        const intensity = 1;
+                        const base = d3.color(colorScale(d.nominated));
+                        const r = Math.round((base?.r ?? 240) + (255 - (base?.r ?? 240)) * intensity * 0.6);
+                        const g = Math.round((base?.g ?? 175) + (255 - (base?.g ?? 175)) * intensity * 0.6);
+                        const b = Math.round((base?.b ?? 71) + (255 - (base?.b ?? 71)) * intensity * 0.6);
+                        return `rgb(${r}, ${g}, ${b})`;
+                    }
+                    return colorScale(d.nominated);
+                }
+
+                // Update bar-core (nominated count or 100% in phase 3)
+                const coreSelection = barGroup.selectAll('.bar-core')
+                    .data(activeData, d => d.genre);
+
+                coreSelection.exit()
+                    .interrupt()
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicIn)
+                    .attr('y', offscreenY)
+                    .style('opacity', 0)
+                    .remove();
+
+                const coreEnter = coreSelection.enter()
+                    .append('rect')
+                    .attr('class', 'bar-core')
+                    .attr('x', 0)
+                    .attr('y', offscreenY)
+                    .attr('height', yScale.bandwidth())
+                    .attr('width', 0)
+                    .attr('stroke', 'rgba(255, 210, 130, 0.65)')
+                    .attr('stroke-width', 1)
+                    .style('opacity', 0);
+
+                coreEnter.merge(coreSelection)
+                    .interrupt()
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicOut)
+                    .attr('y', d => yScale(d.genre))
+                    .attr('height', yScale.bandwidth())
+                    .attr('width', d => {
+                        if (phase === 'phase1' || phase === 'phase2') {
+                            return coreScale(d.nominated);
+                        } else {
+                            return coreScale(1);
+                        }
+                    })
+                    .style('opacity', d => {
+                        if (phase === 'phase1') return 1;
+                        return 0.3;
+                    })
+                    .attr('fill', d => getBarColor(d));
+
+                // Update bar-ghost (rotten count in phase 2, or ratio-based in phase 3)
+                const ghostSelection = barGroup.selectAll('.bar-ghost')
+                    .data(activeData, d => d.genre);
+
+                ghostSelection.exit()
+                    .interrupt()
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicIn)
+                    .attr('y', offscreenY)
+                    .style('opacity', 0)
+                    .remove();
+
+                const ghostEnter = ghostSelection.enter()
+                    .append('rect')
+                    .attr('class', 'bar-ghost')
+                    .attr('x', 0)
+                    .attr('y', offscreenY)
+                    .attr('height', yScale.bandwidth())
+                    .attr('width', 0)
+                    .attr('fill', 'rgba(240, 175, 71, 0.15)')
+                    .attr('stroke', 'rgba(240, 175, 71, 0.35)')
+                    .attr('stroke-width', 1)
+                    .style('opacity', 0);
+
+                ghostEnter.merge(ghostSelection)
+                    .interrupt()
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicOut)
+                    .attr('y', d => yScale(d.genre))
+                    .attr('height', yScale.bandwidth())
+                    .attr('width', d => {
+                        if (phase === 'phase1') {
+                            return 0;
+                        } else if (phase === 'phase2') {
+                            return ghostScale(d.rotten);
+                        } else {
+                            const ratio = (d.nominated || 0) > 0 ? (d.rotten || 0) / d.nominated : 0;
+                            return ghostScale(ratio);
+                        }
+                    })
+                    .style('opacity', d => {
+                        if (phase === 'phase1') return 0;
+                        return 0.8;
+                    })
+                    .attr('fill', d => getBarColor(d));
+
+                // Update labels
+                const labelSelection = barGroup.selectAll('.bar-label')
+                    .data(activeData, d => d.genre);
+
+                labelSelection.exit()
+                    .interrupt()
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicIn)
+                    .attr('y', offscreenY)
+                    .style('opacity', 0)
+                    .remove();
+
+                const labelEnter = labelSelection.enter()
+                    .append('text')
+                    .attr('class', 'bar-label')
+                    .attr('x', -10)
+                    .attr('y', offscreenY)
+                    .attr('dy', '0.35em')
+                    .attr('text-anchor', 'end')
+                    .attr('font-size', '12px')
+                    .attr('fill', '#ddc319')
+                    .style('opacity', 0)
+                    .text(d => d.genre);
+
+                labelEnter.merge(labelSelection)
+                    .interrupt()
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicOut)
+                    .attr('y', d => yScale(d.genre) + yScale.bandwidth() / 2);
+                labelEnter.merge(labelSelection)
+                    .text(d => d.genre)
+                    .style('opacity', 1);
+
+                // Update count text
+                const countSelection = barGroup.selectAll('.bar-count')
+                    .data(activeData, d => d.genre);
+
+                countSelection.exit()
+                    .interrupt()
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicIn)
+                    .attr('y', offscreenY)
+                    .style('opacity', 0)
+                    .remove();
+
+                const countEnter = countSelection.enter()
+                    .append('text')
+                    .attr('class', 'bar-count')
+                    .attr('x', 0)
+                    .attr('y', offscreenY)
+                    .attr('dy', '0.35em')
+                    .attr('font-size', '11px')
+                    .attr('fill', '#ffb347')
+                    .style('opacity', 0);
+
+                countEnter.merge(countSelection)
+                    .text(d => {
+                        if (phase === 'phase1') {
+                            return d.nominated;
+                        } else if (phase === 'phase2') {
+                            return d.rotten;
+                        }
+                        const ratio = (d.nominated || 0) > 0 ? (d.rotten || 0) / d.nominated : 0;
+                        return `${(ratio * 100).toFixed(0)}%`;
+                    })
+                    .interrupt()
+                    .transition()
+                    .duration(duration)
+                    .ease(d3.easeCubicOut)
+                    .attr('y', d => yScale(d.genre) + yScale.bandwidth() / 2)
+                    .attr('x', d => {
+                        if (phase === 'phase1' || phase === 'phase2') {
+                            return (phase === 'phase1' ? coreScale(d.nominated) : ghostScale(d.rotten)) + 8;
+                        }
+                        const ratio = (d.nominated || 0) > 0 ? (d.rotten || 0) / d.nominated : 0;
+                        return ghostScale(ratio) + 8;
+                    })
+                    .style('opacity', 1);
             }
 
             function animateRankModeTransition(previousRankMode, nextRankMode, progress) {
@@ -1056,7 +1981,7 @@
                 const nextMap = getSlide4RankMap(nextRankMode, rankMaps);
                 const duration = 450;
 
-                bubble.select('.bubble-core')
+                bubble.select('.bubble-liquid-base')
                     .transition()
                     .duration(duration)
                     .ease(d3.easeCubicInOut)
@@ -1067,16 +1992,10 @@
                         return t => interpolate(t);
                     });
 
-                bubble.select('.bubble-ghost')
+                bubble.select('.bubble-outline')
                     .transition()
                     .duration(duration)
                     .ease(d3.easeCubicInOut)
-                    .attrTween('fill', function(d) {
-                        const startColor = getSlide4GhostColor(d, previousMap).fill;
-                        const endColor = getSlide4GhostColor(d, nextMap).fill;
-                        const interpolate = d3.interpolateRgb(startColor, endColor);
-                        return t => interpolate(t);
-                    })
                     .attrTween('stroke', function(d) {
                         const startColor = getSlide4GhostColor(d, previousMap).stroke;
                         const endColor = getSlide4GhostColor(d, nextMap).stroke;
@@ -1130,12 +2049,12 @@
             function scheduleBubbleEnter() {
                 if (!bubbleChartState) {
                     bubbleEnterPending = true;
+                    slide4Debug('scheduleBubbleEnter deferred: no bubbleChartState yet');
                     return;
                 }
                 clearBubbleEnterTimer();
-                bubbleEnterTimer = setTimeout(() => {
-                    startBubbleEnterAnimation();
-                }, 500);
+                slide4Debug('scheduleBubbleEnter -> startBubbleEnterAnimation');
+                startBubbleEnterAnimation();
             }
 
             function clearBubbleEnterTimer() {
@@ -1149,6 +2068,12 @@
             function startBubbleEnterAnimation() {
                 if (!bubbleChartState) return;
                 const { nodes, bubble, simulation, centerX, centerY, offscreenPad } = bubbleChartState;
+                slide4Debug('startBubbleEnterAnimation', {
+                    nodeCount: nodes.length,
+                    centerX,
+                    centerY,
+                    offscreenPad
+                });
 
                 nodes.forEach(node => {
                     const angle = Math.random() * Math.PI * 2;
@@ -1157,7 +2082,8 @@
                     node.y = centerY + Math.sin(angle) * distance;
                 });
 
-                bubble.interrupt().style('opacity', 0.2);
+                bubble.interrupt().style('opacity', 1);
+                slide4Debug('bubble opacity set to 1, restarting simulation');
 
                 simulation
                     .force('radial', null)
@@ -1166,11 +2092,6 @@
                     .alpha(1)
                     .alphaTarget(0.08)
                     .restart();
-
-                bubble.transition()
-                    .duration(1000)
-                    .ease(d3.easeCubicOut)
-                    .style('opacity', 1);
             }
 
             // Animate bubbles drifting back out of the frame
